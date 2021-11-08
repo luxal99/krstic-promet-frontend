@@ -3,7 +3,7 @@
 @include mat.core();
 
 $krstic-promet-frontend-primary: mat.define-palette(mat.$green-palette, 400);
-$krstic-promet-frontend-accent: mat.define-palette(mat.$lime-palette, 400);
+$krstic-promet-frontend-accent: mat.define-palette(mat.$grey-palette, 900);
 
 $krstic-promet-frontend-warn: mat.define-palette(mat.$red-palette);
 

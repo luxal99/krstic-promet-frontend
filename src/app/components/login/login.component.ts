@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     auth(): void {
         this.spinnerService.show(this.spinner);
         this.userService.auth(this.loginForm.getRawValue()).subscribe(async (resp) => {
-            sessionStorage.setItem(TOKEN_NAME, resp.headers.get(TOKEN_NAME) as string);
+            localStorage.setItem(TOKEN_NAME, resp.headers.get(TOKEN_NAME) as string);
             this.spinnerService.hide(this.spinner);
             await this.router.navigate([Pages.ADMIN]);
         }, (err: HttpErrorResponse) => {
