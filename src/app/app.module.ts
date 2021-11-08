@@ -7,17 +7,21 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "./material.module";
 import {FormModule} from "./util/form-components/form.module";
 import {DEFAULT_ROUTE} from "./constant/constant";
+import {LoginComponent} from "./components/login/login.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         MaterialModule,
         BrowserAnimationsModule,
-        FormModule
+        FormModule,
+        HttpClientModule
     ],
     providers: [{provide: DEFAULT_ROUTE, useValue: ""}],
     bootstrap: [AppComponent]
