@@ -1,0 +1,14 @@
+[
+  {
+    "context": [
+      "/user",
+      "/article",
+      "/article-category",
+      "/article-sub-price",
+      "/conversion",
+      "/warehouse"
+    ],
+    "target": "http://localhost:8080/",
+    "secure": false
+  }
+]
