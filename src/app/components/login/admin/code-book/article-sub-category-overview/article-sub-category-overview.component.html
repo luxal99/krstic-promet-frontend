@@ -1,0 +1,5 @@
+<app-code-book-overview header="Potkategorije artikla"
+                        [dataSource]="listOfArticleSubCategories"
+                        [displayedColumns]="articleSubCategoryTableConfig"
+                        (otherCallAfterClose)="getAll()"
+                        [configData]="articleSubCategoryDialogConfig"></app-code-book-overview>

@@ -18,6 +18,7 @@ import {NavbarComponent} from "./components/login/admin/navbar/navbar.component"
 import {GenericTableModule} from "./util/table/generic-table/generic-table.module";
 import { CodeBookOverviewComponent } from './components/login/admin/code-book/code-book-overview/code-book-overview.component';
 import { ArticleCategoryOverviewComponent } from './components/login/admin/code-book/article-category-overview/article-category-overview.component';
+import { ArticleSubCategoryOverviewComponent } from './components/login/admin/code-book/article-sub-category-overview/article-sub-category-overview.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { ArticleCategoryOverviewComponent } from './components/login/admin/code-
         CodeBookComponent,
         NavbarComponent,
         CodeBookOverviewComponent,
-        ArticleCategoryOverviewComponent
+        ArticleCategoryOverviewComponent,
+        ArticleSubCategoryOverviewComponent
     ],
     imports: [
         BrowserModule,

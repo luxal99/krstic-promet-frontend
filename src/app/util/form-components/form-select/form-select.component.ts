@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Field} from "../models/Field";
 import {FieldConfig} from "../models/FieldConfig";
 import {FormGroup} from "@angular/forms";
+import {MatFormFieldAppearance} from "@angular/material/form-field";
 
 @Component({
     selector: "app-form-select",
@@ -17,7 +18,7 @@ export class FormSelectComponent implements Field, OnInit {
     @Input() disabled = false;
     @Input() label!: string;
     @Input() icon = "format_align_right";
-    @Input() appearance = "fill";
+    @Input() appearance: MatFormFieldAppearance = "standard";
     @Input() hint!: string;
     @Input() color!: string;
     @Input() required = false;

@@ -1,5 +1,5 @@
 <div [formGroup]="group">
-    <mat-form-field appearance="fill" [style]="{'width':width}">
+    <mat-form-field [appearance]="appearance" [style]="{'width':width}">
         <mat-label>{{config.label || label}}</mat-label>
         <mat-select [multiple]="isMultiple" [disabled]="disabled" [compareWith]="compareObjects"
                     (selectionChange)="selectionChange.emit(true)"

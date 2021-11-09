@@ -13,6 +13,7 @@ export class FormControlNames {
     static USERNAME = "username";
     static PASSWORD = "password";
     static TITLE = "title";
+    static ID_ARTICLE_CATEGORY = "idArticleCategory";
 }
 
 export const TOKEN_NAME = "Authorization";
