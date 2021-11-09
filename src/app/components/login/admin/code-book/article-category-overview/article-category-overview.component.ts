@@ -7,7 +7,7 @@ import {ARTICLE_CATEGORY_TABLE} from "../../../../../constant/table-config/table
 import {Store} from "@ngrx/store";
 import {ArticleCategoryState} from "../../../../../store/reducers/article-category.reducer";
 import {Observable} from "rxjs";
-import {AddArticleCategoryAction} from "../../../../../store/actions/article-category.actions";
+import {articleStoreConfig} from "../../../../../store/models/StoreConfig";
 
 @Component({
     selector: "app-article-category-overview",
@@ -40,7 +40,7 @@ export class ArticleCategoryOverviewComponent implements OnInit {
         headerText: "Dodaj kategoriju artikla",
         service: this.articleCategoryService,
         store: this.articleCategoryStore,
-        storeAction: AddArticleCategoryAction.bind(this)
+        storeConfig: articleStoreConfig
     };
 
 }

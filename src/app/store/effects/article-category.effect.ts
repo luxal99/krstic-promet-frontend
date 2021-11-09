@@ -38,7 +38,8 @@ export class ArticleCategoryEffect {
         mergeMap((data) => this.articleCategoryService.delete(data.payload).pipe(
             map(articleCategory => ({
                 type: ArticleCategoryActionTypes.DELETE_ARTICLE_CATEGORY_SUCCESSFULLY,
-                payload: articleCategory
+                // @ts-ignore
+                payload: data.payload
             }))
         ))
     ));

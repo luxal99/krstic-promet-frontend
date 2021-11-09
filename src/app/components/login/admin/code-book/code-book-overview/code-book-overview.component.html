@@ -7,6 +7,7 @@
             <button mat-button class="primary-btn" (click)="openAddDialog()">Dodaj</button>
         </div>
     </div>
+    <mat-spinner #spinner diameter="25"></mat-spinner>
     <app-generic-table (openEdit)="openEditDialog($event)"
                        (onDelete)="delete($event)" [dataSource]="dataSource"
                        [displayedColumns]="displayedColumns"></app-generic-table>
