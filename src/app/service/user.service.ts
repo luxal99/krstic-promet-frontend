@@ -8,13 +8,13 @@ import {User} from "../models/user";
     providedIn: "root"
 })
 export class UserService {
-    ROUTE: Routes = "user";
+    ROUTE: Routes = "/user/";
 
     constructor(private http: HttpClient) {
     }
 
     auth(user: User): Observable<HttpResponse<any>> {
-        return this.http.post<HttpResponse<any>>(this.ROUTE, user, {
+        return this.http.post<HttpResponse<any>>(this.ROUTE + "auth", user, {
             observe: "response",
             responseType: "json"
         });

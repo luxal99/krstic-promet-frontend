@@ -1,33 +1,24 @@
 @import "src/styles"
 .login
-  background-color: #fafafa
-  padding-top: 15em
+  background: #1D976C
+  background: -webkit-linear-gradient(to right, #93F9B9, #1D976C)
+  background: linear-gradient(to right, #93F9B9, #1D976C)
+  height: 100vh
 
+  .row
+    padding-top: 15em
   .login-form
+    padding: 10em 5em 5em 5em
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px
     background-color: white
-    border-radius: 18px
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px
 
-    .col-sm-7
-      background-color: $primary
-      border-top-right-radius: 50px
-      border-bottom-right-radius: 50px
+    mat-spinner
+      margin: 2em auto 0 auto
+      display: none
 
-      h1
-        font-size: 62px
-        color: white
-
-      .text
-        padding: 5em
-
-    .col-sm
-      padding: 5em
-
-      mat-spinner
-        margin: 2em auto
-        display: none
-
-
-::-webkit-scrollbar, ::-webkit-scrollbar-thumb
-  display: none !important
-
+  .left-col
+    background-color: $primary
+    padding: 10em
+    mat-spinner
+      margin: 2em auto
+      display: none

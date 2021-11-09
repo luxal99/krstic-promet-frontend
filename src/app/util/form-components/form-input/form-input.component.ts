@@ -19,7 +19,7 @@ export class FormInputComponent implements OnInit, Field {
     @Input() disabled = false;
     @Input() label!: string;
     @Input() icon = 'format_align_right';
-    @Input() appearance: MatFormFieldAppearance = 'legacy';
+    @Input() appearance: MatFormFieldAppearance = 'standard';
     @Input() hint!: string;
     @Input() color!: string;
     @Input() required = false
