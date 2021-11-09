@@ -11,12 +11,20 @@ import {LoginComponent} from "./components/login/login.component";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./interceptor/token.interceptor";
 import { AdminComponent } from './components/login/admin/admin.component';
+import { ComponentActivatorComponent } from './util/component-activator/component-activator.component';
+import { DashboardComponent } from './components/login/admin/dashboard/dashboard.component';
+import { CodeBookComponent } from './components/login/admin/code-book/code-book.component';
+import { NavbarComponent } from './components/login/admin/navbar/navbar.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
-        AdminComponent
+        AdminComponent,
+        ComponentActivatorComponent,
+        DashboardComponent,
+        CodeBookComponent,
+        NavbarComponent
     ],
     imports: [
         BrowserModule,

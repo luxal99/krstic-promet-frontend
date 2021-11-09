@@ -1,1 +1,17 @@
-<p>admin works!</p>
+<mat-drawer-container fullscreen>
+    <mat-drawer opened mode="side" #drawer>
+        <h1>Krstić</h1>
+        <div class="menu">
+            <a (click)='loadDashboardComponent()'>
+                <h5 (click)='changeColor($event)' id='overview-btn'>
+                    <mat-icon>home</mat-icon>
+                </h5>
+            </a>
+            <app-component-activator icon="settings" (load)="loadCodeBook()"></app-component-activator>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-navbar [isDrawerOpened]="drawer.opened" [header]="header" (onToggle)="drawer.toggle()"></app-navbar>
+        <div #target class="content"></div>
+    </mat-drawer-content>
+</mat-drawer-container>
