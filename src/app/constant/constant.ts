@@ -12,6 +12,7 @@ export type Routes =
 export class FormControlNames {
     static USERNAME = "username";
     static PASSWORD = "password";
+    static TITLE = "title";
 }
 
 export const TOKEN_NAME = "Authorization";

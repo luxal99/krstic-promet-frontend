@@ -16,6 +16,8 @@ import {DashboardComponent} from "./components/login/admin/dashboard/dashboard.c
 import {CodeBookComponent} from "./components/login/admin/code-book/code-book.component";
 import {NavbarComponent} from "./components/login/admin/navbar/navbar.component";
 import {GenericTableModule} from "./util/table/generic-table/generic-table.module";
+import { CodeBookOverviewComponent } from './components/login/admin/code-book/code-book-overview/code-book-overview.component';
+import { ArticleCategoryOverviewComponent } from './components/login/admin/code-book/article-category-overview/article-category-overview.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,9 @@ import {GenericTableModule} from "./util/table/generic-table/generic-table.modul
         ComponentActivatorComponent,
         DashboardComponent,
         CodeBookComponent,
-        NavbarComponent
+        NavbarComponent,
+        CodeBookOverviewComponent,
+        ArticleCategoryOverviewComponent
     ],
     imports: [
         BrowserModule,

@@ -1,0 +1,5 @@
+<app-code-book-overview header="Kategorije"
+                        [dataSource]="listOfArticleCategories"
+                        [displayedColumns]="articleCategoryTableConfig"
+                        (otherCallAfterClose)="getAll()"
+                        [configData]="articleCategoryDialogConfig"></app-code-book-overview>

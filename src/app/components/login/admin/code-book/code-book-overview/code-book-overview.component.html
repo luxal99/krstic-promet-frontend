@@ -1,0 +1,13 @@
+<div>
+    <div class="row">
+        <div class="col-6">
+            <h2>{{header}}</h2>
+        </div>
+        <div class="col-6 text-right">
+            <button mat-button class="primary-btn" (click)="openAddDialog()">Dodaj</button>
+        </div>
+    </div>
+    <app-generic-table (openEdit)="openEditDialog($event)"
+                       (onDelete)="delete($event)" [dataSource]="dataSource"
+                       [displayedColumns]="displayedColumns"></app-generic-table>
+</div>

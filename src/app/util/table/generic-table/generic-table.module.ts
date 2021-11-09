@@ -5,6 +5,7 @@ import {DynamicPropertyPipe} from "./pipes/dynamic-property.pipe";
 import {GenericTableComponent} from "./generic-table.component";
 import {CapitalizePipe} from "../../../pipes/capitalize.pipe";
 import {MatTableModule} from "@angular/material/table";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {MatTableModule} from "@angular/material/table";
     ],
     imports: [
         CommonModule,
-        MatTableModule
+        MatTableModule,
+        MatButtonModule
     ]
 })
 export class GenericTableModule {
