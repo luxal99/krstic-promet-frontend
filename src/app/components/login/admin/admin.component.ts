@@ -5,7 +5,7 @@ import {loadComponent} from "../../../util/components-util/lazy-load-component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {CodeBookComponent} from "./code-book/code-book.component";
 import {Store} from "@ngrx/store";
-import {GetArticleCategoryAction} from "../../../store/actions/real-estate-category.actions";
+import {GetArticleCategoryAction} from "../../../store/actions/article-category.actions";
 
 @Component({
     selector: "app-admin",

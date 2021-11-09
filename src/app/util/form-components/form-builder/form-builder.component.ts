@@ -1,25 +1,25 @@
-import {AfterViewChecked, ChangeDetectorRef, Component, Inject, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {SnackBarUtil} from '../../snackbar/snackbar-util';
-import {MatSpinner} from '@angular/material/progress-spinner';
+import {AfterViewChecked, ChangeDetectorRef, Component, Inject, OnChanges, OnInit, ViewChild} from "@angular/core";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MatSpinner} from "@angular/material/progress-spinner";
 import {FormBuilderConfig} from "../models/FormBuilderConfig";
 import {SpinnerService} from "../../spinner/spinner.service";
 import {FieldConfig} from "../models/FieldConfig";
+import {SnackBarUtil} from "../../snackbar/snackbar-util";
 
 @Component({
-    selector: 'app-form-builder',
-    templateUrl: './form-builder.component.html',
-    styleUrls: ['./form-builder.component.sass']
+    selector: "app-form-builder",
+    templateUrl: "./form-builder.component.html",
+    styleUrls: ["./form-builder.component.sass"]
 })
 export class FormBuilderComponent implements OnChanges, OnInit, AfterViewChecked {
 
-    @ViewChild('spinner') spinner!: MatSpinner;
+    @ViewChild("spinner") spinner!: MatSpinner;
     form!: FormGroup;
 
     get controls(): any {
-        return this.configData.formFields.filter(({type}) => type !== 'button');
+        return this.configData.formFields.filter(({type}) => type !== "button");
     }
 
     get changes(): any {
@@ -53,24 +53,26 @@ export class FormBuilderComponent implements OnChanges, OnInit, AfterViewChecked
     save(): any {
         this.spinnerService.show(this.spinner);
         if (!this.configData.formValues) {
-            this.configData.service.save(this.form.getRawValue()).subscribe(() => {
-                SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
-                this.spinnerService.hide(this.spinner);
-            }, () => {
-                this.spinnerService.hide(this.spinner);
-                SnackBarUtil.openSnackBar(this.snackBar,"Dogodila se greška");
-            });
+            this.configData.store?.dispatch(new this.configData.storeAction(this.form.getRawValue()));
+            SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
+            this.spinnerService.hide(this.spinner);
         } else {
-            const obj = this.form.getRawValue();
-            obj.id = this.configData.formValues.id;
-            this.configData.service.update(obj).subscribe(() => {
-                this.spinnerService.hide(this.spinner);
-                SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
-            }, () => {
-                this.spinnerService.hide(this.spinner);
-                SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
-            });
+
         }
+
+
+
+        // } else {
+        //     const obj = this.form.getRawValue();
+        //     obj.id = this.configData.formValues.id;
+        //     this.configData.service.update(obj).subscribe(() => {
+        //         this.spinnerService.hide(this.spinner);
+        //         SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
+        //     }, () => {
+        //         this.spinnerService.hide(this.spinner);
+        //         SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
+        //     });
+        // }
     }
 
     ngOnChanges(): void {
@@ -106,7 +108,7 @@ export class FormBuilderComponent implements OnChanges, OnInit, AfterViewChecked
     setValue(): void {
         if (this.configData.formValues) {
             for (const [k, v] of Object.entries(this.configData.formValues)) {
-                if (k !== 'id') {
+                if (k !== "id") {
                     if (this.form.get(k)) {
                         this.form.controls[k].setValue(v, {emitEvent: true});
                     }

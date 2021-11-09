@@ -20,9 +20,9 @@ import {CodeBookOverviewComponent} from "./components/login/admin/code-book/code
 import {ArticleCategoryOverviewComponent} from "./components/login/admin/code-book/article-category-overview/article-category-overview.component";
 import {ArticleSubCategoryOverviewComponent} from "./components/login/admin/code-book/article-sub-category-overview/article-sub-category-overview.component";
 import {StoreModule} from "@ngrx/store";
-import {ArticleCategoryReducer} from "./store/reducers/real-estate-category.reducer";
+import {ArticleCategoryReducer} from "./store/reducers/article-category.reducer";
 import {EffectsModule} from "@ngrx/effects";
-import {ArticleCategoryEffect} from "./store/effects/real-estate-category.effect";
+import {ArticleCategoryEffect} from "./store/effects/article-category.effect";
 
 @NgModule({
     declarations: [

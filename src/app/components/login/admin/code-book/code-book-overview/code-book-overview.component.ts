@@ -36,12 +36,7 @@ export class CodeBookOverviewComponent implements OnInit {
   }
 
   delete(id: any): void {
-    this.configData.service.delete(id).subscribe(() => {
-      SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
-      this.otherCallAfterClose.emit(true);
-    }, () => {
-      SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
-    });
+
   }
 
   openEditDialog(data: any): void {

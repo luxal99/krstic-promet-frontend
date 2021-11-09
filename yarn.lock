@@ -7698,6 +7698,11 @@
     "glob-to-regexp" "^0.4.1"
     "graceful-fs" "^4.1.2"
 
+"wavify@^1.0.0":
+  "integrity" "sha512-fTF3xWaCjKsQjRptpm0xo3DU7UK3dQu1+N5LPqwhrtXe1ZhVOBoc9krCByYoH5UBH35NLGZQsyBcHQamMPAc3Q=="
+  "resolved" "https://registry.npmjs.org/wavify/-/wavify-1.0.0.tgz"
+  "version" "1.0.0"
+
 "wbuf@^1.1.0", "wbuf@^1.7.3":
   "integrity" "sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA=="
   "resolved" "https://registry.npmjs.org/wbuf/-/wbuf-1.7.3.tgz"

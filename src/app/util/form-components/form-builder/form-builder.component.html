@@ -9,7 +9,7 @@
     <ng-container *ngFor="let field of configData.formFields;" dynamicField [config]="field"
                   [group]="form">
     </ng-container>
-    <button (click)="save()" [disabled]="!form.valid" mat-button class="primary-btn">Save</button>
+    <button (click)="save()" [disabled]="!form.valid" mat-button mat-dialog-close class="primary-btn">Save</button>
   </form>
-  <mat-spinner diameter="50" #spinner></mat-spinner>
+  <mat-spinner diameter="25" class="mt-2" #spinner></mat-spinner>
 </div>

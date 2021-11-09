@@ -5,6 +5,9 @@ import {FormControlNames} from "../../../../../constant/constant";
 import {Validators} from "@angular/forms";
 import {ArticleSubCategory} from "../../../../../models/article-sub-category";
 import {ArticleSubCategoryService} from "../../../../../service/article-sub-category.service";
+import {Store} from "@ngrx/store";
+import {ArticleCategoryState} from "../../../../../store/reducers/article-category.reducer";
+import {Observable} from "rxjs";
 
 @Component({
     selector: "app-article-sub-category-overview",
@@ -14,20 +17,22 @@ import {ArticleSubCategoryService} from "../../../../../service/article-sub-cate
 export class ArticleSubCategoryOverviewComponent implements OnInit {
 
     listOfArticleSubCategories: ArticleSubCategory[] = [];
+    listOfArticleCategories: Observable<any> = this.articleCategoryStore.select(state => state.articleCategory.list);
 
     articleSubCategoryTableConfig = ARTICLE_SUB_CATEGORY_TABLE;
 
-    constructor(private articleSubCategoryService: ArticleSubCategoryService) {
+    constructor(private articleSubCategoryService: ArticleSubCategoryService,
+                private articleCategoryStore: Store<{ articleCategory: ArticleCategoryState }>) {
     }
 
     ngOnInit(): void {
-        this.getAll();
+        this.initArticleCategorySelect()
     }
 
-    getAll(): void {
-        this.articleSubCategoryService.getAll().subscribe((resp) => {
-            this.listOfArticleSubCategories = resp;
-        });
+    initArticleCategorySelect(){
+        this.listOfArticleCategories.subscribe((resp)=>{
+            this.articleSubCategoryDialogConfig.formFields[1].options = resp
+        })
     }
 
     articleSubCategoryDialogConfig: FormBuilderConfig = {

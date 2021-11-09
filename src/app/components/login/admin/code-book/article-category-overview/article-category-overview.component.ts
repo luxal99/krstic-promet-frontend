@@ -5,8 +5,9 @@ import {Validators} from "@angular/forms";
 import {FormBuilderConfig} from "../../../../../util/form-components/models/FormBuilderConfig";
 import {ARTICLE_CATEGORY_TABLE} from "../../../../../constant/table-config/table-config";
 import {Store} from "@ngrx/store";
-import {ArticleCategoryState} from "../../../../../store/reducers/real-estate-category.reducer";
+import {ArticleCategoryState} from "../../../../../store/reducers/article-category.reducer";
 import {Observable} from "rxjs";
+import {AddArticleCategoryAction} from "../../../../../store/actions/article-category.actions";
 
 @Component({
     selector: "app-article-category-overview",
@@ -15,7 +16,7 @@ import {Observable} from "rxjs";
 })
 export class ArticleCategoryOverviewComponent implements OnInit {
 
-     listOfArticleCategories$: Observable<any> = this.articleCategoryStore.select(state => state.articleCategory.list);
+    listOfArticleCategories$: Observable<any> = this.articleCategoryStore.select(state => state.articleCategory.list);
 
     articleCategoryTableConfig = ARTICLE_CATEGORY_TABLE;
 
@@ -37,7 +38,9 @@ export class ArticleCategoryOverviewComponent implements OnInit {
             bindValue: ""
         }],
         headerText: "Dodaj kategoriju artikla",
-        service: this.articleCategoryService
+        service: this.articleCategoryService,
+        store: this.articleCategoryStore,
+        storeAction: AddArticleCategoryAction.bind(this)
     };
 
 }

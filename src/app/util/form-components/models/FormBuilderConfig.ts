@@ -1,5 +1,6 @@
 import {FieldConfig} from "./FieldConfig";
 import {GenericService} from "../../../service/generic.service";
+import {Store} from "@ngrx/store";
 
 export interface FormBuilderConfig {
     service: GenericService<any>;
@@ -7,4 +8,6 @@ export interface FormBuilderConfig {
     formValues?: any;
     headerText?: any;
     data?: any;
+    store?: Store;
+    storeAction?: any;
 }
