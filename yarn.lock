@@ -208,7 +208,7 @@
   dependencies:
     "tslib" "^2.2.0"
 
-"@angular/core@^12.0.0 || ^13.0.0-0", "@angular/core@~12.2.0", "@angular/core@12.2.13":
+"@angular/core@^12.0.0", "@angular/core@^12.0.0 || ^13.0.0-0", "@angular/core@~12.2.0", "@angular/core@12.2.13":
   "integrity" "sha512-tZ5nAnmOi418JDaJIFiiP9z2JrluMJZvUvXO4QDUs52BXaL2yuP7MJ2LczWOVJXrBLZXeZGfjDjZmaFPA24grg=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-12.2.13.tgz"
   "version" "12.2.13"
@@ -1188,6 +1188,20 @@
     "loader-utils" "^2.0.0"
     "merge-source-map" "^1.1.0"
     "schema-utils" "^2.7.0"
+
+"@ngrx/effects@^12.5.1":
+  "integrity" "sha512-fVNGIIntYLRWW1XWe0os2XOv03L22S4WTkX0OPZ9O6ztwuaNq0yzxWN7UeAC6H385F+g0k76KwRV78zHyP0bfQ=="
+  "resolved" "https://registry.npmjs.org/@ngrx/effects/-/effects-12.5.1.tgz"
+  "version" "12.5.1"
+  dependencies:
+    "tslib" "^2.0.0"
+
+"@ngrx/store@^12.5.1", "@ngrx/store@12.5.1":
+  "integrity" "sha512-NLVkHLVeZc7IboXSDZlFoq1QrupmwYTYKRHS6se7ZasAv/lrIjHWsVVdICKSVRBsHZYu3+dmCXmu+YgulP7iHw=="
+  "resolved" "https://registry.npmjs.org/@ngrx/store/-/store-12.5.1.tgz"
+  "version" "12.5.1"
+  dependencies:
+    "tslib" "^2.0.0"
 
 "@ngtools/webpack@12.2.13":
   "integrity" "sha512-krAwMyRqOaC1S0+IxAFid9F6A6ABip2DJ0tgCx26X+1Vw/d1GKtV9ZqDJFizMf5k1ywl9aBlhOazWpq5d6i+gw=="

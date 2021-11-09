@@ -26,27 +26,18 @@ export class CodeBookOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reloadDataSource();
   }
 
   openAddDialog() {
     openDialog(FormBuilderComponent, setDialogConfig({data: this.configData}), this.dialog)
         .afterClosed().subscribe(() => {
-      this.reloadDataSource();
       this.otherCallAfterClose.emit(true);
-    });
-  }
-
-  reloadDataSource(): void {
-    this.configData.service.getAll().subscribe((resp) => {
-      this.dataSource = resp;
     });
   }
 
   delete(id: any): void {
     this.configData.service.delete(id).subscribe(() => {
       SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
-      this.reloadDataSource();
       this.otherCallAfterClose.emit(true);
     }, () => {
       SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
@@ -57,7 +48,6 @@ export class CodeBookOverviewComponent implements OnInit {
     this.configData.formValues = data;
     openDialog(FormBuilderComponent, setDialogConfig({data: this.configData}), this.dialog)
         .afterClosed().subscribe(() => {
-      this.reloadDataSource();
       this.otherCallAfterClose.emit(true);
     });
   }

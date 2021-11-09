@@ -16,9 +16,13 @@ import {DashboardComponent} from "./components/login/admin/dashboard/dashboard.c
 import {CodeBookComponent} from "./components/login/admin/code-book/code-book.component";
 import {NavbarComponent} from "./components/login/admin/navbar/navbar.component";
 import {GenericTableModule} from "./util/table/generic-table/generic-table.module";
-import { CodeBookOverviewComponent } from './components/login/admin/code-book/code-book-overview/code-book-overview.component';
-import { ArticleCategoryOverviewComponent } from './components/login/admin/code-book/article-category-overview/article-category-overview.component';
-import { ArticleSubCategoryOverviewComponent } from './components/login/admin/code-book/article-sub-category-overview/article-sub-category-overview.component';
+import {CodeBookOverviewComponent} from "./components/login/admin/code-book/code-book-overview/code-book-overview.component";
+import {ArticleCategoryOverviewComponent} from "./components/login/admin/code-book/article-category-overview/article-category-overview.component";
+import {ArticleSubCategoryOverviewComponent} from "./components/login/admin/code-book/article-sub-category-overview/article-sub-category-overview.component";
+import {StoreModule} from "@ngrx/store";
+import {ArticleCategoryReducer} from "./store/reducers/real-estate-category.reducer";
+import {EffectsModule} from "@ngrx/effects";
+import {ArticleCategoryEffect} from "./store/effects/real-estate-category.effect";
 
 @NgModule({
     declarations: [
@@ -40,7 +44,10 @@ import { ArticleSubCategoryOverviewComponent } from './components/login/admin/co
         BrowserAnimationsModule,
         FormModule,
         HttpClientModule,
-        GenericTableModule
+        GenericTableModule,
+        // @ts-ignore
+        StoreModule.forRoot({articleCategory: ArticleCategoryReducer}),
+        EffectsModule.forRoot([ArticleCategoryEffect])
     ],
     providers: [{provide: DEFAULT_ROUTE, useValue: ""}, {
         provide: HTTP_INTERCEPTORS,

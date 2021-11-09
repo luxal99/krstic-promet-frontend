@@ -4,6 +4,8 @@ import {MatDrawer} from "@angular/material/sidenav";
 import {loadComponent} from "../../../util/components-util/lazy-load-component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {CodeBookComponent} from "./code-book/code-book.component";
+import {Store} from "@ngrx/store";
+import {GetArticleCategoryAction} from "../../../store/actions/real-estate-category.actions";
 
 @Component({
     selector: "app-admin",
@@ -17,13 +19,15 @@ export class AdminComponent implements OnInit {
     @ViewChild("target", {read: ViewContainerRef, static: false}) entry!: ViewContainerRef;
     header = "Pregled";
 
-    constructor(private resolver: ComponentFactoryResolver) {
+    constructor(private resolver: ComponentFactoryResolver,
+                private articleCategoryStore: Store<any>) {
     }
 
     ngOnInit(): void {
-        setTimeout(() => {
+        setTimeout(()=>{
             this.initDefaultMenu();
-        });
+        },100)
+        this.articleCategoryStore.dispatch(new GetArticleCategoryAction());
     }
 
     initDefaultMenu(): void {
