@@ -10,11 +10,12 @@ import {DEFAULT_ROUTE} from "./constant/constant";
 import {LoginComponent} from "./components/login/login.component";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./interceptor/token.interceptor";
-import { AdminComponent } from './components/login/admin/admin.component';
-import { ComponentActivatorComponent } from './util/component-activator/component-activator.component';
-import { DashboardComponent } from './components/login/admin/dashboard/dashboard.component';
-import { CodeBookComponent } from './components/login/admin/code-book/code-book.component';
-import { NavbarComponent } from './components/login/admin/navbar/navbar.component';
+import {AdminComponent} from "./components/login/admin/admin.component";
+import {ComponentActivatorComponent} from "./util/component-activator/component-activator.component";
+import {DashboardComponent} from "./components/login/admin/dashboard/dashboard.component";
+import {CodeBookComponent} from "./components/login/admin/code-book/code-book.component";
+import {NavbarComponent} from "./components/login/admin/navbar/navbar.component";
+import {GenericTableModule} from "./util/table/generic-table/generic-table.module";
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { NavbarComponent } from './components/login/admin/navbar/navbar.componen
         MaterialModule,
         BrowserAnimationsModule,
         FormModule,
-        HttpClientModule
+        HttpClientModule,
+        GenericTableModule
     ],
     providers: [{provide: DEFAULT_ROUTE, useValue: ""}, {
         provide: HTTP_INTERCEPTORS,

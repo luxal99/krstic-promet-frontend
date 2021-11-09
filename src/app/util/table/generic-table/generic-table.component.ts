@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {Column} from "../../../models/util/column";
+import {Column} from "../Column";
 
 @Component({
     selector: "app-generic-table",
