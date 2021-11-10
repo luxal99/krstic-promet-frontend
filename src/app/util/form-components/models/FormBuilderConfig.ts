@@ -4,7 +4,7 @@ import {Store} from "@ngrx/store";
 import {StoreConfig} from "../../../store/config/StoreConfig";
 
 export interface FormBuilderConfig {
-    service: GenericService<any>;
+    service?: GenericService<any>;
     formFields: FieldConfig[];
     formValues?: any;
     headerText?: any;

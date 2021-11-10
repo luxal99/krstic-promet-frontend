@@ -25,7 +25,11 @@ import {EffectsModule} from "@ngrx/effects";
 import {ArticleCategoryEffect} from "./store/effects/article-category.effect";
 import {ArticleSubCategoryReducer} from "./store/reducers/article-sub-category.reducer";
 import {ArticleSubCategoryEffect} from "./store/effects/article-sub-category.effect";
+import {WarehouseOverviewComponent} from "./components/login/admin/code-book/warehouse-overview/warehouse-overview.component";
+import {WarehouseReducer} from "./store/reducers/warehouse.reducer";
+import {WarehouseEffect} from "./store/effects/warehouse.effect";
 
+// @ts-ignore
 @NgModule({
     declarations: [
         AppComponent,
@@ -37,7 +41,8 @@ import {ArticleSubCategoryEffect} from "./store/effects/article-sub-category.eff
         NavbarComponent,
         CodeBookOverviewComponent,
         ArticleCategoryOverviewComponent,
-        ArticleSubCategoryOverviewComponent
+        ArticleSubCategoryOverviewComponent,
+        WarehouseOverviewComponent
     ],
     imports: [
         BrowserModule,
@@ -48,10 +53,14 @@ import {ArticleSubCategoryEffect} from "./store/effects/article-sub-category.eff
         HttpClientModule,
         GenericTableModule,
         StoreModule.forRoot(
-            // @ts-ignore
-            {articleCategory: ArticleCategoryReducer, articleSubCategory: ArticleSubCategoryReducer},
+            {
+                // @ts-ignore
+                articleCategory: ArticleCategoryReducer, articleSubCategory: ArticleSubCategoryReducer,
+                // @ts-ignore
+                warehouse: WarehouseReducer
+            },
         ),
-        EffectsModule.forRoot([ArticleCategoryEffect, ArticleSubCategoryEffect])
+        EffectsModule.forRoot([ArticleCategoryEffect, ArticleSubCategoryEffect, WarehouseEffect])
     ],
     providers: [{provide: DEFAULT_ROUTE, useValue: ""}, {
         provide: HTTP_INTERCEPTORS,

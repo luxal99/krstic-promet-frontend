@@ -7,6 +7,7 @@ import {CodeBookComponent} from "./code-book/code-book.component";
 import {Store} from "@ngrx/store";
 import {GetArticleCategoryAction} from "../../../store/actions/article-category.actions";
 import {GetArticleSubCategoryAction} from "../../../store/actions/article-sub-category.actions";
+import {GetWarehouseAction} from "../../../store/actions/warehouse.actions";
 
 @Component({
     selector: "app-admin",
@@ -30,6 +31,7 @@ export class AdminComponent implements OnInit {
         }, 100);
         this.store.dispatch(new GetArticleCategoryAction());
         this.store.dispatch(new GetArticleSubCategoryAction());
+        this.store.dispatch(new GetWarehouseAction());
     }
 
     initDefaultMenu(): void {

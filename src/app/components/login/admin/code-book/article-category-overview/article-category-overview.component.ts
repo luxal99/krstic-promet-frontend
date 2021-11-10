@@ -1,5 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {ArticleCategoryService} from "../../../../../service/article-category.service";
 import {FormControlNames} from "../../../../../constant/constant";
 import {Validators} from "@angular/forms";
 import {FormBuilderConfig} from "../../../../../util/form-components/models/FormBuilderConfig";
@@ -20,8 +19,7 @@ export class ArticleCategoryOverviewComponent implements OnInit {
 
     articleCategoryTableConfig = ARTICLE_CATEGORY_TABLE;
 
-    constructor(private articleCategoryService: ArticleCategoryService,
-                private articleCategoryStore: Store<{ articleCategory: ArticleCategoryState }>) {
+    constructor(private articleCategoryStore: Store<{ articleCategory: ArticleCategoryState }>) {
     }
 
     ngOnInit(): void {
@@ -38,7 +36,6 @@ export class ArticleCategoryOverviewComponent implements OnInit {
             bindValue: ""
         }],
         headerText: "Dodaj kategoriju artikla",
-        service: this.articleCategoryService,
         store: this.articleCategoryStore,
         storeConfig: articleStoreConfig
     };
