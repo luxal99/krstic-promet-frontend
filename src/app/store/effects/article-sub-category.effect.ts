@@ -14,7 +14,7 @@ export class ArticleSubCategoryEffect {
         ofType(ArticleSubCategoryActionTypes.GET_ARTICLE_SUB_CATEGORY),
         mergeMap(() => this.articleSubCategoryService.getAll().pipe(
             map(articleSubCategories => ({
-                type: ArticleSubCategoryActionTypes.LOAD_ARTICLE_SUB_CATEGORY,
+                type: ArticleSubCategoryActionTypes.GET_ARTICLE_SUB_CATEGORY_SUCCESSFULLY,
                 payload: articleSubCategories
             }))
         ))

@@ -8,7 +8,7 @@ import {Store} from "@ngrx/store";
 import {ArticleCategoryState} from "../../../../../store/reducers/article-category.reducer";
 import {Observable} from "rxjs";
 import {ArticleSubCategoryState} from "../../../../../store/reducers/article-sub-category.reducer";
-import {articleSubStoreConfig} from "../../../../../store/models/StoreConfig";
+import {articleSubStoreConfig} from "../../../../../store/config/StoreConfig";
 
 @Component({
     selector: "app-article-sub-category-overview",

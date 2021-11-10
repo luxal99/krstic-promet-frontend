@@ -7,7 +7,7 @@ import {ARTICLE_CATEGORY_TABLE} from "../../../../../constant/table-config/table
 import {Store} from "@ngrx/store";
 import {ArticleCategoryState} from "../../../../../store/reducers/article-category.reducer";
 import {Observable} from "rxjs";
-import {articleStoreConfig} from "../../../../../store/models/StoreConfig";
+import {articleStoreConfig} from "../../../../../store/config/StoreConfig";
 
 @Component({
     selector: "app-article-category-overview",

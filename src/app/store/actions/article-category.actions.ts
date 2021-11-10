@@ -6,8 +6,9 @@ export enum ArticleCategoryActionTypes {
     ADD_ARTICLE_CATEGORY_SUCCESSFULLY = "[ARTICLE_CATEGORY] Add Item Successfully",
     DELETE_ARTICLE_CATEGORY = "[ARTICLE_CATEGORY] Delete Item",
     DELETE_ARTICLE_CATEGORY_SUCCESSFULLY = "[ARTICLE_CATEGORY] Delete Item Successfully",
-    GET_ARTICLE_CATEGORY = "[ARTICLE_CATEGORY] Get Item",
-    LOAD_ARTICLE_CATEGORY = "[ARTICLE_CATEGORY] Load Item",
+    GET_ARTICLE_CATEGORY = "[ARTICLE_CATEGORY] Get Items",
+    GET_ARTICLE_CATEGORY_SUCCESSFULLY = "[ARTICLE_CATEGORY] Get Items Successfully",
+
 }
 
 export class AddArticleCategoryAction implements Action {
@@ -45,15 +46,15 @@ export class GetArticleCategoryAction implements Action {
 
 }
 
-export class LoadArticleCategoryAction implements Action {
-    type = ArticleCategoryActionTypes.LOAD_ARTICLE_CATEGORY;
+export class GetArticleCategoryActionSuccessfully implements Action {
+    type = ArticleCategoryActionTypes.GET_ARTICLE_CATEGORY_SUCCESSFULLY;
 }
 
 
 export type ArticleCategoryAction =
     AddArticleCategoryAction
     | GetArticleCategoryAction
-    | LoadArticleCategoryAction
+    | GetArticleCategoryActionSuccessfully
     | AddArticleCategorySuccessfullyAction
     | DeleteArticleCategoryAction
     | DeleteArticleCategorySuccessfullyAction

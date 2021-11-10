@@ -48,7 +48,7 @@ export function ArticleSubCategoryReducer(state: ArticleSubCategoryState = initi
                 loading: true
             };
 
-        case ArticleSubCategoryActionTypes.LOAD_ARTICLE_SUB_CATEGORY:
+        case ArticleSubCategoryActionTypes.GET_ARTICLE_SUB_CATEGORY_SUCCESSFULLY:
             return {
                 ...state,
                 //@ts-ignore
