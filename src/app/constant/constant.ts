@@ -19,5 +19,6 @@ export class FormControlNames {
 export const TOKEN_NAME = "Authorization";
 
 export class Pages {
-    static ADMIN = "admin";
+    static ADMIN = "/";
+    static LOGIN = "login";
 }

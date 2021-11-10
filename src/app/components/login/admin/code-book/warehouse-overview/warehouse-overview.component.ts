@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
-import {ARTICLE_CATEGORY_TABLE} from "../../../../../constant/table-config/table-config";
+import {ARTICLE_CATEGORY_TABLE, WAREHOUSE_TABLE} from "../../../../../constant/table-config/table-config";
 import {Store} from "@ngrx/store";
 import {FormBuilderConfig} from "../../../../../util/form-components/models/FormBuilderConfig";
 import {FormControlNames} from "../../../../../constant/constant";
@@ -17,7 +17,7 @@ export class WarehouseOverviewComponent implements OnInit {
 
     listOfWarehouses$: Observable<any> = this.warehouseStore.select(state => state.warehouse.list);
 
-    warehouseTableConfig = ARTICLE_CATEGORY_TABLE;
+    warehouseTableConfig = WAREHOUSE_TABLE;
 
     constructor(private warehouseStore: Store<{ warehouse: WarehouseState }>) {
     }
