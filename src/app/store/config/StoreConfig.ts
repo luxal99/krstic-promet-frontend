@@ -8,7 +8,8 @@ import {
 import {
     AddArticleSubCategoryAction,
     DeleteArticleSubCategoryAction,
-    GetArticleSubCategoryAction
+    GetArticleSubCategoryAction,
+    UpdateArticleSubCategoryAction
 } from "../actions/article-sub-category.actions";
 
 export class StoreConfig implements StoreInterface {
@@ -27,4 +28,4 @@ export class StoreConfig implements StoreInterface {
 }
 
 export const articleStoreConfig: StoreConfig = new StoreConfig(AddArticleCategoryAction.bind(this), DeleteArticleCategoryAction.bind(this), GetArticleCategoryAction.bind(this), UpdateArticleCategoryAction.bind(this));
-export const articleSubStoreConfig: StoreConfig = new StoreConfig(AddArticleSubCategoryAction.bind(this), DeleteArticleSubCategoryAction.bind(this), GetArticleSubCategoryAction.bind(this), null);
+export const articleSubStoreConfig: StoreConfig = new StoreConfig(AddArticleSubCategoryAction.bind(this), DeleteArticleSubCategoryAction.bind(this), GetArticleSubCategoryAction.bind(this), UpdateArticleSubCategoryAction.bind(this));

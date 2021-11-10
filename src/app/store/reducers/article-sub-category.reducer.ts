@@ -1,5 +1,6 @@
 import {ArticleSubCategory} from "../../models/article-sub-category";
 import {ArticleSubCategoryAction, ArticleSubCategoryActionTypes} from "../actions/article-sub-category.actions";
+import {ArticleCategoryActionTypes} from "../actions/article-category.actions";
 
 export interface ArticleSubCategoryState {
     list: ArticleSubCategory[],
@@ -55,7 +56,18 @@ export function ArticleSubCategoryReducer(state: ArticleSubCategoryState = initi
                 list: action.payload,
                 loading: false
             };
-
+        case ArticleSubCategoryActionTypes.UPDATE_ARTICLE_SUB_CATEGORY:
+            return {
+                ...state,
+                loading: true
+            };
+        case ArticleSubCategoryActionTypes.UPDATE_ARTICLE_SUB_CATEGORY_SUCCESSFULLY:
+            return {
+                ...state,
+                //@ts-ignore
+                list: [...state.list.filter((item) => item.id !== action.payload.id), action.payload],
+                loading: false
+            };
 
         default:
             return state;

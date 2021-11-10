@@ -44,4 +44,15 @@ export class ArticleSubCategoryEffect {
         ))
     ));
 
+    updateArticleSubCategory = createEffect(() => this.actions$.pipe(
+        ofType(ArticleSubCategoryActionTypes.UPDATE_ARTICLE_SUB_CATEGORY),
+        // @ts-ignore
+        mergeMap((data) => this.articleSubCategoryService.update(data.payload).pipe(
+            map(articleSubCategory => ({
+                type: ArticleSubCategoryActionTypes.UPDATE_ARTICLE_SUB_CATEGORY_SUCCESSFULLY,
+                payload: articleSubCategory
+            }))
+        ))
+    ));
+
 }
