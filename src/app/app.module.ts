@@ -23,6 +23,8 @@ import {StoreModule} from "@ngrx/store";
 import {ArticleCategoryReducer} from "./store/reducers/article-category.reducer";
 import {EffectsModule} from "@ngrx/effects";
 import {ArticleCategoryEffect} from "./store/effects/article-category.effect";
+import {ArticleSubCategoryReducer} from "./store/reducers/article-sub-category.reducer";
+import {ArticleSubCategoryEffect} from "./store/effects/article-sub-category.effect";
 
 @NgModule({
     declarations: [
@@ -45,9 +47,11 @@ import {ArticleCategoryEffect} from "./store/effects/article-category.effect";
         FormModule,
         HttpClientModule,
         GenericTableModule,
-        // @ts-ignore
-        StoreModule.forRoot({articleCategory: ArticleCategoryReducer}),
-        EffectsModule.forRoot([ArticleCategoryEffect])
+        StoreModule.forRoot(
+            // @ts-ignore
+            {articleCategory: ArticleCategoryReducer, articleSubCategory: ArticleSubCategoryReducer},
+        ),
+        EffectsModule.forRoot([ArticleCategoryEffect, ArticleSubCategoryEffect])
     ],
     providers: [{provide: DEFAULT_ROUTE, useValue: ""}, {
         provide: HTTP_INTERCEPTORS,

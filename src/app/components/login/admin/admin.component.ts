@@ -6,6 +6,7 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import {CodeBookComponent} from "./code-book/code-book.component";
 import {Store} from "@ngrx/store";
 import {GetArticleCategoryAction} from "../../../store/actions/article-category.actions";
+import {GetArticleSubCategoryAction} from "../../../store/actions/article-sub-category.actions";
 
 @Component({
     selector: "app-admin",
@@ -20,14 +21,15 @@ export class AdminComponent implements OnInit {
     header = "Pregled";
 
     constructor(private resolver: ComponentFactoryResolver,
-                private articleCategoryStore: Store<any>) {
+                private store: Store<any>) {
     }
 
     ngOnInit(): void {
-        setTimeout(()=>{
+        setTimeout(() => {
             this.initDefaultMenu();
-        },100)
-        this.articleCategoryStore.dispatch(new GetArticleCategoryAction());
+        }, 100);
+        this.store.dispatch(new GetArticleCategoryAction());
+        this.store.dispatch(new GetArticleSubCategoryAction());
     }
 
     initDefaultMenu(): void {

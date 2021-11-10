@@ -1,4 +1,4 @@
-import {AddArticleCategoryAction, ArticleCategoryActionTypes} from "../actions/article-category.actions";
+import {ArticleCategoryAction, ArticleCategoryActionTypes} from "../actions/article-category.actions";
 import {ArticleCategory} from "../../models/article-category";
 
 export interface ArticleCategoryState {
@@ -14,7 +14,7 @@ const initialState: ArticleCategoryState = {
 };
 
 
-export function ArticleCategoryReducer(state: ArticleCategoryState = initialState, action: AddArticleCategoryAction) {
+export function ArticleCategoryReducer(state: ArticleCategoryState = initialState, action: ArticleCategoryAction) {
     switch (action.type) {
 
         case ArticleCategoryActionTypes.ADD_ARTICLE_CATEGORY:
@@ -24,6 +24,7 @@ export function ArticleCategoryReducer(state: ArticleCategoryState = initialStat
         case ArticleCategoryActionTypes.ADD_ARTICLE_CATEGORY_SUCCESSFULLY:
             return {
                 ...state,
+                //@ts-ignore
                 list: [...state.list, action.payload],
                 loading: false
             };
@@ -36,6 +37,7 @@ export function ArticleCategoryReducer(state: ArticleCategoryState = initialStat
         case ArticleCategoryActionTypes.DELETE_ARTICLE_CATEGORY_SUCCESSFULLY:
             return {
                 ...state,
+                //@ts-ignore
                 list: state.list.filter((item) => item.id !== action.payload),
                 loading: false
             };
@@ -48,6 +50,7 @@ export function ArticleCategoryReducer(state: ArticleCategoryState = initialStat
         case ArticleCategoryActionTypes.LOAD_ARTICLE_CATEGORY:
             return {
                 ...state,
+                //@ts-ignore
                 list: action.payload,
                 loading: false
             };

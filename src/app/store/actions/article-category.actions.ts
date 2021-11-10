@@ -55,3 +55,5 @@ export type ArticleCategoryAction =
     | GetArticleCategoryAction
     | LoadArticleCategoryAction
     | AddArticleCategorySuccessfullyAction
+    | DeleteArticleCategoryAction
+    | DeleteArticleCategorySuccessfullyAction

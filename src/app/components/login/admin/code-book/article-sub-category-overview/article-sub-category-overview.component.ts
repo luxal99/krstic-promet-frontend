@@ -3,11 +3,12 @@ import {ARTICLE_SUB_CATEGORY_TABLE} from "../../../../../constant/table-config/t
 import {FormBuilderConfig} from "../../../../../util/form-components/models/FormBuilderConfig";
 import {FormControlNames} from "../../../../../constant/constant";
 import {Validators} from "@angular/forms";
-import {ArticleSubCategory} from "../../../../../models/article-sub-category";
 import {ArticleSubCategoryService} from "../../../../../service/article-sub-category.service";
 import {Store} from "@ngrx/store";
 import {ArticleCategoryState} from "../../../../../store/reducers/article-category.reducer";
 import {Observable} from "rxjs";
+import {ArticleSubCategoryState} from "../../../../../store/reducers/article-sub-category.reducer";
+import {articleSubStoreConfig} from "../../../../../store/models/StoreConfig";
 
 @Component({
     selector: "app-article-sub-category-overview",
@@ -16,23 +17,25 @@ import {Observable} from "rxjs";
 })
 export class ArticleSubCategoryOverviewComponent implements OnInit {
 
-    listOfArticleSubCategories: ArticleSubCategory[] = [];
+    listOfArticleSubCategories: Observable<any> = this.articleSubCategoryStore.select(state => state.articleSubCategory.list);
     listOfArticleCategories: Observable<any> = this.articleCategoryStore.select(state => state.articleCategory.list);
 
     articleSubCategoryTableConfig = ARTICLE_SUB_CATEGORY_TABLE;
 
     constructor(private articleSubCategoryService: ArticleSubCategoryService,
-                private articleCategoryStore: Store<{ articleCategory: ArticleCategoryState }>) {
+                private articleCategoryStore: Store<{ articleCategory: ArticleCategoryState }>,
+                private articleSubCategoryStore: Store<{ articleSubCategory: ArticleSubCategoryState }>,
+    ) {
     }
 
     ngOnInit(): void {
-        this.initArticleCategorySelect()
+        this.initArticleCategorySelect();
     }
 
-    initArticleCategorySelect(){
-        this.listOfArticleCategories.subscribe((resp)=>{
-            this.articleSubCategoryDialogConfig.formFields[1].options = resp
-        })
+    initArticleCategorySelect() {
+        this.listOfArticleCategories.subscribe((resp) => {
+            this.articleSubCategoryDialogConfig.formFields[1].options = resp;
+        });
     }
 
     articleSubCategoryDialogConfig: FormBuilderConfig = {
@@ -53,6 +56,8 @@ export class ArticleSubCategoryOverviewComponent implements OnInit {
             }
         ],
         headerText: "Dodaj kategoriju artikla",
-        service: this.articleSubCategoryService
+        service: this.articleSubCategoryService,
+        store: this.articleSubCategoryStore,
+        storeConfig: articleSubStoreConfig
     };
 }

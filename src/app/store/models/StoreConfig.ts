@@ -4,6 +4,11 @@ import {
     DeleteArticleCategoryAction,
     GetArticleCategoryAction
 } from "../actions/article-category.actions";
+import {
+    AddArticleSubCategoryAction,
+    DeleteArticleSubCategoryAction,
+    GetArticleSubCategoryAction
+} from "../actions/article-sub-category.actions";
 
 export class StoreConfig implements StoreInterface {
     createAction: any;
@@ -19,3 +24,4 @@ export class StoreConfig implements StoreInterface {
 }
 
 export const articleStoreConfig: StoreConfig = new StoreConfig(AddArticleCategoryAction.bind(this), DeleteArticleCategoryAction.bind(this), GetArticleCategoryAction.bind(this));
+export const articleSubStoreConfig: StoreConfig = new StoreConfig(AddArticleSubCategoryAction.bind(this), DeleteArticleSubCategoryAction.bind(this), GetArticleSubCategoryAction.bind(this));

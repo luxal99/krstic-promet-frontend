@@ -2,7 +2,7 @@ import {Action} from "@ngrx/store";
 import {ArticleCategory} from "../../models/article-category";
 
 export enum ArticleSubCategoryActionTypes {
-    ADD_ARTICLE_SUB_CATEGORY = "[ARTICLE_CATEGORY] Add Item",
+    ADD_ARTICLE_SUB_CATEGORY = "[ARTICLE_SUB_CATEGORY] Add Item",
     ADD_ARTICLE_SUB_CATEGORY_SUCCESSFULLY = "[ARTICLE_SUB_CATEGORY] Add Item Successfully",
     DELETE_ARTICLE_SUB_CATEGORY = "[ARTICLE_SUB_CATEGORY] Delete Item",
     DELETE_ARTICLE_SUB_CATEGORY_SUCCESSFULLY = "[ARTICLE_SUB_CATEGORY] Delete Item Successfully",
@@ -50,8 +50,10 @@ export class LoadArticleSubCategoryAction implements Action {
 }
 
 
-export type ArticleCategoryAction =
+export type ArticleSubCategoryAction =
     ArticleSubCategoryActionTypes
     | GetArticleSubCategoryAction
     | LoadArticleSubCategoryAction
     | AddArticleSubCategorySuccessfullyAction
+    | DeleteArticleSubCategoryAction
+    | DeleteArticleSubCategorySuccessfullyAction
