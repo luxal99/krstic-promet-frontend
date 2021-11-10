@@ -28,6 +28,7 @@ import {ArticleSubCategoryEffect} from "./store/effects/article-sub-category.eff
 import {WarehouseOverviewComponent} from "./components/login/admin/code-book/warehouse-overview/warehouse-overview.component";
 import {WarehouseReducer} from "./store/reducers/warehouse.reducer";
 import {WarehouseEffect} from "./store/effects/warehouse.effect";
+import { ArticlesComponent } from './components/login/admin/articles/articles.component';
 
 // @ts-ignore
 @NgModule({
@@ -42,7 +43,8 @@ import {WarehouseEffect} from "./store/effects/warehouse.effect";
         CodeBookOverviewComponent,
         ArticleCategoryOverviewComponent,
         ArticleSubCategoryOverviewComponent,
-        WarehouseOverviewComponent
+        WarehouseOverviewComponent,
+        ArticlesComponent
     ],
     imports: [
         BrowserModule,

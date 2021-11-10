@@ -8,6 +8,7 @@ import {Store} from "@ngrx/store";
 import {GetArticleCategoryAction} from "../../../store/actions/article-category.actions";
 import {GetArticleSubCategoryAction} from "../../../store/actions/article-sub-category.actions";
 import {GetWarehouseAction} from "../../../store/actions/warehouse.actions";
+import {ArticlesComponent} from "./articles/articles.component";
 
 @Component({
     selector: "app-admin",
@@ -45,6 +46,11 @@ export class AdminComponent implements OnInit {
     loadDashboardComponent(): void {
         this.header = "Pregled";
         this.lazyLoad(DashboardComponent);
+    }
+
+    loadArticlesComponent(): void {
+        this.header = "Artikli";
+        this.lazyLoad(ArticlesComponent);
     }
 
     changeColor(e: any): void {
