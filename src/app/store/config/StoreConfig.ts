@@ -17,6 +17,7 @@ import {
     GetWarehouseAction,
     UpdateWarehouseAction
 } from "../actions/warehouse.actions";
+import {AddArticleAction, DeleteArticleAction, GetArticleAction, UpdateArticleAction} from "../actions/article.actions";
 
 export class StoreConfig implements StoreInterface {
     createAction: any;
@@ -33,7 +34,12 @@ export class StoreConfig implements StoreInterface {
     }
 }
 
-export const articleStoreConfig: StoreConfig = new StoreConfig(AddArticleCategoryAction.bind(this),
+export const articleStoreConfig: StoreConfig = new StoreConfig(AddArticleAction.bind(this),
+    DeleteArticleAction.bind(this),
+    GetArticleAction.bind(this),
+    UpdateArticleAction.bind(this));
+
+export const articleCategoryStoreConfig: StoreConfig = new StoreConfig(AddArticleCategoryAction.bind(this),
     DeleteArticleCategoryAction.bind(this),
     GetArticleCategoryAction.bind(this),
     UpdateArticleCategoryAction.bind(this));

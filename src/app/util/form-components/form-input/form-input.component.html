@@ -5,7 +5,7 @@
                [formControlName]="config.name"
                matInput [type]="config.value ? config.value :'text'"
                [required]="required">
-        <mat-icon matSuffix color="accent">{{icon}}</mat-icon>
+        <mat-icon matSuffix color="accent">{{icon || config.icon}}</mat-icon>
         <mat-hint>{{hint}}</mat-hint>
     </mat-form-field>
 </div>

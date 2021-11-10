@@ -9,6 +9,7 @@ import {GetArticleCategoryAction} from "../../../store/actions/article-category.
 import {GetArticleSubCategoryAction} from "../../../store/actions/article-sub-category.actions";
 import {GetWarehouseAction} from "../../../store/actions/warehouse.actions";
 import {ArticlesComponent} from "./articles/articles.component";
+import {GetArticleAction} from "../../../store/actions/article.actions";
 
 @Component({
     selector: "app-admin",
@@ -33,6 +34,7 @@ export class AdminComponent implements OnInit {
         this.store.dispatch(new GetArticleCategoryAction());
         this.store.dispatch(new GetArticleSubCategoryAction());
         this.store.dispatch(new GetWarehouseAction());
+        this.store.dispatch(new GetArticleAction());
     }
 
     initDefaultMenu(): void {

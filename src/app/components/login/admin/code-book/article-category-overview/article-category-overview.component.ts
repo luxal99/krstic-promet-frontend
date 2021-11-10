@@ -6,7 +6,7 @@ import {ARTICLE_CATEGORY_TABLE} from "../../../../../constant/table-config/table
 import {Store} from "@ngrx/store";
 import {ArticleCategoryState} from "../../../../../store/reducers/article-category.reducer";
 import {Observable} from "rxjs";
-import {articleStoreConfig} from "../../../../../store/config/StoreConfig";
+import {articleCategoryStoreConfig} from "../../../../../store/config/StoreConfig";
 
 @Component({
     selector: "app-article-category-overview",
@@ -31,13 +31,14 @@ export class ArticleCategoryOverviewComponent implements OnInit {
         formFields: [{
             name: FormControlNames.TITLE,
             type: "input",
+            icon:"format_align_right",
             validation: [Validators.required],
             label: "Naziv",
             bindValue: ""
         }],
         headerText: "Dodaj kategoriju artikla",
         store: this.articleCategoryStore,
-        storeConfig: articleStoreConfig
+        storeConfig: articleCategoryStoreConfig
     };
 
 }

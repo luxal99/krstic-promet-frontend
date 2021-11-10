@@ -36,7 +36,9 @@ export class CodeBookOverviewComponent implements OnInit {
     }
 
     openAddDialog() {
-        openDialog(FormBuilderComponent, setDialogConfig({data: this.configData}), this.dialog)
+        openDialog(FormBuilderComponent, setDialogConfig({
+            width:'30%',
+            data: this.configData}), this.dialog)
             .afterClosed().subscribe(() => {
             this.otherCallAfterClose.emit(true);
         });
@@ -49,7 +51,10 @@ export class CodeBookOverviewComponent implements OnInit {
 
     openEditDialog(data: any): void {
         this.configData.formValues = data;
-        openDialog(FormBuilderComponent, setDialogConfig({data: this.configData}), this.dialog)
+        openDialog(FormBuilderComponent, setDialogConfig({
+            width:'30%',
+            data: this.configData
+        }), this.dialog)
             .afterClosed().subscribe(() => {
             this.otherCallAfterClose.emit(true);
         });

@@ -11,4 +11,5 @@ export interface FieldConfig {
     value?: ValueType;
     bindValue: string;
     label?: string;
+    icon?: string;
 }

@@ -14,6 +14,14 @@ export class FormControlNames {
     static PASSWORD = "password";
     static TITLE = "title";
     static ID_ARTICLE_CATEGORY = "idArticleCategory";
+    static NAME = "name";
+    static CODE = "code";
+    static PURCHASE_PRICE = "purchasePrice";
+    static SELLING_PRICE = "sellingPrice";
+    static AMOUNT = "amount";
+    static ID_ARTICLE_SUB_CATEGORY = "idArticleSubCategory";
+    static ID_WAREHOUSE = "idWarehouse";
+    static ID_CONVERSION = "idConversion";
 }
 
 export const TOKEN_NAME = "Authorization";

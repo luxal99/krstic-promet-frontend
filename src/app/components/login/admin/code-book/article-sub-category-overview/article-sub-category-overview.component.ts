@@ -43,6 +43,7 @@ export class ArticleSubCategoryOverviewComponent implements OnInit {
             {
                 name: FormControlNames.TITLE,
                 type: "input",
+                icon:"format_align_right",
                 validation: [Validators.required],
                 label: "Naziv",
                 bindValue: ""
@@ -56,7 +57,6 @@ export class ArticleSubCategoryOverviewComponent implements OnInit {
             }
         ],
         headerText: "Dodaj kategoriju artikla",
-        service: this.articleSubCategoryService,
         store: this.articleSubCategoryStore,
         storeConfig: articleSubStoreConfig
     };

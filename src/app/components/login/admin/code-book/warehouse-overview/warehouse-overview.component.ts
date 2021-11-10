@@ -29,8 +29,9 @@ export class WarehouseOverviewComponent implements OnInit {
 
     warehouseDialogConfig: FormBuilderConfig = {
         formFields: [{
-            name: FormControlNames.TITLE,
+            name: FormControlNames.NAME,
             type: "input",
+            icon:"format_align_right",
             validation: [Validators.required],
             label: "Naziv",
             bindValue: ""
