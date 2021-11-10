@@ -8,6 +8,7 @@ import {openDialog} from "../../../../../util/modal/OpeningModal";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FormBuilderConfig} from "../../../../../util/form-components/models/FormBuilderConfig";
 import {MatSpinner} from "@angular/material/progress-spinner";
+import {openConfirmDialog} from "../../../../../util/confirm-dialog/config/confirm-dialog-config";
 
 @Component({
     selector: "app-code-book-overview",
@@ -28,31 +29,34 @@ export class CodeBookOverviewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      setTimeout(()=>{
-          if (this.dataSource) {
-              this.spinnerService.hide(this.spinner);
-          }
-      },100)
+        setTimeout(() => {
+            if (this.dataSource) {
+                this.spinnerService.hide(this.spinner);
+            }
+        }, 100);
     }
 
     openAddDialog() {
         openDialog(FormBuilderComponent, setDialogConfig({
-            width:'30%',
-            data: this.configData}), this.dialog)
+            width: "30%",
+            data: this.configData
+        }), this.dialog)
             .afterClosed().subscribe(() => {
             this.otherCallAfterClose.emit(true);
         });
     }
 
     delete(id: any): void {
-        // @ts-ignore
-        this.configData.store?.dispatch(new this.configData.storeConfig.deleteAction(id));
+        openConfirmDialog(this.dialog, () => {
+            this.configData.store?.dispatch(new this.configData.storeConfig.deleteAction(id));
+
+        });
     }
 
     openEditDialog(data: any): void {
         this.configData.formValues = data;
         openDialog(FormBuilderComponent, setDialogConfig({
-            width:'30%',
+            width: "30%",
             data: this.configData
         }), this.dialog)
             .afterClosed().subscribe(() => {

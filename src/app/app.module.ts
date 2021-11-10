@@ -31,6 +31,7 @@ import {WarehouseEffect} from "./store/effects/warehouse.effect";
 import {ArticlesComponent} from "./components/login/admin/articles/articles.component";
 import {ArticleReducer} from "./store/reducers/article.reducer";
 import {ArticleEffect} from "./store/effects/article.effect";
+import { ConfirmDialogComponent } from './util/confirm-dialog/confirm-dialog.component';
 
 // @ts-ignore
 @NgModule({
@@ -46,7 +47,8 @@ import {ArticleEffect} from "./store/effects/article.effect";
         ArticleCategoryOverviewComponent,
         ArticleSubCategoryOverviewComponent,
         WarehouseOverviewComponent,
-        ArticlesComponent
+        ArticlesComponent,
+        ConfirmDialogComponent
     ],
     imports: [
         BrowserModule,
