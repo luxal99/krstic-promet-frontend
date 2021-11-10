@@ -52,15 +52,18 @@ export class FormBuilderComponent implements OnChanges, OnInit, AfterViewChecked
 
     save(): any {
         this.spinnerService.show(this.spinner);
+        console.log(this.configData.storeConfig);
         if (!this.configData.formValues) {
             // @ts-ignore
             this.configData.store?.dispatch(new this.configData.storeConfig.createAction(this.form.getRawValue()));
             SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
             this.spinnerService.hide(this.spinner);
         } else {
-
+            const obj = this.form.getRawValue();
+            obj.id = this.configData.formValues.id;
+            // @ts-ignore
+            this.configData.store?.dispatch(new this.configData.storeConfig.updateAction(obj));
         }
-
 
 
         // } else {

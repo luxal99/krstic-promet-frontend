@@ -55,6 +55,18 @@ export function ArticleCategoryReducer(state: ArticleCategoryState = initialStat
                 loading: false
             };
 
+        case ArticleCategoryActionTypes.UPDATE_ARTICLE_CATEGORY:
+            return {
+                ...state,
+                loading: true
+            };
+        case ArticleCategoryActionTypes.UPDATE_ARTICLE_CATEGORY_SUCCESSFULLY:
+            return {
+                ...state,
+                //@ts-ignore
+                list: [...state.list.filter((item) => item.id !== action.payload.id), action.payload],
+                loading: false
+            };
 
         default:
             return state;

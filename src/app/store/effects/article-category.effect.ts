@@ -36,7 +36,7 @@ export class ArticleCategoryEffect {
         ofType(ArticleCategoryActionTypes.DELETE_ARTICLE_CATEGORY),
         // @ts-ignore
         mergeMap((data) => this.articleCategoryService.delete(data.payload).pipe(
-            map(articleCategory => ({
+            map(() => ({
                 type: ArticleCategoryActionTypes.DELETE_ARTICLE_CATEGORY_SUCCESSFULLY,
                 // @ts-ignore
                 payload: data.payload
@@ -44,4 +44,15 @@ export class ArticleCategoryEffect {
         ))
     ));
 
+
+    updateArticleCategory = createEffect(() => this.actions$.pipe(
+        ofType(ArticleCategoryActionTypes.UPDATE_ARTICLE_CATEGORY),
+        // @ts-ignore
+        mergeMap((data) => this.articleCategoryService.update(data.payload).pipe(
+            map(articleCategory => ({
+                type: ArticleCategoryActionTypes.UPDATE_ARTICLE_CATEGORY_SUCCESSFULLY,
+                payload: articleCategory
+            }))
+        ))
+    ));
 }
