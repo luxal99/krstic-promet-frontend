@@ -4,14 +4,13 @@
 
 $krstic-promet-frontend-primary: mat.define-palette(mat.$green-palette, A200);
 $krstic-promet-frontend-accent: mat.define-palette(mat.$grey-palette, A400);
-
 $krstic-promet-frontend-warn: mat.define-palette(mat.$red-palette);
 
 $krstic-promet-frontend-theme: mat.define-light-theme((
         color: (
                 primary: $krstic-promet-frontend-primary,
                 accent: $krstic-promet-frontend-accent,
-                warn: $krstic-promet-frontend-warn,
+                warn: $krstic-promet-frontend-warn
         )
 ));
 @include mat.all-component-themes($krstic-promet-frontend-theme);
