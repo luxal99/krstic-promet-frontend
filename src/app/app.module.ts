@@ -32,6 +32,9 @@ import {ArticlesComponent} from "./components/login/admin/articles/articles.comp
 import {ArticleReducer} from "./store/reducers/article.reducer";
 import {ArticleEffect} from "./store/effects/article.effect";
 import { ConfirmDialogComponent } from './util/confirm-dialog/confirm-dialog.component';
+import { ArticleListViewComponent } from './components/login/admin/articles/article-list-view/article-list-view.component';
+import { ArticleGridWarehouseViewComponent } from './components/login/admin/articles/article-grid-warehouse-view/article-grid-warehouse-view.component';
+import { ArticleSubCategoryGridViewComponent } from './components/login/admin/articles/article-sub-category-grid-view/article-sub-category-grid-view.component';
 
 // @ts-ignore
 @NgModule({
@@ -48,7 +51,10 @@ import { ConfirmDialogComponent } from './util/confirm-dialog/confirm-dialog.com
         ArticleSubCategoryOverviewComponent,
         WarehouseOverviewComponent,
         ArticlesComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        ArticleListViewComponent,
+        ArticleGridWarehouseViewComponent,
+        ArticleSubCategoryGridViewComponent
     ],
     imports: [
         BrowserModule,
