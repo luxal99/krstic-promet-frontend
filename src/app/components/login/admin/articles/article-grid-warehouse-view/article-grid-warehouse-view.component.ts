@@ -30,7 +30,8 @@ export class ArticleGridWarehouseViewComponent implements OnInit {
     }
 
     loadArticleWarehouseView(): void {
-        loadComponent(ArticleListViewComponent, this.entry, this.resolver);
+        const articleListViewComponentComponentRef: ComponentRef<ArticleListViewComponent> = loadComponent(ArticleListViewComponent, this.entry, this.resolver);
+        articleListViewComponentComponentRef.instance.behaviorService = this.warehouseBehaviorService;
 
     }
 

@@ -17,6 +17,7 @@ import {FormBuilderComponent} from "../../../../util/form-components/form-builde
 import {setDialogConfig} from "../../../../util/modal/DialogConfig";
 import {MatDialog} from "@angular/material/dialog";
 import {WarehouseBehaviorService} from "../../../../service/util/warehouse-behavior.service";
+import {ArticleCategoryGridViewComponent} from "./article-category-grid-view/article-category-grid-view.component";
 
 @Component({
     selector: "app-articles",
@@ -27,127 +28,31 @@ export class ArticlesComponent implements OnInit {
 
     @ViewChild("articles", {read: ViewContainerRef, static: false}) entry!: ViewContainerRef;
 
-    listOfArticleSubCategories$: Observable<any> = this.articleSubCategoryStore.select(state => state.articleSubCategory.list);
-    listOfWarehouses$: Observable<any> = this.warehouseStore.select(state => state.warehouse.list);
-
-    articleTableConfig = ARTICLE_TABLE;
-
     constructor(private articleStore: Store<{ articles: ArticleState }>,
                 private warehouseStore: Store<{ warehouse: WarehouseState }>,
                 private resolver: ComponentFactoryResolver,
                 private dialog: MatDialog, private warehouseBehaviorService: WarehouseBehaviorService,
-                private articleSubCategoryStore: Store<{ articleSubCategory: ArticleSubCategoryState }>) {
+               ) {
     }
 
     ngOnInit(): void {
         setTimeout(() => {
             this.loadArticleListView();
         }, 100);
-        this.initArticleSubCategorySelect();
-        this.initWarehouseSelect();
     }
-
-    initArticleSubCategorySelect() {
-        this.listOfArticleSubCategories$.subscribe((resp) => {
-            this.articleDialogConfig.formFields[5].options = resp;
-        });
-    }
-
-    initWarehouseSelect() {
-        this.listOfWarehouses$.subscribe((resp) => {
-            this.articleDialogConfig.formFields[6].options = resp;
-        });
-    }
-
-    openAddDialog() {
-        openDialog(FormBuilderComponent, setDialogConfig({
-            width: "30%",
-            data: this.articleDialogConfig
-        }), this.dialog)
-            .afterClosed().subscribe(() => {
-        });
-    }
-
-    articleDialogConfig: FormBuilderConfig = {
-        formFields: [
-            {
-                name: FormControlNames.NAME,
-                type: "input",
-                icon: "format_align_right",
-                validation: [Validators.required],
-                label: "Naziv",
-                bindValue: ""
-            },
-            {
-                name: FormControlNames.CODE,
-                type: "input",
-                icon: "vpn_key",
-                validation: [Validators.required],
-                label: "Šifra",
-                bindValue: ""
-            },
-            {
-                name: FormControlNames.PURCHASE_PRICE,
-                type: "input",
-                value: "number",
-                icon: "credit_card",
-                validation: [Validators.required],
-                label: "Nabavna cena",
-                bindValue: ""
-            },
-            {
-                name: FormControlNames.SELLING_PRICE,
-                type: "input",
-                value: "number",
-                icon: "credit_card",
-                validation: [Validators.required],
-                label: "Prodajna cena",
-                bindValue: ""
-            },
-            {
-                name: FormControlNames.AMOUNT,
-                type: "input",
-                value: "number",
-                icon: "inventory_2",
-                validation: [Validators.required],
-                label: "Na stanju",
-                bindValue: ""
-            },
-            {
-                name: FormControlNames.ID_ARTICLE_SUB_CATEGORY,
-                type: "select",
-                validation: [Validators.required],
-                label: "Potkategorija",
-                bindValue: "title"
-            },
-            {
-                name: FormControlNames.ID_WAREHOUSE,
-                type: "select",
-                validation: [Validators.required],
-                label: "Magacin",
-                bindValue: "name"
-            },
-            {
-                name: FormControlNames.ID_CONVERSION,
-                type: "select",
-                label: "Konverzija",
-                bindValue: ""
-            },
-
-        ],
-        headerText: "Dodaj artikl",
-        store: this.articleStore,
-        storeConfig: articleStoreConfig
-    };
 
     loadArticleListView(): void {
         this.warehouseBehaviorService.reset();
         const articleListViewComponentComponentRef: ComponentRef<ArticleListViewComponent> = loadComponent(ArticleListViewComponent, this.entry, this.resolver);
-        articleListViewComponentComponentRef.instance.addDialogConfig = this.articleDialogConfig
     }
 
     loadArticleWarehouseView(): void {
         const warehouseGrid: ComponentRef<ArticleGridWarehouseViewComponent> = loadComponent(ArticleGridWarehouseViewComponent, this.entry, this.resolver);
         warehouseGrid.instance.entry = this.entry;
+    }
+
+    loadArticleCategoryView(): void {
+        const articleCategoryGridViewComponentComponentRef: ComponentRef<ArticleCategoryGridViewComponent> = loadComponent(ArticleCategoryGridViewComponent, this.entry, this.resolver);
+        articleCategoryGridViewComponentComponentRef.instance.entry = this.entry;
     }
 }

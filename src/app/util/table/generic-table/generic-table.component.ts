@@ -35,6 +35,7 @@ export class GenericTableComponent implements OnInit {
             data: this.genericDialogConfig
         }), this.dialog)
             .afterClosed().subscribe(() => {
+                this.genericDialogConfig.formValues = null
         });
     }
 

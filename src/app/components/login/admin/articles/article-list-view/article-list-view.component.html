@@ -1,5 +1,8 @@
 <div class="component">
     <h2>Artikli</h2>
-    <app-generic-table [genericDialogConfig]="addDialogConfig" [displayedColumns]="articleTableConfig"
+    <div class="text-right">
+        <button mat-button (click)="openAddDialog()" class="primary-btn">Dodaj</button>
+    </div>
+    <app-generic-table [genericDialogConfig]="articleDialogConfig" [displayedColumns]="articleTableConfig"
                        [dataSource]="listOfArticle$"></app-generic-table>
 </div>

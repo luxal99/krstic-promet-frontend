@@ -35,6 +35,7 @@ import { ConfirmDialogComponent } from './util/confirm-dialog/confirm-dialog.com
 import { ArticleListViewComponent } from './components/login/admin/articles/article-list-view/article-list-view.component';
 import { ArticleGridWarehouseViewComponent } from './components/login/admin/articles/article-grid-warehouse-view/article-grid-warehouse-view.component';
 import { ArticleSubCategoryGridViewComponent } from './components/login/admin/articles/article-sub-category-grid-view/article-sub-category-grid-view.component';
+import { ArticleCategoryGridViewComponent } from './components/login/admin/articles/article-category-grid-view/article-category-grid-view.component';
 
 // @ts-ignore
 @NgModule({
@@ -54,7 +55,8 @@ import { ArticleSubCategoryGridViewComponent } from './components/login/admin/ar
         ConfirmDialogComponent,
         ArticleListViewComponent,
         ArticleGridWarehouseViewComponent,
-        ArticleSubCategoryGridViewComponent
+        ArticleSubCategoryGridViewComponent,
+        ArticleCategoryGridViewComponent
     ],
     imports: [
         BrowserModule,
