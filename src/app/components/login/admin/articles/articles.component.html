@@ -1,10 +1,10 @@
 <div class="text-right" style="margin-right: 2em">
     <div class="inline">
-        <button mat-mini-fab  class="m-2">
+        <button mat-mini-fab class="m-2" (click)="loadArticleListView()">
             <mat-icon color="primary">toc</mat-icon>
         </button>
         <h4 class="mt-3">Lista</h4>
-        <button mat-mini-fab class="m-2">
+        <button mat-mini-fab class="m-2" (click)="loadArticleWarehouseView()">
             <mat-icon color="primary">view_module</mat-icon>
         </button>
         <h4 class="mt-3">Magacini</h4>
@@ -14,7 +14,7 @@
         <h4 class="mt-3">Potkategorije</h4>
     </div>
 </div>
-<app-code-book-overview header="Artikli"
-                        [dataSource]="listOfArticle$"
-                        [displayedColumns]="articleTableConfig"
-                        [configData]="articleDialogConfig"></app-code-book-overview>
+<div class="text-right">
+    <button mat-button (click)="openAddDialog()" class="primary-btn">Dodaj</button>
+</div>
+<div #articles></div>

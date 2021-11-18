@@ -1,1 +1,7 @@
-<p>article-grid-warehouse-view works!</p>
+<div class="component">
+    <div class="row">
+        <div class="col-sm-4" (click)="selectWarehouse(warehouse.id)" *ngFor="let warehouse of listOfWarehouses$|async">
+            <h3>{{warehouse.name}}</h3>
+        </div>
+    </div>
+</div>
