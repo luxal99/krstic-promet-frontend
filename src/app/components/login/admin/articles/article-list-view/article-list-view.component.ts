@@ -1,10 +1,9 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit, Output} from "@angular/core";
 import {ARTICLE_TABLE} from "../../../../../constant/table-config/table-config";
 import {Observable} from "rxjs";
 import {Store} from "@ngrx/store";
 import {ArticleState} from "../../../../../store/reducers/article.reducer";
 import {WarehouseBehaviorService} from "../../../../../service/util/warehouse-behavior.service";
-import {WarehouseService} from "../../../../../service/warehouse.service";
 import {map} from "rxjs/operators";
 
 @Component({
@@ -14,14 +13,14 @@ import {map} from "rxjs/operators";
 })
 export class ArticleListViewComponent implements OnInit {
 
+    @Input() addDialogConfig: any;
     listOfArticle$: Observable<any> = this.articleStore.select(state => state.articles.list);
 
 
     articleTableConfig = ARTICLE_TABLE;
 
     constructor(private articleStore: Store<{ articles: ArticleState }>,
-                private warehouseBehaviorService: WarehouseBehaviorService,
-                private warehouseService: WarehouseService) {
+                private warehouseBehaviorService: WarehouseBehaviorService) {
     }
 
     ngOnInit(): void {

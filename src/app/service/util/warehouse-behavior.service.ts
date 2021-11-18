@@ -1,23 +1,25 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
-import {Warehouse} from "../../models/warehouse";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: "root"
 })
 export class WarehouseBehaviorService {
 
-  private idWarehouse = new BehaviorSubject(0);
+    private idWarehouse = new BehaviorSubject(0);
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  add(idWarehouse: number) {
-    this.idWarehouse.next(idWarehouse);
-  }
+    add(idWarehouse: number) {
+        this.idWarehouse.next(idWarehouse);
+    }
 
-  get(): number {
-    return this.idWarehouse.value;
-  }
+    get(): number {
+        return this.idWarehouse.value;
+    }
 
+    reset() {
+        this.idWarehouse.next(0);
+    }
 }

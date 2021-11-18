@@ -19,12 +19,12 @@
                             (click)="onOverview.emit(element)">
                         Pregled
                     </button>
-                    <button mat-button color="accent" *ngIf="openEdit.observers.length>0"
-                            (click)="openEdit.emit(element)">
+                    <button mat-button color="accent" *ngIf="openEdit.observers.length>0 || genericDialogConfig"
+                            (click)="genericDialogConfig ? openAddDialog(element):openEdit.emit(element)">
                         Izmeni
                     </button>
-                    <button mat-button color="warn" *ngIf="onDelete.observers.length>0"
-                            (click)="onDelete.emit(element.id)">
+                    <button mat-button color="warn" *ngIf="onDelete.observers.length>0 || genericDialogConfig"
+                            (click)="genericDialogConfig ? delete(element.id) :onDelete.emit(element.id)">
                         Obirši
                     </button>
                 </div>

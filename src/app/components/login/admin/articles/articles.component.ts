@@ -16,6 +16,7 @@ import {openDialog} from "../../../../util/modal/OpeningModal";
 import {FormBuilderComponent} from "../../../../util/form-components/form-builder/form-builder.component";
 import {setDialogConfig} from "../../../../util/modal/DialogConfig";
 import {MatDialog} from "@angular/material/dialog";
+import {WarehouseBehaviorService} from "../../../../service/util/warehouse-behavior.service";
 
 @Component({
     selector: "app-articles",
@@ -34,7 +35,7 @@ export class ArticlesComponent implements OnInit {
     constructor(private articleStore: Store<{ articles: ArticleState }>,
                 private warehouseStore: Store<{ warehouse: WarehouseState }>,
                 private resolver: ComponentFactoryResolver,
-                private dialog: MatDialog,
+                private dialog: MatDialog, private warehouseBehaviorService: WarehouseBehaviorService,
                 private articleSubCategoryStore: Store<{ articleSubCategory: ArticleSubCategoryState }>) {
     }
 
@@ -140,7 +141,9 @@ export class ArticlesComponent implements OnInit {
     };
 
     loadArticleListView(): void {
-        loadComponent(ArticleListViewComponent, this.entry, this.resolver);
+        this.warehouseBehaviorService.reset();
+        const articleListViewComponentComponentRef: ComponentRef<ArticleListViewComponent> = loadComponent(ArticleListViewComponent, this.entry, this.resolver);
+        articleListViewComponentComponentRef.instance.addDialogConfig = this.articleDialogConfig
     }
 
     loadArticleWarehouseView(): void {
