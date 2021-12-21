@@ -6,6 +6,7 @@ import {loadComponent} from "../../../../../util/components-util/lazy-load-compo
 import {ArticleCategoryBehaviorService} from "../../../../../service/util/article-category-behavior.service";
 import {ArticleSubCategoryGridViewComponent} from "../article-sub-category-grid-view/article-sub-category-grid-view.component";
 import {ArticleCategoryState} from "../../../../../store/reducers/article-category.reducer";
+import {map} from "rxjs/operators";
 
 @Component({
     selector: "app-article-category-grid-view",

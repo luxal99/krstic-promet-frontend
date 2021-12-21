@@ -37,6 +37,7 @@ import { ArticleGridWarehouseViewComponent } from './components/login/admin/arti
 import { ArticleSubCategoryGridViewComponent } from './components/login/admin/articles/article-sub-category-grid-view/article-sub-category-grid-view.component';
 import { ArticleCategoryGridViewComponent } from './components/login/admin/articles/article-category-grid-view/article-category-grid-view.component';
 import { DeliveryNoteComponent } from './components/login/admin/delivery-note/delivery-note.component';
+import { AddDeliveryNoteComponent } from './components/login/admin/delivery-note/add-delivery-note/add-delivery-note.component';
 
 // @ts-ignore
 @NgModule({
@@ -58,7 +59,8 @@ import { DeliveryNoteComponent } from './components/login/admin/delivery-note/de
         ArticleGridWarehouseViewComponent,
         ArticleSubCategoryGridViewComponent,
         ArticleCategoryGridViewComponent,
-        DeliveryNoteComponent
+        DeliveryNoteComponent,
+        AddDeliveryNoteComponent
     ],
     imports: [
         BrowserModule,

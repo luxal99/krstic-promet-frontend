@@ -10,6 +10,7 @@ import {GetArticleSubCategoryAction} from "../../../store/actions/article-sub-ca
 import {GetWarehouseAction} from "../../../store/actions/warehouse.actions";
 import {ArticlesComponent} from "./articles/articles.component";
 import {GetArticleAction} from "../../../store/actions/article.actions";
+import {DeliveryNoteComponent} from "./delivery-note/delivery-note.component";
 
 @Component({
     selector: "app-admin",
@@ -53,6 +54,11 @@ export class AdminComponent implements OnInit {
     loadArticlesComponent(): void {
         this.header = "Artikli";
         this.lazyLoad(ArticlesComponent);
+    }
+
+    loadDeliveryNote(): void {
+        this.header = "Otpremnice";
+        this.lazyLoad(DeliveryNoteComponent);
     }
 
     changeColor(e: any): void {
