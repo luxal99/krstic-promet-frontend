@@ -4,12 +4,26 @@
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <h3><b>{{configData.headerText}}</b></h3>
+  <h3>
+    <b>{{ configData.headerText }}</b>
+  </h3>
   <form class="dynamic-form" [formGroup]="form">
-    <ng-container *ngFor="let field of configData.formFields;" dynamicField [config]="field"
-                  [group]="form">
+    <ng-container
+      *ngFor="let field of configData.formFields"
+      dynamicField
+      [config]="field"
+      [group]="form"
+    >
     </ng-container>
-    <button (click)="save()" [disabled]="!form.valid" mat-button mat-dialog-close class="primary-btn">Save</button>
+    <button
+      (click)="save()"
+      [disabled]="!form.valid"
+      mat-button
+      mat-dialog-close
+      class="primary-btn"
+    >
+      Save
+    </button>
   </form>
   <mat-spinner diameter="25" class="mt-2" #spinner></mat-spinner>
 </div>

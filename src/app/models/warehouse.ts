@@ -1,4 +1,4 @@
 export interface Warehouse {
-    id?: number;
-    title?: string;
+  id?: number;
+  title?: string;
 }

@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { GenericService } from "./generic.service";
-import { ArticleSubCategory } from "../models/article-sub-category";
+import { Conversion } from "../models/conversion";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
 })
-export class ArticleSubCategoryService extends GenericService<ArticleSubCategory> {
+export class ConversionService extends GenericService<Conversion> {
   constructor(http: HttpClient) {
-    super(http, "/article-sub-category/");
+    super(http, "/conversion/");
   }
 }

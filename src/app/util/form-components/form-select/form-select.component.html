@@ -1,16 +1,23 @@
 <div [formGroup]="group">
-    <mat-form-field [appearance]="appearance" [style]="{'width':width}">
-        <mat-label>{{config.label || label}}</mat-label>
-        <mat-select [multiple]="isMultiple" [disabled]="disabled" [compareWith]="compareObjects"
-                    (selectionChange)="selectionChange.emit(true)"
-                    [(ngModel)]="model"
-                    [formControlName]="config.name"
-                    [required]="required">
-            <mat-option value="" selected>---</mat-option>
-            <mat-option (click)="clickOnSelect.emit(true)" *ngFor="let item of config.options"
-                        [value]="item">
-                {{item[config.bindValue] || item  }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+  <mat-form-field [appearance]="appearance" [style]="{ width: width }">
+    <mat-label>{{ config.label || label }}</mat-label>
+    <mat-select
+      [multiple]="isMultiple"
+      [disabled]="disabled"
+      [compareWith]="compareObjects"
+      (selectionChange)="selectionChange.emit(true)"
+      [(ngModel)]="model"
+      [formControlName]="config.name"
+      [required]="required"
+    >
+      <mat-option value="" selected>---</mat-option>
+      <mat-option
+        (click)="clickOnSelect.emit(true)"
+        *ngFor="let item of config.options"
+        [value]="item"
+      >
+        {{ item[config.bindValue] || item }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>

@@ -1,19 +1,27 @@
 <mat-drawer-container fullscreen>
-    <mat-drawer opened mode="side" #drawer>
-        <div class="menu">
-            <a (click)='loadDashboardComponent()'>
-                <h5 (click)='changeColor($event)' id='overview-btn'>
-                    <mat-icon>home</mat-icon>
-                </h5>
-            </a>
-            <app-component-activator icon="settings" (load)="loadCodeBook()"></app-component-activator>
-            <app-component-activator icon="collections_bookmark" (load)="loadArticlesComponent()"></app-component-activator>
-            <app-component-activator icon="business_center" (load)="loadDeliveryNote()"></app-component-activator>
-        </div>
-    </mat-drawer>
-    <mat-drawer-content>
-        <app-navbar [header]="header" (onToggle)="drawer.toggle()"></app-navbar>
-        <div #target class="content"></div>
-    </mat-drawer-content>
+  <mat-drawer opened mode="side" #drawer>
+    <div class="menu">
+      <a (click)="loadDashboardComponent()">
+        <h5 (click)="changeColor($event)" id="overview-btn">
+          <mat-icon>home</mat-icon>
+        </h5>
+      </a>
+      <app-component-activator
+        icon="settings"
+        (load)="loadCodeBook()"
+      ></app-component-activator>
+      <app-component-activator
+        icon="collections_bookmark"
+        (load)="loadArticlesComponent()"
+      ></app-component-activator>
+      <app-component-activator
+        icon="business_center"
+        (load)="loadDeliveryNote()"
+      ></app-component-activator>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-navbar [header]="header" (onToggle)="drawer.toggle()"></app-navbar>
+    <div #target class="content"></div>
+  </mat-drawer-content>
 </mat-drawer-container>
-

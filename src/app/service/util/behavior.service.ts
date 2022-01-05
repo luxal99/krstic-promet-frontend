@@ -1,25 +1,23 @@
-import {Injectable} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
-    providedIn: "root"
+  providedIn: "root",
 })
 export class BehaviorService {
+  private behaviorSubject = new BehaviorSubject(0);
 
-    private behaviorSubject = new BehaviorSubject(0);
+  constructor() {}
 
-    constructor() {
-    }
+  add(id: number) {
+    this.behaviorSubject.next(id);
+  }
 
-    add(id: number) {
-        this.behaviorSubject.next(id);
-    }
+  get(): number {
+    return this.behaviorSubject.value;
+  }
 
-    get(): number {
-        return this.behaviorSubject.value;
-    }
-
-    reset() {
-        this.behaviorSubject.next(0);
-    }
+  reset() {
+    this.behaviorSubject.next(0);
+  }
 }

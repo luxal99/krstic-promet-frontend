@@ -1,23 +1,23 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map, mergeMap } from "rxjs/operators";
-import { ArticleService } from "../../service/article.service";
-import { ArticleActionTypes } from "../actions/article.actions";
+import { ConversionActionTypes } from "../actions/conversion.actions";
+import { ConversionService } from "../../service/conversion.service";
 
 @Injectable()
-export class ArticleEffect {
+export class ConversionEffect {
   constructor(
     private actions$: Actions,
-    private articleService: ArticleService
+    private articleService: ConversionService
   ) {}
 
-  loadArticle = createEffect(() =>
+  loadConversion = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleActionTypes.GET_ARTICLE),
+      ofType(ConversionActionTypes.GET_CONVERSION),
       mergeMap(() =>
         this.articleService.getAll().pipe(
           map((articleCategories) => ({
-            type: ArticleActionTypes.GET_ARTICLE_SUCCESSFULLY,
+            type: ConversionActionTypes.GET_CONVERSION_SUCCESSFULLY,
             payload: articleCategories,
           }))
         )
@@ -25,14 +25,14 @@ export class ArticleEffect {
     )
   );
 
-  addArticle = createEffect(() =>
+  addConversion = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleActionTypes.ADD_ARTICLE),
+      ofType(ConversionActionTypes.ADD_CONVERSION),
       mergeMap((data) =>
         // @ts-ignore
         this.articleService.save(data.payload).pipe(
           map((article) => ({
-            type: ArticleActionTypes.ADD_ARTICLE_SUCCESSFULLY,
+            type: ConversionActionTypes.ADD_CONVERSION_SUCCESSFULLY,
             payload: article,
           }))
         )
@@ -40,15 +40,14 @@ export class ArticleEffect {
     )
   );
 
-  deleteArticle = createEffect(() =>
+  deleteConversion = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleActionTypes.DELETE_ARTICLE),
-      // @ts-ignore
+      ofType(ConversionActionTypes.DELETE_CONVERSION),
       mergeMap((data) =>
         // @ts-ignore
         this.articleService.delete(data.payload).pipe(
           map(() => ({
-            type: ArticleActionTypes.DELETE_ARTICLE_SUCCESSFULLY,
+            type: ConversionActionTypes.DELETE_CONVERSION_SUCCESSFULLY,
             // @ts-ignore
             payload: data.payload,
           }))
@@ -57,15 +56,14 @@ export class ArticleEffect {
     )
   );
 
-  updateArticle = createEffect(() =>
+  updateConversion = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleActionTypes.UPDATE_ARTICLE),
-      // @ts-ignore
+      ofType(ConversionActionTypes.UPDATE_CONVERSION),
       mergeMap((data) =>
         // @ts-ignore
         this.articleService.update(data.payload).pipe(
           map((article) => ({
-            type: ArticleActionTypes.UPDATE_ARTICLE_SUCCESSFULLY,
+            type: ConversionActionTypes.UPDATE_CONVERSION_SUCCESSFULLY,
             payload: article,
           }))
         )

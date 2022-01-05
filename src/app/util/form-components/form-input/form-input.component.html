@@ -1,11 +1,15 @@
 <div [formGroup]="group">
-    <mat-form-field [appearance]="appearance" [hidden]="disabled">
-        <mat-label>{{config.label || label}}</mat-label>
-        <input (input)="change.emit(true)" [(ngModel)]="model"
-               [formControlName]="config.name"
-               matInput [type]="config.value ? config.value :'text'"
-               [required]="required">
-        <mat-icon matSuffix color="accent">{{icon || config.icon}}</mat-icon>
-        <mat-hint>{{hint}}</mat-hint>
-    </mat-form-field>
+  <mat-form-field [appearance]="appearance" [hidden]="disabled">
+    <mat-label>{{ config.label || label }}</mat-label>
+    <input
+      (input)="change.emit(true)"
+      [(ngModel)]="model"
+      [formControlName]="config.name"
+      matInput
+      [type]="config.value ? config.value : 'text'"
+      [required]="required"
+    />
+    <mat-icon matSuffix color="accent">{{ icon || config.icon }}</mat-icon>
+    <mat-hint>{{ hint }}</mat-hint>
+  </mat-form-field>
 </div>

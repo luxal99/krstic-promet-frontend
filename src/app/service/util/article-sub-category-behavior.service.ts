@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import {BehaviorService} from "./behavior.service";
+import { Injectable } from "@angular/core";
+import { BehaviorService } from "./behavior.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-export class ArticleSubCategoryBehaviorService extends BehaviorService{
+export class ArticleSubCategoryBehaviorService extends BehaviorService {
   constructor() {
     super();
   }

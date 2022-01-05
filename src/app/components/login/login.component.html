@@ -1,21 +1,31 @@
 <div class="login">
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-sm-6 left-col">
-                <img src="assets/img/imgbin_data-analysis-analytics-management-big-data-data-processing-png.png" class="img-fluid">
-            </div>
-            <div class="col-sm-6 login-form">
-                <h1>Krstić promet DOO</h1>
-                <app-form-input icon="person" label="Username" [config]="usernameInputConfig"
-                                [group]="loginForm"></app-form-input>
-                <app-form-input icon="lock" label="Password" [config]="passwordInputConfig"
-                                [group]="loginForm"></app-form-input>
-                <button class="primary-btn mt-3" mat-button (click)="auth()">Login</button>
-                <mat-spinner #spinner diameter="25"></mat-spinner>
-            </div>
-        </div>
-
-
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-sm-6 left-col">
+        <img
+          src="assets/img/imgbin_data-analysis-analytics-management-big-data-data-processing-png.png"
+          class="img-fluid"
+        />
+      </div>
+      <div class="col-sm-6 login-form">
+        <h1>Krstić promet DOO</h1>
+        <app-form-input
+          icon="person"
+          label="Username"
+          [config]="usernameInputConfig"
+          [group]="loginForm"
+        ></app-form-input>
+        <app-form-input
+          icon="lock"
+          label="Password"
+          [config]="passwordInputConfig"
+          [group]="loginForm"
+        ></app-form-input>
+        <button class="primary-btn mt-3" mat-button (click)="auth()">
+          Login
+        </button>
+        <mat-spinner #spinner diameter="25"></mat-spinner>
+      </div>
     </div>
-
+  </div>
 </div>

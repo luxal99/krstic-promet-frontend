@@ -1,44 +1,45 @@
-import {Component, OnInit} from "@angular/core";
-import {Observable} from "rxjs";
-import {ARTICLE_CATEGORY_TABLE, WAREHOUSE_TABLE} from "../../../../../constant/table-config/table-config";
-import {Store} from "@ngrx/store";
-import {FormBuilderConfig} from "../../../../../util/form-components/models/FormBuilderConfig";
-import {FormControlNames} from "../../../../../constant/constant";
-import {Validators} from "@angular/forms";
-import {warehouseStoreConfig} from "../../../../../store/config/StoreConfig";
-import {WarehouseState} from "../../../../../store/reducers/warehouse.reducer";
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import {
+  ARTICLE_CATEGORY_TABLE,
+  WAREHOUSE_TABLE,
+} from "../../../../../constant/table-config/table-config";
+import { Store } from "@ngrx/store";
+import { FormBuilderConfig } from "../../../../../util/form-components/models/FormBuilderConfig";
+import { FormControlNames } from "../../../../../constant/constant";
+import { Validators } from "@angular/forms";
+import { warehouseStoreConfig } from "../../../../../store/config/StoreConfig";
+import { WarehouseState } from "../../../../../store/reducers/warehouse.reducer";
 
 @Component({
-    selector: "app-warehouse-overview",
-    templateUrl: "./warehouse-overview.component.html",
-    styleUrls: ["./warehouse-overview.component.sass"]
+  selector: "app-warehouse-overview",
+  templateUrl: "./warehouse-overview.component.html",
+  styleUrls: ["./warehouse-overview.component.sass"],
 })
 export class WarehouseOverviewComponent implements OnInit {
+  listOfWarehouses$: Observable<any> = this.warehouseStore.select(
+    (state) => state.warehouse.list
+  );
 
-    listOfWarehouses$: Observable<any> = this.warehouseStore.select(state => state.warehouse.list);
+  warehouseTableConfig = WAREHOUSE_TABLE;
 
-    warehouseTableConfig = WAREHOUSE_TABLE;
+  constructor(private warehouseStore: Store<{ warehouse: WarehouseState }>) {}
 
-    constructor(private warehouseStore: Store<{ warehouse: WarehouseState }>) {
-    }
+  ngOnInit(): void {}
 
-    ngOnInit(): void {
-
-    }
-
-
-    warehouseDialogConfig: FormBuilderConfig = {
-        formFields: [{
-            name: FormControlNames.NAME,
-            type: "input",
-            icon:"format_align_right",
-            validation: [Validators.required],
-            label: "Naziv",
-            bindValue: ""
-        }],
-        headerText: "Dodaj kategoriju artikla",
-        store: this.warehouseStore,
-        storeConfig: warehouseStoreConfig
-    };
-
+  warehouseDialogConfig: FormBuilderConfig = {
+    formFields: [
+      {
+        name: FormControlNames.NAME,
+        type: "input",
+        icon: "format_align_right",
+        validation: [Validators.required],
+        label: "Naziv",
+        bindValue: "",
+      },
+    ],
+    headerText: "Dodaj kategoriju artikla",
+    store: this.warehouseStore,
+    storeConfig: warehouseStoreConfig,
+  };
 }

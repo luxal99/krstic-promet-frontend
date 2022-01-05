@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-add-delivery-note',
-  templateUrl: './add-delivery-note.component.html',
-  styleUrls: ['./add-delivery-note.component.sass']
+  selector: "app-add-delivery-note",
+  templateUrl: "./add-delivery-note.component.html",
+  styleUrls: ["./add-delivery-note.component.sass"],
 })
 export class AddDeliveryNoteComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

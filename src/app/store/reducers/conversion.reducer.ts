@@ -1,32 +1,32 @@
-import { Warehouse } from "../../models/warehouse";
 import {
-  WarehouseAction,
-  WarehouseActionTypes,
-} from "../actions/warehouse.actions";
+  ConversionAction,
+  ConversionActionTypes,
+} from "../actions/conversion.actions";
+import { Conversion } from "../../models/conversion";
 
-export interface WarehouseState {
-  list: Warehouse[];
+export interface ConversionState {
+  list: Conversion[];
   loading: boolean;
   error: any;
 }
 
-const initialState: WarehouseState = {
+const initialState: ConversionState = {
   list: [],
   loading: false,
   error: undefined,
 };
 
-export function WarehouseReducer(
-  state: WarehouseState = initialState,
-  action: WarehouseAction
+export function ConversionReducer(
+  state: ConversionState = initialState,
+  action: ConversionAction
 ) {
   switch (action.type) {
-    case WarehouseActionTypes.ADD_WAREHOUSE:
+    case ConversionActionTypes.ADD_CONVERSION:
       return {
         ...state,
         loading: true,
       };
-    case WarehouseActionTypes.ADD_WAREHOUSE_SUCCESSFULLY:
+    case ConversionActionTypes.ADD_CONVERSION_SUCCESSFULLY:
       return {
         ...state,
         //@ts-ignore
@@ -34,25 +34,25 @@ export function WarehouseReducer(
         loading: false,
       };
 
-    case WarehouseActionTypes.DELETE_WAREHOUSE:
+    case ConversionActionTypes.DELETE_CONVERSION:
       return {
         ...state,
         loading: true,
       };
-    case WarehouseActionTypes.DELETE_WAREHOUSE_SUCCESSFULLY:
+    case ConversionActionTypes.DELETE_CONVERSION_SUCCESSFULLY:
       return {
         ...state,
         //@ts-ignore
         list: state.list.filter((item) => item.id !== action.payload),
         loading: false,
       };
-    case WarehouseActionTypes.GET_WAREHOUSE:
+    case ConversionActionTypes.GET_CONVERSION:
       return {
         ...state,
         loading: true,
       };
 
-    case WarehouseActionTypes.GET_WAREHOUSE_SUCCESSFULLY:
+    case ConversionActionTypes.GET_CONVERSION_SUCCESSFULLY:
       return {
         ...state,
         //@ts-ignore
@@ -60,12 +60,12 @@ export function WarehouseReducer(
         loading: false,
       };
 
-    case WarehouseActionTypes.UPDATE_WAREHOUSE:
+    case ConversionActionTypes.UPDATE_CONVERSION:
       return {
         ...state,
         loading: true,
       };
-    case WarehouseActionTypes.UPDATE_WAREHOUSE_SUCCESSFULLY:
+    case ConversionActionTypes.UPDATE_CONVERSION_SUCCESSFULLY:
       return {
         ...state,
         list: [

@@ -1,5 +1,5 @@
 export interface TokenBody {
-    exp?: number;
-    iat?: number;
-    sub?: string;
+  exp?: number;
+  iat?: number;
+  sub?: string;
 }

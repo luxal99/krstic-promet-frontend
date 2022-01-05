@@ -1,37 +1,59 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container *ngFor="let column of displayedColumns">
-        <ng-container *ngIf="column.name !== 'option'" [matColumnDef]="column.name">
-            <th mat-header-cell *matHeaderCellDef> {{column.displayedName}} </th>
-            <td mat-cell *matCellDef="let element">
-                <ng-container *ngIf="column.name !=='date'">
-                    {{element|dynamicProperty:column.value|capitalize}}
-                </ng-container>
-                <ng-container *ngIf="column.name ==='date'">
-                    {{element|dynamicProperty:column.value|date}}
-                </ng-container>
-            </td>
+  <ng-container *ngFor="let column of displayedColumns">
+    <ng-container *ngIf="column.name !== 'option'" [matColumnDef]="column.name">
+      <th mat-header-cell *matHeaderCellDef>{{ column.displayedName }}</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="column.name !== 'date'">
+          {{ element | dynamicProperty: column.value | capitalize }}
         </ng-container>
-        <ng-container *ngIf="column.name === 'option'" [matColumnDef]="column.name">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
-                <div class="text-right">
-                    <button mat-button color="primary" *ngIf="onOverview.observers.length>0"
-                            (click)="onOverview.emit(element)">
-                        Pregled
-                    </button>
-                    <button mat-button color="accent" *ngIf="openEdit.observers.length>0 || genericDialogConfig"
-                            (click)="genericDialogConfig ? openAddDialog(element):openEdit.emit(element)">
-                        Izmeni
-                    </button>
-                    <button mat-button color="warn" *ngIf="onDelete.observers.length>0 || genericDialogConfig"
-                            (click)="genericDialogConfig ? delete(element.id) :onDelete.emit(element.id)">
-                        Obirši
-                    </button>
-                </div>
-            </td>
+        <ng-container *ngIf="column.name === 'date'">
+          {{ element | dynamicProperty: column.value | date }}
         </ng-container>
-
+      </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns|mapColumnArray"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns|mapColumnArray;"></tr>
+    <ng-container *ngIf="column.name === 'option'" [matColumnDef]="column.name">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <div class="text-right">
+          <button
+            mat-button
+            color="primary"
+            *ngIf="onOverview.observers.length > 0"
+            (click)="onOverview.emit(element)"
+          >
+            Pregled
+          </button>
+          <button
+            mat-button
+            color="accent"
+            *ngIf="openEdit.observers.length > 0 || genericDialogConfig"
+            (click)="
+              genericDialogConfig
+                ? openAddDialog(element)
+                : openEdit.emit(element)
+            "
+          >
+            Izmeni
+          </button>
+          <button
+            mat-button
+            color="warn"
+            *ngIf="onDelete.observers.length > 0 || genericDialogConfig"
+            (click)="
+              genericDialogConfig
+                ? delete(element.id)
+                : onDelete.emit(element.id)
+            "
+          >
+            Obirši
+          </button>
+        </div>
+      </td>
+    </ng-container>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns | mapColumnArray"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns | mapColumnArray"
+  ></tr>
 </table>
