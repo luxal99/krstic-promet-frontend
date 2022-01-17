@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { WAREHOUSE_TABLE } from "../../../../../constant/table-config/table-config";
+import {
+  CONVERSION_TABLE,
+  WAREHOUSE_TABLE,
+} from "../../../../../constant/table-config/table-config";
 import { Store } from "@ngrx/store";
 import { FormBuilderConfig } from "../../../../../util/form-components/models/FormBuilderConfig";
 import { FormControlNames } from "../../../../../constant/constant";
@@ -19,7 +22,7 @@ export class ConversionOverviewComponent implements OnInit {
     (state) => state.conversion.list
   );
 
-  conversionTableConfig = WAREHOUSE_TABLE;
+  conversionTableConfig = CONVERSION_TABLE;
 
   constructor(
     private conversionStore: Store<{ conversion: ConversionState }>

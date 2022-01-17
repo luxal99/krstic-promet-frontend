@@ -15,6 +15,7 @@ import { FormBuilderComponent } from "../../../../../util/form-components/form-b
 import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 import { MatDialog } from "@angular/material/dialog";
 import { BehaviorService } from "../../../../../service/util/behavior.service";
+import { ConversionState } from "../../../../../store/reducers/conversion.reducer";
 
 @Component({
   selector: "app-article-list-view",
@@ -34,12 +35,19 @@ export class ArticleListViewComponent implements OnInit {
     (state) => state.warehouse.list
   );
 
+  listOfConversions$: Observable<any> = this.conversionStore.select(
+    (state) => state.conversion.list
+  );
+
   articleTableConfig = ARTICLE_TABLE;
 
   constructor(
     private articleStore: Store<{ articles: ArticleState }>,
     private articleSubCategoryStore: Store<{
       articleSubCategory: ArticleSubCategoryState;
+    }>,
+    private conversionStore: Store<{
+      conversion: ConversionState;
     }>,
     private warehouseStore: Store<{ warehouse: WarehouseState }>,
     private dialog: MatDialog
@@ -49,6 +57,7 @@ export class ArticleListViewComponent implements OnInit {
     this.getQuery();
     this.initArticleSubCategorySelect();
     this.initWarehouseSelect();
+    this.initConversionSelect();
   }
 
   getQuery() {
@@ -97,6 +106,12 @@ export class ArticleListViewComponent implements OnInit {
   initWarehouseSelect() {
     this.listOfWarehouses$.subscribe((resp) => {
       this.articleDialogConfig.formFields[6].options = resp;
+    });
+  }
+
+  initConversionSelect() {
+    this.listOfConversions$.subscribe((resp) => {
+      this.articleDialogConfig.formFields[7].options = resp;
     });
   }
 
@@ -163,7 +178,7 @@ export class ArticleListViewComponent implements OnInit {
         name: FormControlNames.ID_CONVERSION,
         type: "select",
         label: "Konverzija",
-        bindValue: "",
+        bindValue: "conversionToValue",
       },
     ],
     headerText: "Dodaj artikl",

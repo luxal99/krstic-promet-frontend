@@ -17,6 +17,30 @@ export const WAREHOUSE_TABLE: Column[] = [
   { name: "name", displayedName: "Naziv", value: "name" },
   { name: "option", displayedName: "", value: "" },
 ];
+
+export const CONVERSION_TABLE: Column[] = [
+  {
+    name: "conversionFromValue",
+    displayedName: "Vrednost",
+    value: "conversionFromValue",
+  },
+  {
+    name: "conversionFromUnit",
+    displayedName: "Jedinica konverzija",
+    value: "conversionFromUnit",
+  },
+  {
+    name: "conversionToValue",
+    displayedName: "Vrednost konverzije",
+    value: "conversionToValue",
+  },
+  {
+    name: "conversionToUnit",
+    displayedName: "Jedinica u kojoj se konvertuje",
+    value: "conversionToUnit",
+  },
+  { name: "option", displayedName: "", value: "" },
+];
 export const ARTICLE_TABLE: Column[] = [
   { name: "name", displayedName: "Naziv", value: "name" },
   { name: "code", displayedName: "Šifra", value: "code" },
