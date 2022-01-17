@@ -30,6 +30,9 @@ export class FormControlNames {
   static FIRST_NAME = "firstName";
   static LAST_NAME = "lastName";
   static TELEPHONE = "telephone";
+  static PAID_STATUS = "paidStatus";
+  static DATE_OF_DELIVERY_NOTE = "dateOfDeliveryNote";
+  static GROSS = "gross";
 }
 
 export const TOKEN_NAME = "Authorization";

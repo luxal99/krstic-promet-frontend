@@ -43,7 +43,11 @@ import { ConversionReducer } from "./store/reducers/conversion.reducer";
 import { ConversionEffect } from "./store/effects/conversion.effect";
 import { ClientReducer } from "./store/reducers/client.reducer";
 import { ClientEffect } from "./store/effects/client.effect";
-import { ClientComponent } from './components/login/admin/client/client.component';
+import { ClientComponent } from "./components/login/admin/client/client.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatChipsModule } from "@angular/material/chips";
+import { TranslatePipe } from "./pipes/translate.pipe";
+import { PipesModule } from "./pipes/pipes.module";
 
 // @ts-ignore
 @NgModule({
@@ -78,6 +82,7 @@ import { ClientComponent } from './components/login/admin/client/client.componen
     FormModule,
     HttpClientModule,
     GenericTableModule,
+    PipesModule,
     StoreModule.forRoot({
       // @ts-ignore
       articleCategory: ArticleCategoryReducer,
@@ -100,6 +105,8 @@ import { ClientComponent } from './components/login/admin/client/client.componen
       ConversionEffect,
       ClientEffect,
     ]),
+    ReactiveFormsModule,
+    MatChipsModule,
   ],
   providers: [
     { provide: DEFAULT_ROUTE, useValue: "" },
@@ -110,5 +117,6 @@ import { ClientComponent } from './components/login/admin/client/client.componen
     },
   ],
   bootstrap: [AppComponent],
+  exports: [TranslatePipe],
 })
 export class AppModule {}

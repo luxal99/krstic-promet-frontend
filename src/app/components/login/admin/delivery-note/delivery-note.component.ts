@@ -18,7 +18,11 @@ export class DeliveryNoteComponent implements OnInit {
     openDialog(
       AddDeliveryNoteComponent,
       setDialogConfig({
-        width: "50%",
+        maxWidth: "100vw",
+        maxHeight: "100vh",
+        height: "100%",
+        width: "100%",
+        autoFocus: false,
       }),
       this.dialog
     );

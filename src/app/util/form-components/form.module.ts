@@ -7,6 +7,9 @@ import { FormDateComponent } from "./form-date/form-date.component";
 import { FormInputComponent } from "./form-input/form-input.component";
 import { FormSelectComponent } from "./form-select/form-select.component";
 import { MaterialModule } from "../../material.module";
+import { GenericTableModule } from "../table/generic-table/generic-table.module";
+import { AppModule } from "../../app.module";
+import { PipesModule } from "../../pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -16,7 +19,14 @@ import { MaterialModule } from "../../material.module";
     FormInputComponent,
     FormSelectComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MaterialModule,
+    GenericTableModule,
+    PipesModule,
+  ],
   exports: [
     DynamicFieldDirective,
     FormBuilderComponent,

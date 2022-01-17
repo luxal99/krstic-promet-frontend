@@ -6,15 +6,15 @@ import { GenericTableComponent } from "./generic-table.component";
 import { CapitalizePipe } from "../../../pipes/capitalize.pipe";
 import { MatTableModule } from "@angular/material/table";
 import { MatButtonModule } from "@angular/material/button";
+import { PipesModule } from "../../../pipes/pipes.module";
 
 @NgModule({
   declarations: [
     MapColumnArrayPipe,
     DynamicPropertyPipe,
     GenericTableComponent,
-    CapitalizePipe,
   ],
   exports: [MapColumnArrayPipe, DynamicPropertyPipe, GenericTableComponent],
-  imports: [CommonModule, MatTableModule, MatButtonModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule, PipesModule],
 })
 export class GenericTableModule {}
