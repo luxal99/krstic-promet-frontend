@@ -41,6 +41,9 @@ import { AddDeliveryNoteComponent } from "./components/login/admin/delivery-note
 import { ConversionOverviewComponent } from "./components/login/admin/code-book/conversion-overview/conversion-overview.component";
 import { ConversionReducer } from "./store/reducers/conversion.reducer";
 import { ConversionEffect } from "./store/effects/conversion.effect";
+import { ClientReducer } from "./store/reducers/client.reducer";
+import { ClientEffect } from "./store/effects/client.effect";
+import { ClientComponent } from './components/login/admin/client/client.component';
 
 // @ts-ignore
 @NgModule({
@@ -65,6 +68,7 @@ import { ConversionEffect } from "./store/effects/conversion.effect";
     DeliveryNoteComponent,
     AddDeliveryNoteComponent,
     ConversionOverviewComponent,
+    ClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +89,8 @@ import { ConversionEffect } from "./store/effects/conversion.effect";
       articles: ArticleReducer,
       // @ts-ignore
       conversion: ConversionReducer,
+      // @ts-ignore
+      client: ClientReducer,
     }),
     EffectsModule.forRoot([
       ArticleEffect,
@@ -92,6 +98,7 @@ import { ConversionEffect } from "./store/effects/conversion.effect";
       ArticleSubCategoryEffect,
       WarehouseEffect,
       ConversionEffect,
+      ClientEffect,
     ]),
   ],
   providers: [

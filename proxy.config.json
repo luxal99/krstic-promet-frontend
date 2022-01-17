@@ -6,6 +6,7 @@
       "/article-category",
       "/article-sub-price",
       "/conversion",
+      "/client",
       "/warehouse"
     ],
     "target": "http://localhost:8080/",

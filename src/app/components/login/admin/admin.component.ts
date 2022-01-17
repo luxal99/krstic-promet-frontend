@@ -18,6 +18,8 @@ import { ArticlesComponent } from "./articles/articles.component";
 import { GetArticleAction } from "../../../store/actions/article.actions";
 import { DeliveryNoteComponent } from "./delivery-note/delivery-note.component";
 import { GetConversionAction } from "../../../store/actions/conversion.actions";
+import { ClientComponent } from "./client/client.component";
+import { GetClientAction } from "../../../store/actions/client.actions";
 
 @Component({
   selector: "app-admin",
@@ -45,6 +47,7 @@ export class AdminComponent implements OnInit {
     this.store.dispatch(new GetWarehouseAction());
     this.store.dispatch(new GetArticleAction());
     this.store.dispatch(new GetConversionAction());
+    this.store.dispatch(new GetClientAction());
   }
 
   initDefaultMenu(): void {
@@ -63,6 +66,11 @@ export class AdminComponent implements OnInit {
   loadArticlesComponent(): void {
     this.header = "Artikli";
     this.lazyLoad(ArticlesComponent);
+  }
+
+  loadClient(): void {
+    this.header = "Klijenti";
+    this.lazyLoad(ClientComponent);
   }
 
   loadDeliveryNote(): void {

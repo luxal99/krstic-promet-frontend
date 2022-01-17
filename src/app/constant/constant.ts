@@ -7,6 +7,7 @@ export type Routes =
   | "/article-category/"
   | "/article-sub-category/"
   | "/conversion/"
+  | "/client/"
   | "/warehouse/";
 
 export class FormControlNames {
@@ -26,6 +27,9 @@ export class FormControlNames {
   static CONVERSION_FROM_UNIT = "conversionFromUnit";
   static CONVERSION_TO_VALUE = "conversionToValue";
   static CONVERSION_TO_UNIT = "conversionToUnit";
+  static FIRST_NAME = "firstName";
+  static LAST_NAME = "lastName";
+  static TELEPHONE = "telephone";
 }
 
 export const TOKEN_NAME = "Authorization";

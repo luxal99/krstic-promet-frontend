@@ -41,6 +41,13 @@ export const CONVERSION_TABLE: Column[] = [
   },
   { name: "option", displayedName: "", value: "" },
 ];
+
+export const CLIENT_TABLE: Column[] = [
+  { name: "firstName", displayedName: "Ime", value: "firstName" },
+  { name: "lastName", displayedName: "Prezime", value: "lastName" },
+  { name: "telephone", displayedName: "Telefon", value: "telephone" },
+  { name: "option", displayedName: "", value: "" },
+];
 export const ARTICLE_TABLE: Column[] = [
   { name: "name", displayedName: "Naziv", value: "name" },
   { name: "code", displayedName: "Šifra", value: "code" },

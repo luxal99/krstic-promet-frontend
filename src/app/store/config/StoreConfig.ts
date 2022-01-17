@@ -29,6 +29,12 @@ import {
   GetConversionAction,
   UpdateConversionAction,
 } from "../actions/conversion.actions";
+import {
+  AddClientAction,
+  DeleteClientAction,
+  GetClientAction,
+  UpdateClientAction,
+} from "../actions/client.actions";
 
 export class StoreConfig implements StoreInterface {
   createAction: any;
@@ -82,4 +88,10 @@ export const conversionStoreConfig: StoreConfig = new StoreConfig(
   DeleteConversionAction.bind(this),
   GetConversionAction.bind(this),
   UpdateConversionAction.bind(this)
+);
+export const clientStoreConfig: StoreConfig = new StoreConfig(
+  AddClientAction.bind(this),
+  DeleteClientAction.bind(this),
+  GetClientAction.bind(this),
+  UpdateClientAction.bind(this)
 );
