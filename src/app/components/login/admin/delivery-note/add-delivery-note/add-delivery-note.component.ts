@@ -108,7 +108,7 @@ export class AddDeliveryNoteComponent implements OnInit {
       });
     }
 
-    this.total += article.sellingPrice;
+    this.total += article.sellingPrice * amountValue;
   }
 
   decreaseArticle(article: SelectedArticleDto | any): void {
@@ -131,7 +131,10 @@ export class AddDeliveryNoteComponent implements OnInit {
   }
 
   removeArticle(article: SelectedArticleDto | any): void {
+    const articleById: SelectedArticleDto | undefined =
+      this.listOfSelectedArticles.find((item) => item.id === article.id);
     this.listOfSelectedArticles.splice(article, 1);
-    this.total -= article.sellingPrice;
+    //@ts-ignore
+    this.total -= articleById?.total;
   }
 }
