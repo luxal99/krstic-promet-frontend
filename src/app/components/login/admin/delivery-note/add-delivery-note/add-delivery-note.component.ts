@@ -7,7 +7,8 @@ import { FieldConfig } from "../../../../../util/form-components/models/FieldCon
 import { DeliveryNoteStatusEnum } from "../../../../../enum/DeliveryNoteStatusEnum";
 import { FormControlNames } from "../../../../../constant/constant";
 import { SelectedArticleDto } from "../../../../../models/dto/SelectedArticleDto";
-
+import { DeliveryNoteService } from "../../../../../service/delivery-note.service";
+import * as moment from "moment";
 @Component({
   selector: "app-add-delivery-note",
   templateUrl: "./add-delivery-note.component.html",
@@ -72,7 +73,8 @@ export class AddDeliveryNoteComponent implements OnInit {
     }>,
     private articleStore: Store<{
       articles: ArticleState;
-    }>
+    }>,
+    private deliveryNoteService: DeliveryNoteService
   ) {}
 
   ngOnInit(): void {}
@@ -136,5 +138,23 @@ export class AddDeliveryNoteComponent implements OnInit {
     this.listOfSelectedArticles.splice(article, 1);
     //@ts-ignore
     this.total -= articleById?.total;
+  }
+
+  save(): void {
+    this.deliveryNoteService
+      .save({
+        gross: this.total,
+        paidStatus: this.deliveryNoteForm.get(FormControlNames.PAID_STATUS)
+          ?.value,
+        dateOfDeliveryNote: moment(
+          this.deliveryNoteForm.get(FormControlNames.DATE_OF_DELIVERY_NOTE)
+            ?.value
+        ).format("YYYY-MM-DD"),
+        listOfArticles: this.listOfSelectedArticles,
+        idClient: this.deliveryNoteForm.get(FormControlNames.ID_CLIENT)?.value,
+      })
+      .subscribe((resp) => {
+        console.log(resp);
+      });
   }
 }

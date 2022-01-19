@@ -8,6 +8,7 @@ export type Routes =
   | "/article-sub-category/"
   | "/conversion/"
   | "/client/"
+  | "/delivery-note/"
   | "/warehouse/";
 
 export class FormControlNames {
@@ -33,6 +34,7 @@ export class FormControlNames {
   static PAID_STATUS = "paidStatus";
   static DATE_OF_DELIVERY_NOTE = "dateOfDeliveryNote";
   static GROSS = "gross";
+  static ID_CLIENT = "idClient";
 }
 
 export const TOKEN_NAME = "Authorization";
