@@ -7,7 +7,6 @@ import { Article } from "../models/article";
 })
 export class GroupObjectInArrayPipe implements PipeTransform {
   transform(listOfArticles: Article[]): any[] {
-    console.log(listOfArticles);
     return [
       ...new Map(
         listOfArticles
