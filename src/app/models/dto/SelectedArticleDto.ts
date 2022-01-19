@@ -1,5 +1,5 @@
 export interface SelectedArticleDto {
-  id: number;
+  id?: number;
   name: string;
   sellingPrice: number;
   total: number;

@@ -95,8 +95,14 @@ export class AddDeliveryNoteComponent implements OnInit {
       this.listOfSelectedArticles.push({
         id: article.id,
         code: article.code,
-        amount: amountValue,
-        total: amountValue * article.sellingPrice,
+        amount: article.idConversion
+          ? amountValue * article.idConversion.conversionToValue
+          : amountValue,
+        total: article.idConversion
+          ? amountValue *
+            article.idConversion.conversionToValue *
+            article.sellingPrice
+          : amountValue * article.sellingPrice,
         sellingPrice: article.sellingPrice,
         name: article.name,
       });
@@ -105,7 +111,7 @@ export class AddDeliveryNoteComponent implements OnInit {
     this.total += article.sellingPrice;
   }
 
-  removeArticle(article: SelectedArticleDto | any): void {
+  decreaseArticle(article: SelectedArticleDto | any): void {
     const articleForRemove: SelectedArticleDto | undefined =
       this.listOfSelectedArticles.find((item) => article.id === item.id);
     const index = this.listOfSelectedArticles.findIndex(
@@ -121,6 +127,11 @@ export class AddDeliveryNoteComponent implements OnInit {
       this.listOfSelectedArticles[index].total -=
         this.listOfSelectedArticles[index].sellingPrice;
     }
+    this.total -= article.sellingPrice;
+  }
+
+  removeArticle(article: SelectedArticleDto | any): void {
+    this.listOfSelectedArticles.splice(article, 1);
     this.total -= article.sellingPrice;
   }
 }

@@ -88,7 +88,7 @@
         <mat-icon>add</mat-icon>
       </button>
       <button
-        (click)="removeArticle(element)"
+        (click)="decreaseArticle(element)"
         mat-icon-button
         class="m-1"
         color="warn"
@@ -131,10 +131,10 @@
       <h4>{{ selectedArticle.sellingPrice }}</h4>
     </div>
     <div class="col">
-      <h4>{{ selectedArticle.amount }}</h4>
+      <h4>{{ selectedArticle.amount|formatNumber }}</h4>
     </div>
     <div class="col">
-      <h4>{{ selectedArticle.total }}</h4>
+      <h4>{{ selectedArticle.total|formatNumber }}</h4>
     </div>
     <div class="col">
       <button
@@ -147,12 +147,17 @@
         <mat-icon>add</mat-icon>
       </button>
       <button
-        (click)="removeArticle(selectedArticle)"
+        (click)="decreaseArticle(selectedArticle)"
         mat-icon-button
         class="m-1"
         color="warn"
       >
         <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+    <div class="col">
+      <button mat-button (click)="removeArticle(selectedArticle)" color="warn" mat-icon-button>
+        <mat-icon>close</mat-icon>
       </button>
     </div>
   </div>

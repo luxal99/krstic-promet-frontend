@@ -1,5 +1,6 @@
 import { ArticleSubCategory } from "./article-sub-category";
 import { Warehouse } from "./warehouse";
+import { Conversion } from "./conversion";
 
 export interface Article {
   id?: number;
@@ -12,5 +13,5 @@ export interface Article {
   debit?: number;
   idArticleSubCategory: ArticleSubCategory;
   idWarehouse: Warehouse;
-  idConversion: any;
+  idConversion: Conversion;
 }
