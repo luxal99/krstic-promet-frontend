@@ -3,6 +3,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { openDialog } from "../../../../util/modal/OpeningModal";
 import { AddDeliveryNoteComponent } from "./add-delivery-note/add-delivery-note.component";
 import { setDialogConfig } from "../../../../util/modal/DialogConfig";
+import { DeliveryNoteService } from "../../../../service/delivery-note.service";
+import { DeliveryNote } from "../../../../models/delivery-note";
 
 @Component({
   selector: "app-delivery-note",
@@ -10,7 +12,12 @@ import { setDialogConfig } from "../../../../util/modal/DialogConfig";
   styleUrls: ["./delivery-note.component.sass"],
 })
 export class DeliveryNoteComponent implements OnInit {
-  constructor(private dialog: MatDialog) {}
+  listOfDeliveryNotes: DeliveryNote[] = [];
+
+  constructor(
+    private dialog: MatDialog,
+    private deliveryNoteService: DeliveryNoteService
+  ) {}
 
   ngOnInit(): void {}
 

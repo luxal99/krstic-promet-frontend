@@ -9,6 +9,11 @@ import { FormControlNames } from "../../../../../constant/constant";
 import { SelectedArticleDto } from "../../../../../models/dto/SelectedArticleDto";
 import { DeliveryNoteService } from "../../../../../service/delivery-note.service";
 import * as moment from "moment";
+import { SnackBarUtil } from "../../../../../util/snackbar/snackbar-util";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Client } from "../../../../../models/client";
+import { GetArticleAction } from "../../../../../store/actions/article.actions";
+
 @Component({
   selector: "app-add-delivery-note",
   templateUrl: "./add-delivery-note.component.html",
@@ -33,7 +38,7 @@ export class AddDeliveryNoteComponent implements OnInit {
   deliveryNoteForm = new FormGroup({
     idClient: new FormControl(""),
     paidStatus: new FormControl(""),
-    gross: new FormControl(this.total, Validators.required),
+    gross: new FormControl("", Validators.required),
     dateOfDeliveryNote: new FormControl(new Date(), Validators.required),
   });
 
@@ -74,6 +79,7 @@ export class AddDeliveryNoteComponent implements OnInit {
     private articleStore: Store<{
       articles: ArticleState;
     }>,
+    private snackBar: MatSnackBar,
     private deliveryNoteService: DeliveryNoteService
   ) {}
 
@@ -100,6 +106,7 @@ export class AddDeliveryNoteComponent implements OnInit {
         amount: article.idConversion
           ? amountValue * article.idConversion.conversionToValue
           : amountValue,
+        amountInWarehouse: article.amount,
         total: article.idConversion
           ? amountValue *
             article.idConversion.conversionToValue *
@@ -153,8 +160,18 @@ export class AddDeliveryNoteComponent implements OnInit {
         listOfArticles: this.listOfSelectedArticles,
         idClient: this.deliveryNoteForm.get(FormControlNames.ID_CLIENT)?.value,
       })
-      .subscribe((resp) => {
-        console.log(resp);
-      });
+      .subscribe(
+        (resp) => {
+          SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
+          this.articleStore.dispatch(new GetArticleAction());
+        },
+        () => {
+          SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
+        }
+      );
+  }
+
+  displayClient(client: Client): string {
+    return client ? client.firstName + " " + client.lastName : "";
   }
 }

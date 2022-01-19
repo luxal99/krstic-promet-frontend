@@ -4,5 +4,6 @@ export interface SelectedArticleDto {
   sellingPrice: number;
   total: number;
   amount: number;
+  amountInWarehouse: number;
   code: string;
 }
