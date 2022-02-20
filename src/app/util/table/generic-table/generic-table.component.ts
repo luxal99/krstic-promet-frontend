@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from "@angular/core";
 import { Column } from "../Column";
 import { openDialog } from "../../modal/OpeningModal";
 import { FormBuilderComponent } from "../../form-components/form-builder/form-builder.component";
@@ -19,10 +26,13 @@ export class GenericTableComponent implements OnInit {
   @Output() onOverview = new EventEmitter();
   @Output() openEdit = new EventEmitter();
   @Input() genericDialogConfig!: FormBuilderConfig;
+  @Input() customColumnTemplate!: TemplateRef<any>;
 
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.customColumnTemplate);
+  }
 
   openAddDialog(formValues: any) {
     this.genericDialogConfig.formValues = formValues;

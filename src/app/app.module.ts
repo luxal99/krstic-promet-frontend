@@ -48,6 +48,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatChipsModule } from "@angular/material/chips";
 import { TranslatePipe } from "./pipes/translate.pipe";
 import { PipesModule } from "./pipes/pipes.module";
+import { CurrentWeekOverviewComponent } from './components/login/admin/delivery-note/current-week-overview/current-week-overview.component';
 
 // @ts-ignore
 @NgModule({
@@ -73,6 +74,7 @@ import { PipesModule } from "./pipes/pipes.module";
     AddDeliveryNoteComponent,
     ConversionOverviewComponent,
     ClientComponent,
+    CurrentWeekOverviewComponent,
   ],
   imports: [
     BrowserModule,

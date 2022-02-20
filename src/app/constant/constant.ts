@@ -38,7 +38,7 @@ export class FormControlNames {
 }
 
 export const TOKEN_NAME = "Authorization";
-
+export const DATE_VALUE_FORMAT = "YYYY-MM-DD";
 export class Pages {
   static ADMIN = "/";
   static LOGIN = "login";
