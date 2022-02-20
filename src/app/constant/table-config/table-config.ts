@@ -67,7 +67,7 @@ export const ARTICLE_TABLE: Column[] = [
 ];
 export const DELIVERY_NOTE_TABLE: Column[] = [
   {
-    name: "dateOfDeliveryNote",
+    name: "date",
     displayedName: "Datum otpremnice",
     value: "dateOfDeliveryNote",
   },

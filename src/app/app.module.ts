@@ -49,6 +49,9 @@ import { MatChipsModule } from "@angular/material/chips";
 import { TranslatePipe } from "./pipes/translate.pipe";
 import { PipesModule } from "./pipes/pipes.module";
 import { CurrentWeekOverviewComponent } from './components/login/admin/delivery-note/current-week-overview/current-week-overview.component';
+import { CurrentMonthOverviewComponent } from './components/login/admin/delivery-note/current-month-overview/current-month-overview.component';
+import { CustomPeriodOverviewComponent } from './components/login/admin/delivery-note/custom-period-overview/custom-period-overview.component';
+import { GenericDeliveryNoteOverviewComponent } from './components/login/admin/delivery-note/generic-delivery-note-overview/generic-delivery-note-overview.component';
 
 // @ts-ignore
 @NgModule({
@@ -75,6 +78,9 @@ import { CurrentWeekOverviewComponent } from './components/login/admin/delivery-
     ConversionOverviewComponent,
     ClientComponent,
     CurrentWeekOverviewComponent,
+    CurrentMonthOverviewComponent,
+    CustomPeriodOverviewComponent,
+    GenericDeliveryNoteOverviewComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { openDialog } from "../../../../util/modal/OpeningModal";
 import { AddDeliveryNoteComponent } from "./add-delivery-note/add-delivery-note.component";
 import { setDialogConfig } from "../../../../util/modal/DialogConfig";
-import { DELIVERY_NOTE_TABLE } from "../../../../constant/table-config/table-config";
+import { DeliveryNote } from "../../../../models/delivery-note";
 
 @Component({
   selector: "app-delivery-note",

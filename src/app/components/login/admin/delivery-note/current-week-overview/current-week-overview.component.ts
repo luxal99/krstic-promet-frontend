@@ -11,28 +11,12 @@ import { DELIVERY_NOTE_TABLE } from "../../../../../constant/table-config/table-
 })
 export class CurrentWeekOverviewComponent implements OnInit {
   listOfDeliveryNotes: DeliveryNote[] | null = [];
+  startDate = moment().startOf("isoWeek").format(DATE_VALUE_FORMAT);
+  endDate = moment().endOf("isoWeek").format(DATE_VALUE_FORMAT);
 
   tableConfig = DELIVERY_NOTE_TABLE;
 
   constructor(private deliveryNoteService: DeliveryNoteService) {}
 
-  ngOnInit(): void {
-    this.getDeliveryNotesForCurrentWeek();
-  }
-
-  getDeliveryNotesForCurrentWeek(): void {
-    this.deliveryNoteService
-      .getDeliveryNoteByQuery(
-        encodeURI(
-          JSON.stringify({
-            pagination: { page: 0, rows: 10 },
-            startDate: moment().startOf("isoWeek").format(DATE_VALUE_FORMAT),
-            endDate: moment().endOf("isoWeek").format(DATE_VALUE_FORMAT),
-          })
-        )
-      )
-      .subscribe((resp) => {
-        this.listOfDeliveryNotes = resp.body;
-      });
-  }
+  ngOnInit(): void {}
 }
