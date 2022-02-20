@@ -48,7 +48,6 @@ export class GenericDeliveryNoteOverviewComponent implements OnInit {
   }
 
   deleteDeliveryNote(id: any) {
-    console.log(id);
     openConfirmDialog(this.dialog, () => {
       this.deliveryNoteService.delete(id).subscribe(() => {
         this.getDeliveryNotesForCurrentWeek();

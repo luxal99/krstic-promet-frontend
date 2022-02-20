@@ -26,6 +26,8 @@ export class DeliveryNoteComponent implements OnInit {
         autoFocus: false,
       }),
       this.dialog
-    );
+    )
+      .afterClosed()
+      .subscribe(() => {});
   }
 }
