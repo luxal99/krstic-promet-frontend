@@ -35,10 +35,14 @@ export class FormControlNames {
   static DATE_OF_DELIVERY_NOTE = "dateOfDeliveryNote";
   static GROSS = "gross";
   static ID_CLIENT = "idClient";
+  static END_DATE = "endDate";
+  static START_DATE = "endDate";
+  static SEARCH = "search";
 }
 
 export const TOKEN_NAME = "Authorization";
 export const DATE_VALUE_FORMAT = "YYYY-MM-DD";
+
 export class Pages {
   static ADMIN = "/";
   static LOGIN = "login";

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { ClientState } from "../../../../../store/reducers/client.reducer";
@@ -13,17 +13,21 @@ import { SnackBarUtil } from "../../../../../util/snackbar/snackbar-util";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Client } from "../../../../../models/client";
 import { GetArticleAction } from "../../../../../store/actions/article.actions";
+import { BehaviorService } from "../../../../../service/util/behavior.service";
+import { debounceTime, distinctUntilChanged, filter } from "rxjs/operators";
+import { ArticleService } from "../../../../../service/article.service";
+import { Article } from "../../../../../models/article";
 
 @Component({
   selector: "app-add-delivery-note",
   templateUrl: "./add-delivery-note.component.html",
   styleUrls: ["./add-delivery-note.component.sass"],
 })
-export class AddDeliveryNoteComponent implements OnInit {
+export class AddDeliveryNoteComponent implements OnInit, AfterViewInit {
   public total = 0;
   listOfSelectedArticles: SelectedArticleDto[] = [];
 
-  listOfArticles = this.articleStore.select((state) => state.articles.list);
+  listOfArticles: Article[] = [];
 
   articleTableDisplayedColumns: string[] = [
     "code",
@@ -80,21 +84,28 @@ export class AddDeliveryNoteComponent implements OnInit {
       articles: ArticleState;
     }>,
     private snackBar: MatSnackBar,
-    private deliveryNoteService: DeliveryNoteService
+    private deliveryNoteService: DeliveryNoteService,
+    private articleService: ArticleService,
+    private updateDeliveryNoteBS: BehaviorService
   ) {}
+
+  ngAfterViewInit(): void {
+    this.searchForArticle();
+  }
 
   ngOnInit(): void {}
 
-  addArticle(article: SelectedArticleDto | any): void {
+  addArticle(article: SelectedArticleDto | any, amountInputValue?: any): void {
     let isArticleExistingInArray: SelectedArticleDto | undefined =
       this.listOfSelectedArticles.find((item) => article.id === item.id);
     const index = this.listOfSelectedArticles.findIndex(
       (item) => article.id === item.id
     );
 
-    const amountValue = Number.parseInt(
-      this.amountForm.get(FormControlNames.AMOUNT)?.value
-    );
+    if (!amountInputValue) {
+      amountInputValue = 1;
+    }
+    const amountValue = Number.parseInt(amountInputValue);
     if (isArticleExistingInArray) {
       this.listOfSelectedArticles[index].amount += amountValue;
       this.listOfSelectedArticles[index].total +=
@@ -158,17 +169,45 @@ export class AddDeliveryNoteComponent implements OnInit {
             ?.value
         ).format("YYYY-MM-DD"),
         listOfArticles: this.listOfSelectedArticles,
-        idClient: this.deliveryNoteForm.get(FormControlNames.ID_CLIENT)?.value,
+        idClient:
+          this.deliveryNoteForm.get(FormControlNames.ID_CLIENT)?.value !== ""
+            ? this.deliveryNoteForm.get(FormControlNames.ID_CLIENT)?.value
+            : null,
       })
       .subscribe(
         (resp) => {
           SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
           this.articleStore.dispatch(new GetArticleAction());
+          this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
+            true
+          );
         },
         () => {
           SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
         }
       );
+  }
+
+  searchForArticle() {
+    this.searchForm
+      .get(FormControlNames.SEARCH)
+      ?.valueChanges.pipe(
+        filter((inputValue) => {
+          if (inputValue.length > 2) {
+            return inputValue;
+          } else {
+          }
+        }),
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+      .subscribe((searchText) => {
+        this.articleService
+          .searchForRealEstate(searchText)
+          .subscribe((resp) => {
+            this.listOfArticles = resp;
+          });
+      });
   }
 
   displayClient(client: Client): string {

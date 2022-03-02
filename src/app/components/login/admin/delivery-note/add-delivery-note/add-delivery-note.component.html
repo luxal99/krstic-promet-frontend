@@ -67,34 +67,35 @@
     <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef style="width: 100px">Količina</th>
         <td mat-cell *matCellDef="let element" style="width: 100px">
-            <app-form-input
-                    [group]="amountForm"
-                    label="Količina"
-                    [model]="1"
-                    [config]="amountInputConfig"
-            ></app-form-input>
+            <div class="inline">
+                <mat-form-field>
+                    <mat-label>Količina</mat-label>
+                    <input #amountInput matInput>
+                </mat-form-field>
+                <button
+                        (click)="addArticle(element,amountInput.value)"
+                        class="m-1"
+                        mat-icon-button
+                        color="primary"
+                >
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button
+                        (click)="decreaseArticle(element)"
+                        mat-icon-button
+                        class="m-1"
+                        color="warn"
+                >
+                    <mat-icon>remove</mat-icon>
+                </button>
+            </div>
+
         </td>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-            <button
-                    (click)="addArticle(element)"
-                    class="m-1"
-                    mat-icon-button
-                    color="primary"
-            >
-                <mat-icon>add</mat-icon>
-            </button>
-            <button
-                    (click)="decreaseArticle(element)"
-                    mat-icon-button
-                    class="m-1"
-                    color="warn"
-            >
-                <mat-icon>remove</mat-icon>
-            </button>
         </td>
     </ng-container>
 

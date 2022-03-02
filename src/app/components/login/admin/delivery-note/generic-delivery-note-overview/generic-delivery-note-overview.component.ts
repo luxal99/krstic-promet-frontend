@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from "@angular/core";
 import { DeliveryNote } from "../../../../../models/delivery-note";
 import { DELIVERY_NOTE_TABLE } from "../../../../../constant/table-config/table-config";
 import { DeliveryNoteService } from "../../../../../service/delivery-note.service";
@@ -9,13 +16,16 @@ import { SnackBarUtil } from "../../../../../util/snackbar/snackbar-util";
 import { openDialog } from "../../../../../util/modal/OpeningModal";
 import { AddDeliveryNoteComponent } from "../add-delivery-note/add-delivery-note.component";
 import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
+import { BehaviorService } from "../../../../../service/util/behavior.service";
 
 @Component({
   selector: "app-generic-delivery-note-overview",
   templateUrl: "./generic-delivery-note-overview.component.html",
   styleUrls: ["./generic-delivery-note-overview.component.sass"],
 })
-export class GenericDeliveryNoteOverviewComponent implements OnInit {
+export class GenericDeliveryNoteOverviewComponent
+  implements OnInit, OnDestroy, OnChanges
+{
   @Input() listOfDeliveryNotes: DeliveryNote[] | null = [];
   @Input() startDate = "";
   @Input() endDate = "";
@@ -24,14 +34,30 @@ export class GenericDeliveryNoteOverviewComponent implements OnInit {
   constructor(
     private deliveryNoteService: DeliveryNoteService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private updateDeliveryNoteBS: BehaviorService
   ) {}
 
-  ngOnInit(): void {
-    this.getDeliveryNotesForCurrentWeek();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.startDate.firstChange && !changes.endDate.firstChange) {
+      this.getDeliveryNotes();
+    }
   }
 
-  getDeliveryNotesForCurrentWeek(): void {
+  ngOnInit(): void {
+    this.getDeliveryNotes();
+    this.updateListOfDeliveryNotes();
+  }
+
+  updateListOfDeliveryNotes() {
+    this.updateDeliveryNoteBS.updateDeliveryNotes.subscribe((resp) => {
+      if (resp) {
+        this.getDeliveryNotes();
+      }
+    });
+  }
+
+  getDeliveryNotes(): void {
     this.deliveryNoteService
       .getDeliveryNoteByQuery(
         encodeURI(
@@ -50,7 +76,7 @@ export class GenericDeliveryNoteOverviewComponent implements OnInit {
   deleteDeliveryNote(id: any) {
     openConfirmDialog(this.dialog, () => {
       this.deliveryNoteService.delete(id).subscribe(() => {
-        this.getDeliveryNotesForCurrentWeek();
+        this.getDeliveryNotes();
         SnackBarUtil.openSnackBar(this.snackBar, "Uspešno obrisana otpremnica");
       });
     });
@@ -69,5 +95,9 @@ export class GenericDeliveryNoteOverviewComponent implements OnInit {
       }),
       this.dialog
     );
+  }
+
+  ngOnDestroy(): void {
+    this.updateDeliveryNoteBS.updateDeliveryNotes.unsubscribe();
   }
 }

@@ -30,9 +30,7 @@ export class GenericTableComponent implements OnInit {
 
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {
-    console.log(this.customColumnTemplate);
-  }
+  ngOnInit(): void {}
 
   openAddDialog(formValues: any) {
     this.genericDialogConfig.formValues = formValues;
