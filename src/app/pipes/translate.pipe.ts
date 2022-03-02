@@ -21,6 +21,6 @@ export class TranslatePipe implements PipeTransform {
         break;
     }
 
-    return value;
+    return value.charAt(0).toUpperCase() + value.substr(1).toLowerCase();
   }
 }

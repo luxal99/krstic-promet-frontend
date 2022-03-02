@@ -1,5 +1,10 @@
-<a (click)="load.emit(true)">
-  <h5 (click)="changeColor($event)" class="inactive">
-    <mat-icon>{{ icon }}</mat-icon>
-  </h5>
-</a>
+<div (click)="load.emit(true)">
+  <a   (click)="changeColor($event)">
+    <div class="inactive menu-item">
+      <mat-icon>{{ icon }}</mat-icon>
+      <h3 >{{title}}
+      </h3>
+    </div>
+  </a>
+
+</div>

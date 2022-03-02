@@ -36,6 +36,12 @@ export const WAREHOUSE_TABLE: Column[] = [
 
 export const CONVERSION_TABLE: Column[] = [
   {
+    name: "name",
+    displayedName: "Naziv konverzije",
+    value: "name",
+    columnType: "GENERIC",
+  },
+  {
     name: "conversionFromValue",
     displayedName: "Vrednost",
     value: "conversionFromValue",

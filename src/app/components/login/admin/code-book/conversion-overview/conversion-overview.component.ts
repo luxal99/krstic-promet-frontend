@@ -33,6 +33,14 @@ export class ConversionOverviewComponent implements OnInit {
   conversionDialogConfig: FormBuilderConfig = {
     formFields: [
       {
+        name: FormControlNames.NAME,
+        type: "input",
+        icon: "format_align_right",
+        validation: [Validators.required],
+        label: "Naziv konverzije",
+        bindValue: "",
+      },
+      {
         name: FormControlNames.CONVERSION_FROM_VALUE,
         type: "input",
         icon: "format_align_right",
