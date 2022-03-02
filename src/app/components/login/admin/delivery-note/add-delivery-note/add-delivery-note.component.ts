@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { ClientState } from "../../../../../store/reducers/client.reducer";
 import { ArticleState } from "../../../../../store/reducers/article.reducer";
 import { FieldConfig } from "../../../../../util/form-components/models/FieldConfig";
-import { DeliveryNoteStatusEnum } from "../../../../../enum/DeliveryNoteStatusEnum";
+import { DeliveryNotePaidStatusEnum } from "../../../../../enum/DeliveryNotePaidStatusEnum";
 import { FormControlNames } from "../../../../../constant/constant";
 import { SelectedArticleDto } from "../../../../../models/dto/SelectedArticleDto";
 import { DeliveryNoteService } from "../../../../../service/delivery-note.service";
@@ -17,6 +17,8 @@ import { BehaviorService } from "../../../../../service/util/behavior.service";
 import { debounceTime, distinctUntilChanged, filter } from "rxjs/operators";
 import { ArticleService } from "../../../../../service/article.service";
 import { Article } from "../../../../../models/article";
+import { DeliveryNoteStatusEnum } from "../../../../../enum/DeliveryNoteStatusEnum";
+import { ARTICLE_TABLE } from "../../../../../constant/table-config/table-config";
 
 @Component({
   selector: "app-add-delivery-note",
@@ -29,19 +31,14 @@ export class AddDeliveryNoteComponent implements OnInit, AfterViewInit {
 
   listOfArticles: Article[] = [];
 
-  articleTableDisplayedColumns: string[] = [
-    "code",
-    "name",
-    "price",
-    "amount",
-    "quantity",
-  ];
+  articleTableDisplayedColumns = ARTICLE_TABLE;
 
   public listOfClients$ = this.clientStore.select((state) => state.client.list);
 
   deliveryNoteForm = new FormGroup({
     idClient: new FormControl(""),
     paidStatus: new FormControl(""),
+    deliveredStatus: new FormControl(""),
     gross: new FormControl("", Validators.required),
     dateOfDeliveryNote: new FormControl(new Date(), Validators.required),
   });
@@ -60,6 +57,12 @@ export class AddDeliveryNoteComponent implements OnInit, AfterViewInit {
   };
 
   paidStatusSelectConfig: FieldConfig = {
+    bindValue: "",
+    name: FormControlNames.PAID_STATUS,
+    type: "select",
+    options: Object.values(DeliveryNotePaidStatusEnum),
+  };
+  deliveryStatusSelectConfig: FieldConfig = {
     bindValue: "",
     name: FormControlNames.PAID_STATUS,
     type: "select",

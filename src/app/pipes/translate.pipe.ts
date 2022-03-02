@@ -13,6 +13,12 @@ export class TranslatePipe implements PipeTransform {
       case "NOT_PAID":
         value = "Neplaćeno";
         break;
+      case "DELIVERED":
+        value = "Isporučeno";
+        break;
+      case "NOT_DELIVERED":
+        value = "Neisporučeno";
+        break;
     }
 
     return value;

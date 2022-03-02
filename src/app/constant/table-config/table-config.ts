@@ -63,7 +63,6 @@ export const ARTICLE_TABLE: Column[] = [
   },
   { name: "amount", displayedName: "Na stanju", value: "amount" },
   { name: "debit", displayedName: "Zaduženje", value: "debit" },
-  { name: "option", displayedName: "", value: "" },
 ];
 export const DELIVERY_NOTE_TABLE: Column[] = [
   {
