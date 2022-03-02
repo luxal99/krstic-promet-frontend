@@ -52,6 +52,8 @@ import { CurrentWeekOverviewComponent } from './components/login/admin/delivery-
 import { CurrentMonthOverviewComponent } from './components/login/admin/delivery-note/current-month-overview/current-month-overview.component';
 import { CustomPeriodOverviewComponent } from './components/login/admin/delivery-note/custom-period-overview/custom-period-overview.component';
 import { GenericDeliveryNoteOverviewComponent } from './components/login/admin/delivery-note/generic-delivery-note-overview/generic-delivery-note-overview.component';
+import { DeliveryNoteOvervireComponent } from './components/login/admin/delivery-note/delivery-note-overvire/delivery-note-overvire.component';
+import { DeliveryNoteOverviewComponent } from './components/login/admin/delivery-note/delivery-note-overview/delivery-note-overview.component';
 
 // @ts-ignore
 @NgModule({
@@ -81,6 +83,8 @@ import { GenericDeliveryNoteOverviewComponent } from './components/login/admin/d
     CurrentMonthOverviewComponent,
     CustomPeriodOverviewComponent,
     GenericDeliveryNoteOverviewComponent,
+    DeliveryNoteOvervireComponent,
+    DeliveryNoteOverviewComponent,
   ],
   imports: [
     BrowserModule,

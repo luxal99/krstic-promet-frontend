@@ -17,6 +17,7 @@ import { openDialog } from "../../../../../util/modal/OpeningModal";
 import { AddDeliveryNoteComponent } from "../add-delivery-note/add-delivery-note.component";
 import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 import { BehaviorService } from "../../../../../service/util/behavior.service";
+import { DeliveryNoteOverviewComponent } from "../delivery-note-overview/delivery-note-overview.component";
 
 @Component({
   selector: "app-generic-delivery-note-overview",
@@ -80,6 +81,16 @@ export class GenericDeliveryNoteOverviewComponent
         SnackBarUtil.openSnackBar(this.snackBar, "Uspešno obrisana otpremnica");
       });
     });
+  }
+
+  openDeliveryNoteOverview(deliveryNote: any): void {
+    openDialog(
+      DeliveryNoteOverviewComponent,
+      setDialogConfig({
+        data: deliveryNote,
+      }),
+      this.dialog
+    );
   }
 
   openEditDeliveryNote(deliveryNote: DeliveryNote): void {
