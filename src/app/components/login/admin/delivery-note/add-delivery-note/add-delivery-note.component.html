@@ -1,4 +1,4 @@
-<div>
+<div class="add-delivery-note-form">
   <div class="text-right">
     <button mat-mini-fab mat-dialog-close class="close-btn">
       <mat-icon>close</mat-icon>
@@ -32,16 +32,22 @@
       </mat-autocomplete>
     </mat-form-field>
   </form>
-  <app-form-select
-    label="Status plaćanja"
-    [config]="paidStatusSelectConfig"
-    [group]="deliveryNoteForm"
-  ></app-form-select>
-  <app-form-select
-    label="Status isporuke"
-    [config]="deliveryStatusSelectConfig"
-    [group]="deliveryNoteForm"
-  ></app-form-select>
+  <div class="row">
+    <div class="col-sm" style="padding-left: 0">
+      <app-form-select
+              label="Status plaćanja"
+              [config]="paidStatusSelectConfig"
+              [group]="deliveryNoteForm"
+      ></app-form-select>
+    </div>
+    <div class="col-sm" style="padding-right: 0">
+      <app-form-select
+              label="Status isporuke"
+              [config]="deliveryStatusSelectConfig"
+              [group]="deliveryNoteForm"
+      ></app-form-select>
+    </div>
+  </div>
   <form [formGroup]="searchForm">
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Pretraži</mat-label>
@@ -89,7 +95,7 @@
       label="Ukupno"
       [group]="deliveryNoteForm"
       [config]="grossInputConfig"
-      appearance="outline"
+      appearance="fill"
     ></app-form-input>
   </div>
 
