@@ -1,10 +1,15 @@
 import {
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   SimpleChanges,
+  TemplateRef,
+  ViewChild,
 } from "@angular/core";
 import { DeliveryNote } from "../../../../../models/delivery-note";
 import { DELIVERY_NOTE_TABLE } from "../../../../../constant/table-config/table-config";
@@ -25,9 +30,10 @@ import { DeliveryNoteOverviewComponent } from "../delivery-note-overview/deliver
   styleUrls: ["./generic-delivery-note-overview.component.sass"],
 })
 export class GenericDeliveryNoteOverviewComponent
-  implements OnInit, OnDestroy, OnChanges
+  implements OnInit, OnDestroy, OnChanges, AfterViewInit, AfterViewChecked
 {
-  @Input() listOfDeliveryNotes: DeliveryNote[] | null = [];
+  @ViewChild("options") optionsTemplateRef!: TemplateRef<any>;
+  @Input() listOfDeliveryNotes: DeliveryNote[] = [];
   @Input() startDate = "";
   @Input() endDate = "";
   tableConfig = DELIVERY_NOTE_TABLE;
@@ -36,8 +42,26 @@ export class GenericDeliveryNoteOverviewComponent
     private deliveryNoteService: DeliveryNoteService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private updateDeliveryNoteBS: BehaviorService
+    private updateDeliveryNoteBS: BehaviorService,
+    private cdRef: ChangeDetectorRef
   ) {}
+
+  ngAfterViewChecked(): void {
+    this.cdRef.detectChanges();
+  }
+
+  ngAfterViewInit(): void {
+    this.tableConfig = [
+      ...this.tableConfig,
+      {
+        name: "option",
+        value: "",
+        templateRef: this.optionsTemplateRef,
+        columnType: "CUSTOM",
+        displayedName: "",
+      },
+    ];
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes.startDate.firstChange && !changes.endDate.firstChange) {
@@ -70,6 +94,7 @@ export class GenericDeliveryNoteOverviewComponent
         )
       )
       .subscribe((resp) => {
+        //@ts-ignore
         this.listOfDeliveryNotes = resp.body;
       });
   }

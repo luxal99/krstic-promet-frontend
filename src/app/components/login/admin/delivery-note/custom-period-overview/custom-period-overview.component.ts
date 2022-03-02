@@ -15,7 +15,7 @@ import { FormControl, FormGroup } from "@angular/forms";
   styleUrls: ["./custom-period-overview.component.sass"],
 })
 export class CustomPeriodOverviewComponent implements OnInit {
-  listOfDeliveryNotes: DeliveryNote[] | null = [];
+  listOfDeliveryNotes: DeliveryNote[] = [];
   startDate = moment().startOf("month").format(DATE_VALUE_FORMAT);
   endDate = moment().endOf("month").format(DATE_VALUE_FORMAT);
 

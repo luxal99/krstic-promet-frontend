@@ -1,178 +1,160 @@
 <div>
-    <div class="text-right">
-        <button mat-mini-fab mat-dialog-close class="close-btn">
-            <mat-icon>close</mat-icon>
-        </button>
-    </div>
-    <h1><b>Kreiranje otpremnice</b></h1>
-    <app-form-date
-            [group]="deliveryNoteForm"
-            [config]="dateOfDeliveryNoteConfig"
-    ></app-form-date>
-    <form [formGroup]="deliveryNoteForm">
-        <mat-form-field class="example-full-width">
-            <mat-label>Klijent</mat-label>
-            <input
-                    type="text"
-                    placeholder="Pick one"
-                    aria-label="Number"
-                    matInput
-                    formControlName="idClient"
-                    [matAutocomplete]="auto"
-            />
-            <mat-autocomplete #auto="matAutocomplete"
-                              [displayWith]="displayClient">
-                <mat-option
-                        *ngFor="let client of listOfClients$ | async"
-                        [value]="client"
-                >
-                    {{ client.firstName + " " + client.lastName + " " + client.telephone }}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    </form>
-    <app-form-select
-            label="Status plaćanja"
-            [config]="paidStatusSelectConfig"
-            [group]="deliveryNoteForm"
-    ></app-form-select>
-    <app-form-select
-            label="Status isporuke"
-            [config]="deliveryStatusSelectConfig"
-            [group]="deliveryNoteForm"
-    ></app-form-select>
-    <form [formGroup]="searchForm">
-        <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Pretraži</mat-label>
-            <input
-                    type="text"
-                    placeholder="Pretraži"
-                    matInput
-                    formControlName="search"
-            />
-        </mat-form-field>
-    </form>
-    <app-generic-table [dataSource]="listOfArticles"
-                       [displayedColumns]="articleTableDisplayedColumns"
-    [customColumnTemplate]="amountColumn" >
-    </app-generic-table>
-    <ng-template #amountColumn let-element>
-        <div class="inline">
-            <mat-form-field>
-                <mat-label>Količina</mat-label>
-                <input #amountInput matInput>
-            </mat-form-field>
-            <button
-                    (click)="addArticle(element,amountInput.value)"
-                    class="m-1"
-                    mat-icon-button
-                    color="primary"
-            >
-                <mat-icon>add</mat-icon>
-            </button>
-            <button
-                    (click)="decreaseArticle(element)"
-                    mat-icon-button
-                    class="m-1"
-                    color="warn"
-            >
-                <mat-icon>remove</mat-icon>
-            </button>
-        </div>
-    </ng-template>
-<!--    <table mat-table [dataSource]="listOfArticles" class="mat-elevation-z8">-->
-<!--        <ng-container matColumnDef="code">-->
-<!--            <th mat-header-cell *matHeaderCellDef>Šifra</th>-->
-<!--            <td mat-cell *matCellDef="let element">{{ element.code }}</td>-->
-<!--        </ng-container>-->
-
-<!--        &lt;!&ndash; Name Column &ndash;&gt;-->
-<!--        <ng-container matColumnDef="name">-->
-<!--            <th mat-header-cell *matHeaderCellDef>Ime</th>-->
-<!--            <td mat-cell *matCellDef="let element">{{ element.name }}</td>-->
-<!--        </ng-container>-->
-
-<!--        &lt;!&ndash; Weight Column &ndash;&gt;-->
-<!--        <ng-container matColumnDef="price">-->
-<!--            <th mat-header-cell *matHeaderCellDef>Cena</th>-->
-<!--            <td mat-cell-->
-<!--                *matCellDef="let element">{{ element.sellingPrice }}</td>-->
-<!--        </ng-container>-->
-
-<!--        <ng-container matColumnDef="amount">-->
-<!--            <th mat-header-cell *matHeaderCellDef style="width: 100px">-->
-<!--                Količina-->
-<!--            </th>-->
-<!--            <td mat-cell *matCellDef="let element" style="width: 100px">-->
-
-
-<!--            </td>-->
-<!--        </ng-container>-->
-<!--    </table>-->
-    <div class="text-right w-25 mt-3">
-        <app-form-input
-                [model]="total"
-                label="Ukupno"
-                [group]="deliveryNoteForm"
-                [config]="grossInputConfig"
-                appearance="outline"
-        ></app-form-input>
-    </div>
-
-    <div class="text-right">
-        <button class="primary-btn" mat-button (click)="save()"
-                [disabled]="!deliveryNoteForm.valid||listOfSelectedArticles.length===0">
-            Sačuvaj
-        </button>
-    </div>
-
-    <h2><b>Trenutni artikli</b></h2>
-    <div>
-        <div
-                class="row article-row"
-                *ngFor="let selectedArticle of listOfSelectedArticles "
+  <div class="text-right">
+    <button mat-mini-fab mat-dialog-close class="close-btn">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <h1><b>Kreiranje otpremnice</b></h1>
+  <app-form-date
+    [group]="deliveryNoteForm"
+    [config]="dateOfDeliveryNoteConfig"
+  ></app-form-date>
+  <form [formGroup]="deliveryNoteForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>Klijent</mat-label>
+      <input
+        type="text"
+        placeholder="Pick one"
+        aria-label="Number"
+        matInput
+        formControlName="idClient"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayClient">
+        <mat-option
+          *ngFor="let client of listOfClients$ | async"
+          [value]="client"
         >
-            <div class="col">
-                <h4>{{ selectedArticle.code }}</h4>
-            </div>
-            <div class="col">
-                <h4>{{ selectedArticle.name }}</h4>
-            </div>
-            <div class="col">
-                <h4>{{ selectedArticle.sellingPrice }}</h4>
-            </div>
-            <div class="col">
-                <h4>{{ selectedArticle.amount|formatNumber }}</h4>
-            </div>
-            <div class="col">
-                <h4>{{ selectedArticle.total|formatNumber }}</h4>
-            </div>
-            <div class="col">
-                <button
-                        (click)="addArticle(selectedArticle)"
-                        class="m-1"
-                        [disabled]="false"
-                        mat-icon-button
-                        color="primary"
-                >
-                    <mat-icon>add</mat-icon>
-                </button>
-                <button
-                        (click)="decreaseArticle(selectedArticle)"
-                        mat-icon-button
-                        class="m-1"
-                        color="warn"
-                >
-                    <mat-icon>remove</mat-icon>
-                </button>
-            </div>
-            <div class="col">
-                <button mat-button (click)="removeArticle(selectedArticle)"
-                        color="warn" mat-icon-button>
-                    <mat-icon>close</mat-icon>
-                </button>
-            </div>
-        </div>
-    </div>
+          {{
+            client.firstName + " " + client.lastName + " " + client.telephone
+          }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <app-form-select
+    label="Status plaćanja"
+    [config]="paidStatusSelectConfig"
+    [group]="deliveryNoteForm"
+  ></app-form-select>
+  <app-form-select
+    label="Status isporuke"
+    [config]="deliveryStatusSelectConfig"
+    [group]="deliveryNoteForm"
+  ></app-form-select>
+  <form [formGroup]="searchForm">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Pretraži</mat-label>
+      <input
+        type="text"
+        placeholder="Pretraži"
+        matInput
+        formControlName="search"
+      />
+    </mat-form-field>
+  </form>
+  <generic-material-table
+    [dataSource]="listOfArticles"
+    [displayedColumns]="articleTableDisplayedColumns"
+  >
+    <ng-template #amountColumn let-element>
+      <div class="inline">
+        <mat-form-field>
+          <mat-label>Količina</mat-label>
+          <input #amountInput matInput />
+        </mat-form-field>
+        <button
+          (click)="addArticle(element, amountInput.value)"
+          class="m-1"
+          mat-icon-button
+          color="primary"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          (click)="decreaseArticle(element)"
+          mat-icon-button
+          class="m-1"
+          color="warn"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+    </ng-template>
+  </generic-material-table>
+  <div class="text-right w-25 mt-3">
+    <app-form-input
+      [model]="total"
+      label="Ukupno"
+      [group]="deliveryNoteForm"
+      [config]="grossInputConfig"
+      appearance="outline"
+    ></app-form-input>
+  </div>
 
+  <div class="text-right">
+    <button
+      class="primary-btn"
+      mat-button
+      (click)="save()"
+      [disabled]="
+        !deliveryNoteForm.valid || listOfSelectedArticles.length === 0
+      "
+    >
+      Sačuvaj
+    </button>
+  </div>
+
+  <h2><b>Trenutni artikli</b></h2>
+  <div>
+    <div
+      class="row article-row"
+      *ngFor="let selectedArticle of listOfSelectedArticles"
+    >
+      <div class="col">
+        <h4>{{ selectedArticle.code }}</h4>
+      </div>
+      <div class="col">
+        <h4>{{ selectedArticle.name }}</h4>
+      </div>
+      <div class="col">
+        <h4>{{ selectedArticle.sellingPrice }}</h4>
+      </div>
+      <div class="col">
+        <h4>{{ selectedArticle.amount | formatNumber }}</h4>
+      </div>
+      <div class="col">
+        <h4>{{ selectedArticle.total | formatNumber }}</h4>
+      </div>
+      <div class="col">
+        <button
+          (click)="addArticle(selectedArticle)"
+          class="m-1"
+          [disabled]="false"
+          mat-icon-button
+          color="primary"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          (click)="decreaseArticle(selectedArticle)"
+          mat-icon-button
+          class="m-1"
+          color="warn"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <div class="col">
+        <button
+          mat-button
+          (click)="removeArticle(selectedArticle)"
+          color="warn"
+          mat-icon-button
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

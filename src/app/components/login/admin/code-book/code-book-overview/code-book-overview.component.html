@@ -10,10 +10,19 @@
     </div>
   </div>
   <mat-spinner #spinner diameter="25"></mat-spinner>
-  <app-generic-table
-    (openEdit)="openEditDialog($event)"
-    (onDelete)="delete($event)"
+  <generic-material-table
     [dataSource]="dataSource"
     [displayedColumns]="displayedColumns"
-  ></app-generic-table>
+  >
+    <ng-template #optionBtnsTemplateRef let-element>
+      <div class="text-right">
+        <button mat-button color="accent" (click)="openEditDialog(element)">
+          Izmeni
+        </button>
+        <button mat-button color="warn" (click)="delete(element.id)">
+          Obirši
+        </button>
+      </div>
+    </ng-template>
+  </generic-material-table>
 </div>

@@ -1,8 +1,12 @@
 import {
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
   OnInit,
+  TemplateRef,
   ViewChild,
   ViewContainerRef,
 } from "@angular/core";
@@ -25,6 +29,8 @@ import { setDialogConfig } from "../../../../util/modal/DialogConfig";
 import { MatDialog } from "@angular/material/dialog";
 import { WarehouseBehaviorService } from "../../../../service/util/warehouse-behavior.service";
 import { ArticleCategoryGridViewComponent } from "./article-category-grid-view/article-category-grid-view.component";
+import { Template } from "@angular/compiler/src/render3/r3_ast";
+import { ChangeDetection } from "@angular/cli/lib/config/workspace-schema";
 
 @Component({
   selector: "app-articles",
@@ -40,7 +46,8 @@ export class ArticlesComponent implements OnInit {
     private warehouseStore: Store<{ warehouse: WarehouseState }>,
     private resolver: ComponentFactoryResolver,
     private dialog: MatDialog,
-    private warehouseBehaviorService: WarehouseBehaviorService
+    private warehouseBehaviorService: WarehouseBehaviorService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {

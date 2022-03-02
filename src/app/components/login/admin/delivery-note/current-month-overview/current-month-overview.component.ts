@@ -11,7 +11,7 @@ import { DATE_VALUE_FORMAT } from "../../../../../constant/constant";
   styleUrls: ["./current-month-overview.component.sass"],
 })
 export class CurrentMonthOverviewComponent implements OnInit {
-  listOfDeliveryNotes: DeliveryNote[] | null = [];
+  listOfDeliveryNotes: DeliveryNote[] = [];
   startDate = moment().startOf("month").format(DATE_VALUE_FORMAT);
   endDate = moment().endOf("month").format(DATE_VALUE_FORMAT);
 

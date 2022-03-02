@@ -10,7 +10,7 @@ import { DELIVERY_NOTE_TABLE } from "../../../../../constant/table-config/table-
   styleUrls: ["./current-week-overview.component.sass"],
 })
 export class CurrentWeekOverviewComponent implements OnInit {
-  listOfDeliveryNotes: DeliveryNote[] | null = [];
+  listOfDeliveryNotes: DeliveryNote[] = [];
   startDate = moment().startOf("isoWeek").format(DATE_VALUE_FORMAT);
   endDate = moment().endOf("isoWeek").format(DATE_VALUE_FORMAT);
 

@@ -1,15 +1,14 @@
-<app-generic-table [dataSource]="listOfDeliveryNotes"
-                   [displayedColumns]="tableConfig"
-                   [customColumnTemplate]="paidStatusColumn"></app-generic-table>
-<ng-template #paidStatusColumn let-element>
-    <button mat-icon-button color="primary" (click)="openDeliveryNoteOverview(element)" >
-        <mat-icon>visibility</mat-icon>
-    </button>
-    <button mat-icon-button color="accent">
-        <mat-icon>edit</mat-icon>
-    </button>
-    <button mat-icon-button color="warn" (click)="deleteDeliveryNote(element.id)" >
-        <mat-icon>delete</mat-icon>
-    </button>
+<generic-material-table [dataSource]="listOfDeliveryNotes" [displayedColumns]="tableConfig">
+    <ng-template #options let-element>
+        <button mat-icon-button color="primary" (click)="openDeliveryNoteOverview(element)" >
+            <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button color="accent">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteDeliveryNote(element.id)" >
+            <mat-icon>delete</mat-icon>
+        </button>
 
-</ng-template>
+    </ng-template>
+</generic-material-table>

@@ -15,7 +15,6 @@ import { ComponentActivatorComponent } from "./util/component-activator/componen
 import { DashboardComponent } from "./components/login/admin/dashboard/dashboard.component";
 import { CodeBookComponent } from "./components/login/admin/code-book/code-book.component";
 import { NavbarComponent } from "./components/login/admin/navbar/navbar.component";
-import { GenericTableModule } from "./util/table/generic-table/generic-table.module";
 import { CodeBookOverviewComponent } from "./components/login/admin/code-book/code-book-overview/code-book-overview.component";
 import { ArticleCategoryOverviewComponent } from "./components/login/admin/code-book/article-category-overview/article-category-overview.component";
 import { ArticleSubCategoryOverviewComponent } from "./components/login/admin/code-book/article-sub-category-overview/article-sub-category-overview.component";
@@ -48,12 +47,13 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatChipsModule } from "@angular/material/chips";
 import { TranslatePipe } from "./pipes/translate.pipe";
 import { PipesModule } from "./pipes/pipes.module";
-import { CurrentWeekOverviewComponent } from './components/login/admin/delivery-note/current-week-overview/current-week-overview.component';
-import { CurrentMonthOverviewComponent } from './components/login/admin/delivery-note/current-month-overview/current-month-overview.component';
-import { CustomPeriodOverviewComponent } from './components/login/admin/delivery-note/custom-period-overview/custom-period-overview.component';
-import { GenericDeliveryNoteOverviewComponent } from './components/login/admin/delivery-note/generic-delivery-note-overview/generic-delivery-note-overview.component';
-import { DeliveryNoteOvervireComponent } from './components/login/admin/delivery-note/delivery-note-overvire/delivery-note-overvire.component';
-import { DeliveryNoteOverviewComponent } from './components/login/admin/delivery-note/delivery-note-overview/delivery-note-overview.component';
+import { CurrentWeekOverviewComponent } from "./components/login/admin/delivery-note/current-week-overview/current-week-overview.component";
+import { CurrentMonthOverviewComponent } from "./components/login/admin/delivery-note/current-month-overview/current-month-overview.component";
+import { CustomPeriodOverviewComponent } from "./components/login/admin/delivery-note/custom-period-overview/custom-period-overview.component";
+import { GenericDeliveryNoteOverviewComponent } from "./components/login/admin/delivery-note/generic-delivery-note-overview/generic-delivery-note-overview.component";
+import { DeliveryNoteOvervireComponent } from "./components/login/admin/delivery-note/delivery-note-overvire/delivery-note-overvire.component";
+import { DeliveryNoteOverviewComponent } from "./components/login/admin/delivery-note/delivery-note-overview/delivery-note-overview.component";
+import { GenericMaterialTableModule } from "generic-material-table";
 
 // @ts-ignore
 @NgModule({
@@ -93,7 +93,7 @@ import { DeliveryNoteOverviewComponent } from './components/login/admin/delivery
     BrowserAnimationsModule,
     FormModule,
     HttpClientModule,
-    GenericTableModule,
+    GenericMaterialTableModule,
     PipesModule,
     StoreModule.forRoot({
       // @ts-ignore

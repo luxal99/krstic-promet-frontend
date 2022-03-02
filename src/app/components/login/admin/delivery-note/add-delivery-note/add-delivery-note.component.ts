@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { ClientState } from "../../../../../store/reducers/client.reducer";
@@ -25,7 +33,10 @@ import { ARTICLE_TABLE } from "../../../../../constant/table-config/table-config
   templateUrl: "./add-delivery-note.component.html",
   styleUrls: ["./add-delivery-note.component.sass"],
 })
-export class AddDeliveryNoteComponent implements OnInit, AfterViewInit {
+export class AddDeliveryNoteComponent
+  implements OnInit, AfterViewInit, AfterViewChecked
+{
+  @ViewChild("amountColumn") amountColumn!: TemplateRef<any>;
   public total = 0;
   listOfSelectedArticles: SelectedArticleDto[] = [];
 
@@ -89,11 +100,22 @@ export class AddDeliveryNoteComponent implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar,
     private deliveryNoteService: DeliveryNoteService,
     private articleService: ArticleService,
-    private updateDeliveryNoteBS: BehaviorService
+    private updateDeliveryNoteBS: BehaviorService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit(): void {
     this.searchForArticle();
+    this.articleTableDisplayedColumns = [
+      ...this.articleTableDisplayedColumns,
+      {
+        name: "amountInput",
+        columnType: "CUSTOM",
+        value: "",
+        templateRef: this.amountColumn,
+        displayedName: "",
+      },
+    ];
   }
 
   ngOnInit(): void {}
@@ -215,5 +237,9 @@ export class AddDeliveryNoteComponent implements OnInit, AfterViewInit {
 
   displayClient(client: Client): string {
     return client ? client.firstName + " " + client.lastName : "";
+  }
+
+  ngAfterViewChecked(): void {
+    this.cdRef.detectChanges();
   }
 }

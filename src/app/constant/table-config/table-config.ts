@@ -1,21 +1,37 @@
-import { Column } from "../../util/table/Column";
+import { Column } from "generic-material-table/lib/models/Column";
 
 export const ARTICLE_CATEGORY_TABLE: Column[] = [
-  { name: "title", displayedName: "Naziv", value: "title" },
-  { name: "option", displayedName: "", value: "" },
+  {
+    name: "title",
+    displayedName: "Naziv",
+    value: "title",
+    columnType: "GENERIC",
+  },
+  { name: "option", displayedName: "", value: "", columnType: "CUSTOM" },
 ];
 export const ARTICLE_SUB_CATEGORY_TABLE: Column[] = [
-  { name: "title", displayedName: "Naziv", value: "title" },
+  {
+    name: "title",
+    displayedName: "Naziv",
+    value: "title",
+    columnType: "GENERIC",
+  },
   {
     name: "category",
     displayedName: "Naziv kategorije",
     value: "idArticleCategory.title",
+    columnType: "GENERIC",
   },
-  { name: "option", displayedName: "", value: "" },
+  { name: "option", displayedName: "", value: "", columnType: "CUSTOM" },
 ];
 export const WAREHOUSE_TABLE: Column[] = [
-  { name: "name", displayedName: "Naziv", value: "name" },
-  { name: "option", displayedName: "", value: "" },
+  {
+    name: "name",
+    displayedName: "Naziv",
+    value: "name",
+    columnType: "GENERIC",
+  },
+  { name: "option", displayedName: "", value: "", columnType: "CUSTOM" },
 ];
 
 export const CONVERSION_TABLE: Column[] = [
@@ -23,53 +39,115 @@ export const CONVERSION_TABLE: Column[] = [
     name: "conversionFromValue",
     displayedName: "Vrednost",
     value: "conversionFromValue",
+    columnType: "GENERIC",
   },
   {
     name: "conversionFromUnit",
     displayedName: "Jedinica konverzija",
     value: "conversionFromUnit",
+    columnType: "GENERIC",
   },
   {
     name: "conversionToValue",
     displayedName: "Vrednost konverzije",
     value: "conversionToValue",
+    columnType: "GENERIC",
   },
   {
     name: "conversionToUnit",
     displayedName: "Jedinica u kojoj se konvertuje",
     value: "conversionToUnit",
+    columnType: "GENERIC",
   },
-  { name: "option", displayedName: "", value: "" },
+  {
+    name: "option",
+    displayedName: "",
+    value: "",
+    columnType: "CUSTOM",
+  },
 ];
 
 export const CLIENT_TABLE: Column[] = [
-  { name: "firstName", displayedName: "Ime", value: "firstName" },
-  { name: "lastName", displayedName: "Prezime", value: "lastName" },
-  { name: "telephone", displayedName: "Telefon", value: "telephone" },
-  { name: "option", displayedName: "", value: "" },
+  {
+    name: "firstName",
+    displayedName: "Ime",
+    value: "firstName",
+    columnType: "GENERIC",
+  },
+  {
+    name: "lastName",
+    displayedName: "Prezime",
+    value: "lastName",
+    columnType: "GENERIC",
+  },
+  {
+    name: "telephone",
+    displayedName: "Telefon",
+    value: "telephone",
+    columnType: "GENERIC",
+  },
+  {
+    name: "option",
+    displayedName: "",
+    value: "",
+    columnType: "CUSTOM",
+  },
 ];
 export const ARTICLE_TABLE: Column[] = [
-  { name: "name", displayedName: "Naziv", value: "name" },
-  { name: "code", displayedName: "Šifra", value: "code" },
+  {
+    name: "name",
+    displayedName: "Naziv",
+    value: "name",
+    columnType: "GENERIC",
+  },
+  {
+    name: "code",
+    displayedName: "Šifra",
+    value: "code",
+    columnType: "GENERIC",
+  },
   {
     name: "purchasePrice",
     displayedName: "Nabavna cena",
     value: "purchasePrice",
+    columnType: "GENERIC",
   },
   {
     name: "sellingPrice",
     displayedName: "Prodajna cena",
     value: "sellingPrice",
+    columnType: "GENERIC",
   },
-  { name: "amount", displayedName: "Na stanju", value: "amount" },
-  { name: "debit", displayedName: "Zaduženje", value: "debit" },
+  {
+    name: "amount",
+    displayedName: "Na stanju",
+    value: "amount",
+    columnType: "GENERIC",
+  },
+  {
+    name: "debit",
+    displayedName: "Zaduženje",
+    value: "debit",
+    columnType: "GENERIC",
+  },
 ];
 export const DELIVERY_NOTE_TABLE: Column[] = [
   {
     name: "date",
     displayedName: "Datum otpremnice",
     value: "dateOfDeliveryNote",
+    columnType: "GENERIC",
   },
-  { name: "gross", displayedName: "Ukupno", value: "gross" },
-  { name: "custom", displayedName: "Status", value: "paidStatus" },
+  {
+    name: "gross",
+    displayedName: "Ukupno",
+    value: "gross",
+    columnType: "GENERIC",
+  },
+  {
+    name: "custom",
+    displayedName: "Status",
+    value: "paidStatus",
+    columnType: "GENERIC",
+  },
 ];

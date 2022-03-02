@@ -1,4 +1,14 @@
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from "@angular/core";
 import { ARTICLE_TABLE } from "../../../../../constant/table-config/table-config";
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
@@ -16,13 +26,19 @@ import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 import { MatDialog } from "@angular/material/dialog";
 import { BehaviorService } from "../../../../../service/util/behavior.service";
 import { ConversionState } from "../../../../../store/reducers/conversion.reducer";
+import { openConfirmDialog } from "../../../../../util/confirm-dialog/config/confirm-dialog-config";
 
 @Component({
   selector: "app-article-list-view",
   templateUrl: "./article-list-view.component.html",
   styleUrls: ["./article-list-view.component.sass"],
 })
-export class ArticleListViewComponent implements OnInit {
+export class ArticleListViewComponent
+  implements OnInit, AfterViewInit, AfterViewChecked
+{
+  @ViewChild("options")
+  options!: TemplateRef<any>;
+
   @Input() behaviorService!: BehaviorService;
   listOfArticle$: Observable<any> = this.articleStore.select(
     (state) => state.articles.list
@@ -50,7 +66,8 @@ export class ArticleListViewComponent implements OnInit {
       conversion: ConversionState;
     }>,
     private warehouseStore: Store<{ warehouse: WarehouseState }>,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +75,23 @@ export class ArticleListViewComponent implements OnInit {
     this.initArticleSubCategorySelect();
     this.initWarehouseSelect();
     this.initConversionSelect();
+  }
+
+  ngAfterViewInit(): void {
+    this.articleTableConfig = [
+      ...this.articleTableConfig,
+      {
+        name: "option",
+        value: "",
+        templateRef: this.options,
+        columnType: "CUSTOM",
+        displayedName: "",
+      },
+    ];
+  }
+
+  ngAfterViewChecked(): void {
+    this.cdRef.detectChanges();
   }
 
   getQuery() {
@@ -84,7 +118,10 @@ export class ArticleListViewComponent implements OnInit {
     }
   }
 
-  openAddDialog() {
+  openAddDialog(data?: any) {
+    if (data) {
+      this.articleDialogConfig.formValues = data;
+    }
     openDialog(
       FormBuilderComponent,
       setDialogConfig({
@@ -185,4 +222,12 @@ export class ArticleListViewComponent implements OnInit {
     store: this.articleStore,
     storeConfig: articleStoreConfig,
   };
+
+  delete(id: any): void {
+    openConfirmDialog(this.dialog, () => {
+      this.articleDialogConfig.store?.dispatch(
+        new this.articleDialogConfig.storeConfig.deleteAction(id)
+      );
+    });
+  }
 }

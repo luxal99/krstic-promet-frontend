@@ -5,9 +5,18 @@
       Dodaj
     </button>
   </div>
-  <app-generic-table
-    [genericDialogConfig]="articleDialogConfig"
-    [displayedColumns]="articleTableConfig"
-    [dataSource]="listOfArticle$"
-  ></app-generic-table>
+  <generic-material-table
+  [dataSource]="listOfArticle$|async"
+  [displayedColumns]="articleTableConfig">
+    <ng-template #options let-element>
+      <div class="text-right">
+        <button mat-button color="accent" (click)="openAddDialog(element)">
+          Izmeni
+        </button>
+        <button mat-button color="warn" (click)="delete(element.id)">
+          Obirši
+        </button>
+      </div>
+    </ng-template>
+  </generic-material-table>
 </div>
