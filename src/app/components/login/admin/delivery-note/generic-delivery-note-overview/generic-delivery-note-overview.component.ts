@@ -1,4 +1,5 @@
 import {
+  AfterContentChecked,
   AfterViewChecked,
   AfterViewInit,
   ChangeDetectorRef,
@@ -30,7 +31,13 @@ import { DeliveryNoteOverviewComponent } from "../delivery-note-overview/deliver
   styleUrls: ["./generic-delivery-note-overview.component.sass"],
 })
 export class GenericDeliveryNoteOverviewComponent
-  implements OnInit, OnDestroy, OnChanges, AfterViewInit, AfterViewChecked
+  implements
+    OnInit,
+    OnDestroy,
+    OnChanges,
+    AfterViewInit,
+    AfterViewChecked,
+    AfterContentChecked
 {
   @ViewChild("options") optionsTemplateRef!: TemplateRef<any>;
   @Input() listOfDeliveryNotes: DeliveryNote[] = [];
@@ -45,6 +52,10 @@ export class GenericDeliveryNoteOverviewComponent
     private updateDeliveryNoteBS: BehaviorService,
     private cdRef: ChangeDetectorRef
   ) {}
+
+  ngAfterContentChecked(): void {
+    console.log("Content checked");
+  }
 
   ngAfterViewChecked(): void {
     this.cdRef.detectChanges();

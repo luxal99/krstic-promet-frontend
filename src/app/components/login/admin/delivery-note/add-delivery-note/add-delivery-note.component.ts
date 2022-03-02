@@ -27,6 +27,8 @@ import { ArticleService } from "../../../../../service/article.service";
 import { Article } from "../../../../../models/article";
 import { DeliveryNoteStatusEnum } from "../../../../../enum/DeliveryNoteStatusEnum";
 import { ARTICLE_TABLE } from "../../../../../constant/table-config/table-config";
+import { MatSpinner } from "@angular/material/progress-spinner";
+import { SpinnerService } from "../../../../../util/spinner/spinner.service";
 
 @Component({
   selector: "app-add-delivery-note",
@@ -36,6 +38,7 @@ import { ARTICLE_TABLE } from "../../../../../constant/table-config/table-config
 export class AddDeliveryNoteComponent
   implements OnInit, AfterViewInit, AfterViewChecked
 {
+  @ViewChild("spinner") spinner!: MatSpinner;
   @ViewChild("amountColumn") amountColumn!: TemplateRef<any>;
   public total = 0;
   listOfSelectedArticles: SelectedArticleDto[] = [];
@@ -101,7 +104,8 @@ export class AddDeliveryNoteComponent
     private deliveryNoteService: DeliveryNoteService,
     private articleService: ArticleService,
     private updateDeliveryNoteBS: BehaviorService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private spinnerService: SpinnerService
   ) {}
 
   ngAfterViewInit(): void {
@@ -219,8 +223,10 @@ export class AddDeliveryNoteComponent
       ?.valueChanges.pipe(
         filter((inputValue) => {
           if (inputValue.length > 2) {
+            this.spinnerService.show(this.spinner);
             return inputValue;
           } else {
+            this.spinnerService.hide(this.spinner);
           }
         }),
         debounceTime(500),
@@ -231,6 +237,7 @@ export class AddDeliveryNoteComponent
           .searchForRealEstate(searchText)
           .subscribe((resp) => {
             this.listOfArticles = resp;
+            this.spinnerService.hide(this.spinner);
           });
       });
   }
