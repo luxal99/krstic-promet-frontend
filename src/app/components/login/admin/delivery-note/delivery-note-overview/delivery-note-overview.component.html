@@ -1,1 +1,53 @@
-<p>delivery-note-overview works!</p>
+<div class="delivery-note-overview">
+  <div class="text-right inline">
+    <h4>Plaćeno</h4>
+    <div
+      [class]="
+        deliveryNote.paidStatus.toString() === 'PAID'
+          ? 'paid-col'
+          : 'not-paid-col'
+      "
+    >
+      <mat-icon>
+        {{ deliveryNote.paidStatus.toString() === "PAID" ? "check" : "close" }}
+      </mat-icon>
+    </div>
+    <h4>Dostavljenjo</h4>
+    <div
+      [class]="
+        deliveryNote.deliveryStatus.toString() === 'PAID'
+          ? 'paid-col'
+          : 'not-paid-col'
+      "
+    >
+      <mat-icon>
+        {{
+          deliveryNote.deliveryStatus.toString() === "PAID" ? "check" : "close"
+        }}
+      </mat-icon>
+    </div>
+  </div>
+
+  <div class="text-right">
+    <h4><b>Datum otpremnice</b>: {{ deliveryNote.dateOfDeliveryNote }}</h4>
+  </div>
+  <div *ngIf="deliveryNote.idClient">
+    <h2>
+      {{
+        deliveryNote.idClient.firstName + " " + deliveryNote.idClient.lastName
+      }}
+    </h2>
+    <p *ngIf="deliveryNote.idClient.telephone">
+      <b>Kontakt: </b>{{ deliveryNote.idClient.telephone }}
+    </p>
+  </div>
+  <generic-material-table
+    [dataSource]="deliveryNote.listOfArticles"
+    [displayedColumns]="articlesTableColumns"
+  ></generic-material-table>
+  <div class="text-right">
+    <div class="price-div">
+      <h2>Ukupno: {{deliveryNote.gross}}</h2>
+    </div>
+  </div>
+</div>

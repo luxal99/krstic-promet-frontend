@@ -1,0 +1,22 @@
+<div class="dashboard component">
+  <div class="row">
+    <div class="col-sm">
+      <h3>Neplaćene otpremnice</h3>
+      <generic-material-table
+        [dataSource]="listOfUnPaidDeliveryNotes"
+        [displayedColumns]="deliveryNoteTableConfig"
+      >
+        <ng-template #overviewButton let-element>
+          <button mat-button color="primary" (click)="openDeliveryNoteOverview(element)">Pregled</button>
+        </ng-template>
+      </generic-material-table>
+    </div>
+    <div class="col-sm">
+      <h3>Otpremnice koje nisu dostavljene</h3>
+      <generic-material-table
+        [dataSource]="listOfUnDeliveredDeliveryNotes"
+        [displayedColumns]="deliveryNoteTableConfig"
+      ></generic-material-table>
+    </div>
+  </div>
+</div>

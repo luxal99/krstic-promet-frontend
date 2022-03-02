@@ -38,6 +38,7 @@ export class FormControlNames {
   static END_DATE = "endDate";
   static START_DATE = "endDate";
   static SEARCH = "search";
+  static DELIVERY_STATUS = "deliveryStatus+";
 }
 
 export const TOKEN_NAME = "Authorization";

@@ -40,6 +40,7 @@ export class GenericDeliveryNoteOverviewComponent
     AfterContentChecked
 {
   @ViewChild("options") optionsTemplateRef!: TemplateRef<any>;
+  @ViewChild("paidStatusColumn") paidStatusColumnTemplateRef!: TemplateRef<any>;
   @Input() listOfDeliveryNotes: DeliveryNote[] = [];
   @Input() startDate = "";
   @Input() endDate = "";
@@ -64,6 +65,13 @@ export class GenericDeliveryNoteOverviewComponent
   ngAfterViewInit(): void {
     this.tableConfig = [
       ...this.tableConfig,
+      {
+        name: "paidStatus",
+        value: "",
+        templateRef: this.paidStatusColumnTemplateRef,
+        columnType: "CUSTOM",
+        displayedName: "Status plaćanja",
+      },
       {
         name: "option",
         value: "",
@@ -124,6 +132,7 @@ export class GenericDeliveryNoteOverviewComponent
       DeliveryNoteOverviewComponent,
       setDialogConfig({
         data: deliveryNote,
+        width: "50%",
       }),
       this.dialog
     );

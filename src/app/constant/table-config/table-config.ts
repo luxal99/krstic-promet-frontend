@@ -144,10 +144,4 @@ export const DELIVERY_NOTE_TABLE: Column[] = [
     value: "gross",
     columnType: "GENERIC",
   },
-  {
-    name: "custom",
-    displayedName: "Status",
-    value: "paidStatus",
-    columnType: "GENERIC",
-  },
 ];

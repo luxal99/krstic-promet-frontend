@@ -193,6 +193,9 @@ export class AddDeliveryNoteComponent
         gross: this.total,
         paidStatus: this.deliveryNoteForm.get(FormControlNames.PAID_STATUS)
           ?.value,
+        deliveryStatus: this.deliveryNoteForm.get(
+          FormControlNames.DELIVERY_STATUS
+        )?.value,
         dateOfDeliveryNote: moment(
           this.deliveryNoteForm.get(FormControlNames.DATE_OF_DELIVERY_NOTE)
             ?.value

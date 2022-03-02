@@ -1,0 +1,18 @@
+@import "src/styles"
+
+.paid-col
+  text-align: center
+  font-weight: bold
+  background-color: $secondary
+  color: white
+  border-radius: 8px
+  width: 25px
+  height: 25px
+  border-radius: 50%
+  mat-icon
+    width: 25px
+    height: 25px
+
+.not-paid-col
+  @extend .paid-col
+  background-color: #f52c2c

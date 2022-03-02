@@ -8,6 +8,7 @@ export interface DeliveryNote {
   dateOfDeliveryNote: string;
   gross: number;
   paidStatus: DeliveryNoteStatusEnum;
+  deliveryStatus: DeliveryNoteStatusEnum;
   idClient?: Client;
   listOfArticles: SelectedArticleDto[];
 }
