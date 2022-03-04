@@ -36,9 +36,9 @@ export class FormControlNames {
   static GROSS = "gross";
   static ID_CLIENT = "idClient";
   static END_DATE = "endDate";
-  static START_DATE = "endDate";
+  static START_DATE = "startDate";
   static SEARCH = "search";
-  static DELIVERY_STATUS = "deliveryStatus+";
+  static DELIVERY_STATUS = "deliveryStatus";
 }
 
 export const TOKEN_NAME = "Authorization";

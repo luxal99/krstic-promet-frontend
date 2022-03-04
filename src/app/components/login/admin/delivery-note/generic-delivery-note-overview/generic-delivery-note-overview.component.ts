@@ -54,9 +54,7 @@ export class GenericDeliveryNoteOverviewComponent
     private cdRef: ChangeDetectorRef
   ) {}
 
-  ngAfterContentChecked(): void {
-    console.log("Content checked");
-  }
+  ngAfterContentChecked(): void {}
 
   ngAfterViewChecked(): void {
     this.cdRef.detectChanges();

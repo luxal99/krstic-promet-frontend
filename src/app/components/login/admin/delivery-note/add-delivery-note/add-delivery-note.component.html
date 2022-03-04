@@ -17,6 +17,7 @@
         placeholder="Pick one"
         aria-label="Number"
         matInput
+        [ngModel]="data ? data.idClient : null"
         formControlName="idClient"
         [matAutocomplete]="auto"
       />
@@ -35,16 +36,18 @@
   <div class="row">
     <div class="col-sm" style="padding-left: 0">
       <app-form-select
-              label="Status plaćanja"
-              [config]="paidStatusSelectConfig"
-              [group]="deliveryNoteForm"
+        label="Status plaćanja"
+        [config]="paidStatusSelectConfig"
+        [group]="deliveryNoteForm"
+        [model]="data ? data.paidStatus : null"
       ></app-form-select>
     </div>
     <div class="col-sm" style="padding-right: 0">
       <app-form-select
-              label="Status isporuke"
-              [config]="deliveryStatusSelectConfig"
-              [group]="deliveryNoteForm"
+        label="Status isporuke"
+        [config]="deliveryStatusSelectConfig"
+        [group]="deliveryNoteForm"
+        [model]="data ? data.deliveryStatus : null"
       ></app-form-select>
     </div>
   </div>
@@ -59,7 +62,11 @@
       />
     </mat-form-field>
   </form>
-  <mat-spinner #spinner diameter="25" style="display: none;margin: 2em auto"></mat-spinner>
+  <mat-spinner
+    #spinner
+    diameter="25"
+    style="display: none; margin: 2em auto"
+  ></mat-spinner>
   <generic-material-table
     [dataSource]="listOfArticles"
     [displayedColumns]="articleTableDisplayedColumns"

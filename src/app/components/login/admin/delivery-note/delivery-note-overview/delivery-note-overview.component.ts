@@ -35,7 +35,5 @@ export class DeliveryNoteOverviewComponent implements OnInit {
     },
   ];
 
-  ngOnInit(): void {
-    console.log(this.deliveryNote);
-  }
+  ngOnInit(): void {}
 }

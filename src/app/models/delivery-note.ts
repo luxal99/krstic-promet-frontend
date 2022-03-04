@@ -1,6 +1,7 @@
 import { DeliveryNoteStatusEnum } from "../enum/DeliveryNoteStatusEnum";
 import { Client } from "./client";
 import { SelectedArticleDto } from "./dto/SelectedArticleDto";
+import { DeliveryNoteArticle } from "./delivery-note-article";
 
 export interface DeliveryNote {
   id?: number;
@@ -10,5 +11,5 @@ export interface DeliveryNote {
   paidStatus: DeliveryNoteStatusEnum;
   deliveryStatus: DeliveryNoteStatusEnum;
   idClient?: Client;
-  listOfArticles: SelectedArticleDto[];
+  listOfArticles: DeliveryNoteArticle[];
 }
