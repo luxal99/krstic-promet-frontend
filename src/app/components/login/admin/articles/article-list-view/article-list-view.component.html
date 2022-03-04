@@ -1,22 +1,30 @@
 <div class="component">
-  <h2>Artikli</h2>
-  <div class="text-right">
-    <button mat-button (click)="openAddDialog()" class="primary-btn">
-      Dodaj
-    </button>
-  </div>
-  <generic-material-table
-  [dataSource]="listOfArticle$|async"
-  [displayedColumns]="articleTableConfig">
-    <ng-template #options let-element>
-      <div class="text-right">
-        <button mat-button color="accent" (click)="openAddDialog(element)">
-          Izmeni
-        </button>
-        <button mat-button color="warn" (click)="delete(element.id)">
-          Obirši
-        </button>
-      </div>
-    </ng-template>
-  </generic-material-table>
+    <h2>Artikli</h2>
+    <div class="row">
+        <div class="col-sm">
+            <mat-spinner diameter="25" #spinner></mat-spinner>
+            <app-form-input [group]="searchForm"
+                            [config]="searchInputConfig"></app-form-input>
+        </div>
+        <div class="col-sm text-right">
+            <button mat-button (click)="openAddDialog()" class="primary-btn">
+                Dodaj
+            </button>
+        </div>
+    </div>
+    <generic-material-table
+            [dataSource]="listOfArticle$|async"
+            [displayedColumns]="articleTableConfig">
+        <ng-template #options let-element>
+            <div class="text-right">
+                <button mat-button color="accent"
+                        (click)="openAddDialog(element)">
+                    Izmeni
+                </button>
+                <button mat-button color="warn" (click)="delete(element.id)">
+                    Obirši
+                </button>
+            </div>
+        </ng-template>
+    </generic-material-table>
 </div>

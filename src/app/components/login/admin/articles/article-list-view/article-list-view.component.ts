@@ -7,16 +7,20 @@ import {
   OnInit,
   TemplateRef,
   ViewChild,
-  ViewContainerRef,
 } from "@angular/core";
 import { ARTICLE_TABLE } from "../../../../../constant/table-config/table-config";
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
 import { ArticleState } from "../../../../../store/reducers/article.reducer";
-import { map } from "rxjs/operators";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+} from "rxjs/operators";
 import { FormBuilderConfig } from "../../../../../util/form-components/models/FormBuilderConfig";
 import { FormControlNames } from "../../../../../constant/constant";
-import { Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { articleStoreConfig } from "../../../../../store/config/StoreConfig";
 import { ArticleSubCategoryState } from "../../../../../store/reducers/article-sub-category.reducer";
 import { WarehouseState } from "../../../../../store/reducers/warehouse.reducer";
@@ -27,6 +31,10 @@ import { MatDialog } from "@angular/material/dialog";
 import { BehaviorService } from "../../../../../service/util/behavior.service";
 import { ConversionState } from "../../../../../store/reducers/conversion.reducer";
 import { openConfirmDialog } from "../../../../../util/confirm-dialog/config/confirm-dialog-config";
+import { FieldConfig } from "../../../../../util/form-components/models/FieldConfig";
+import { ArticleService } from "../../../../../service/article.service";
+import { SpinnerService } from "../../../../../util/spinner/spinner.service";
+import { MatSpinner } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-article-list-view",
@@ -38,6 +46,9 @@ export class ArticleListViewComponent
 {
   @ViewChild("options")
   options!: TemplateRef<any>;
+
+  @ViewChild("spinner")
+  spinner!: MatSpinner;
 
   @Input() behaviorService!: BehaviorService;
   listOfArticle$: Observable<any> = this.articleStore.select(
@@ -57,6 +68,17 @@ export class ArticleListViewComponent
 
   articleTableConfig = ARTICLE_TABLE;
 
+  searchForm = new FormGroup({
+    search: new FormControl(""),
+  });
+
+  searchInputConfig: FieldConfig = {
+    name: FormControlNames.SEARCH,
+    type: "input",
+    bindValue: "",
+    label: "Pretraži",
+  };
+
   constructor(
     private articleStore: Store<{ articles: ArticleState }>,
     private articleSubCategoryStore: Store<{
@@ -67,7 +89,9 @@ export class ArticleListViewComponent
     }>,
     private warehouseStore: Store<{ warehouse: WarehouseState }>,
     private dialog: MatDialog,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private articleService: ArticleService,
+    private spinnerService: SpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -88,6 +112,7 @@ export class ArticleListViewComponent
         displayedName: "",
       },
     ];
+    this.searchForArticle();
   }
 
   ngAfterViewChecked(): void {
@@ -215,7 +240,7 @@ export class ArticleListViewComponent
         name: FormControlNames.ID_CONVERSION,
         type: "select",
         label: "Konverzija",
-        bindValue: "conversionToValue",
+        bindValue: "name",
       },
     ],
     headerText: "Dodaj artikl",
@@ -229,5 +254,27 @@ export class ArticleListViewComponent
         new this.articleDialogConfig.storeConfig.deleteAction(id)
       );
     });
+  }
+
+  searchForArticle() {
+    this.searchForm
+      .get(FormControlNames.SEARCH)
+      ?.valueChanges.pipe(
+        filter((inputValue) => {
+          if (inputValue.length > 2) {
+            this.spinnerService.show(this.spinner);
+            return inputValue;
+          } else {
+            this.spinnerService.hide(this.spinner);
+          }
+        }),
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+      .subscribe((searchText) => {
+        this.listOfArticle$ =
+          this.articleService.searchForRealEstate(searchText);
+        this.spinnerService.hide(this.spinner);
+      });
   }
 }
