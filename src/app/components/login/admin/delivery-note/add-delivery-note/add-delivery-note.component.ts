@@ -146,6 +146,7 @@ export class AddDeliveryNoteComponent
         name: item.idArticle.name,
         sellingPrice: item.sellingPrice,
         amount: item.amount,
+        amountInWarehouse: item.idArticle?.amount,
         // @ts-ignore
         code: item.idArticle.code,
 
