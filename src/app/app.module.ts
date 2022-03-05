@@ -54,6 +54,7 @@ import { GenericDeliveryNoteOverviewComponent } from "./components/login/admin/d
 import { DeliveryNoteOvervireComponent } from "./components/login/admin/delivery-note/delivery-note-overvire/delivery-note-overvire.component";
 import { DeliveryNoteOverviewComponent } from "./components/login/admin/delivery-note/delivery-note-overview/delivery-note-overview.component";
 import { GenericMaterialTableModule } from "generic-material-table";
+import { ArticleConfirmDialogComponent } from './components/login/admin/delivery-note/add-delivery-note/article-confirm-dialog/article-confirm-dialog.component';
 
 // @ts-ignore
 @NgModule({
@@ -85,6 +86,7 @@ import { GenericMaterialTableModule } from "generic-material-table";
     GenericDeliveryNoteOverviewComponent,
     DeliveryNoteOvervireComponent,
     DeliveryNoteOverviewComponent,
+    ArticleConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

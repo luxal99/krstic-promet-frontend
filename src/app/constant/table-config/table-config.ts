@@ -137,6 +137,33 @@ export const ARTICLE_TABLE: Column[] = [
     columnType: "GENERIC",
   },
 ];
+
+export const ARTICLE_BEFORE_PURCHASE_TABLE: Column[] = [
+  {
+    name: "name",
+    displayedName: "Naziv",
+    value: "name",
+    columnType: "GENERIC",
+  },
+  {
+    name: "code",
+    displayedName: "Šifra",
+    value: "code",
+    columnType: "GENERIC",
+  },
+  {
+    name: "sellingPrice",
+    displayedName: "Prodajna cena",
+    value: "sellingPrice",
+    columnType: "GENERIC",
+  },
+  {
+    name: "amount",
+    displayedName: "Poručena količina",
+    value: "amount",
+    columnType: "GENERIC",
+  },
+];
 export const DELIVERY_NOTE_TABLE: Column[] = [
   {
     name: "date",

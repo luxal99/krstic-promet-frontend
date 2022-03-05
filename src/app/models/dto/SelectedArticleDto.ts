@@ -6,4 +6,6 @@ export interface SelectedArticleDto {
   amount: number;
   amountInWarehouse?: number;
   code: string;
+  payedAmount: number;
+  deliveredAmount: number;
 }

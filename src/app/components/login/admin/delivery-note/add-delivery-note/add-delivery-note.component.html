@@ -33,24 +33,6 @@
       </mat-autocomplete>
     </mat-form-field>
   </form>
-  <div class="row">
-    <div class="col-sm" style="padding-left: 0">
-      <app-form-select
-        label="Status plaćanja"
-        [config]="paidStatusSelectConfig"
-        [group]="deliveryNoteForm"
-        [model]="data ? data.paidStatus : null"
-      ></app-form-select>
-    </div>
-    <div class="col-sm" style="padding-right: 0">
-      <app-form-select
-        label="Status isporuke"
-        [config]="deliveryStatusSelectConfig"
-        [group]="deliveryNoteForm"
-        [model]="data ? data.deliveryStatus : null"
-      ></app-form-select>
-    </div>
-  </div>
   <form [formGroup]="searchForm">
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Pretraži</mat-label>
@@ -73,7 +55,7 @@
   >
     <ng-template #amountColumn let-element>
       <div class="inline">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Količina</mat-label>
           <input #amountInput matInput />
         </mat-form-field>
@@ -95,6 +77,7 @@
         </button>
       </div>
     </ng-template>
+
   </generic-material-table>
   <div class="text-right w-25 mt-3">
     <app-form-input

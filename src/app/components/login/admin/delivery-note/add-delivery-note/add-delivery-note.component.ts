@@ -30,8 +30,11 @@ import { DeliveryNoteStatusEnum } from "../../../../../enum/DeliveryNoteStatusEn
 import { ARTICLE_TABLE } from "../../../../../constant/table-config/table-config";
 import { MatSpinner } from "@angular/material/progress-spinner";
 import { SpinnerService } from "../../../../../util/spinner/spinner.service";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { DeliveryNote } from "../../../../../models/delivery-note";
+import { openDialog } from "../../../../../util/modal/OpeningModal";
+import { ArticleConfirmDialogComponent } from "./article-confirm-dialog/article-confirm-dialog.component";
+import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 
 @Component({
   selector: "app-add-delivery-note",
@@ -54,8 +57,6 @@ export class AddDeliveryNoteComponent
 
   deliveryNoteForm = new FormGroup({
     idClient: new FormControl(""),
-    paidStatus: new FormControl(""),
-    deliveryStatus: new FormControl(""),
     gross: new FormControl("", Validators.required),
     dateOfDeliveryNote: new FormControl(new Date(), Validators.required),
   });
@@ -73,18 +74,6 @@ export class AddDeliveryNoteComponent
     type: "input",
   };
 
-  paidStatusSelectConfig: FieldConfig = {
-    bindValue: "",
-    name: FormControlNames.PAID_STATUS,
-    type: "select",
-    options: Object.values(DeliveryNotePaidStatusEnum),
-  };
-  deliveryStatusSelectConfig: FieldConfig = {
-    bindValue: "",
-    name: FormControlNames.DELIVERY_STATUS,
-    type: "select",
-    options: Object.values(DeliveryNoteStatusEnum),
-  };
   dateOfDeliveryNoteConfig: FieldConfig = {
     bindValue: "",
     name: FormControlNames.DATE_OF_DELIVERY_NOTE,
@@ -109,7 +98,8 @@ export class AddDeliveryNoteComponent
     private articleService: ArticleService,
     private updateDeliveryNoteBS: BehaviorService,
     private cdRef: ChangeDetectorRef,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private dialog: MatDialog
   ) {}
 
   ngAfterViewInit(): void {
@@ -131,7 +121,6 @@ export class AddDeliveryNoteComponent
 
   setValues() {
     if (this.data) {
-      console.log(this.data);
       this.deliveryNoteForm
         .get(FormControlNames.PAID_STATUS)
         ?.setValue(this.data.paidStatus);
@@ -149,6 +138,8 @@ export class AddDeliveryNoteComponent
         amountInWarehouse: item.idArticle?.amount,
         // @ts-ignore
         code: item.idArticle.code,
+        payedAmount: item.payedAmount,
+        deliveredAmount: item.deliveredAmount,
 
         // @ts-ignore
         total: item.amount * item.sellingPrice,
@@ -187,6 +178,8 @@ export class AddDeliveryNoteComponent
           : amountValue * article.sellingPrice,
         sellingPrice: article.sellingPrice,
         name: article.name,
+        payedAmount: this.data ? article.payedAmount : 0,
+        deliveredAmount: this.data ? article.deliveredAmount : 0,
       });
     }
 
@@ -223,11 +216,8 @@ export class AddDeliveryNoteComponent
   save(): void {
     const deliveryNote: DeliveryNote = {
       gross: this.total,
-      paidStatus: this.deliveryNoteForm.get(FormControlNames.PAID_STATUS)
-        ?.value,
-      deliveryStatus: this.deliveryNoteForm.get(
-        FormControlNames.DELIVERY_STATUS
-      )?.value,
+      paidStatus: DeliveryNotePaidStatusEnum.NOT_PAID,
+      deliveryStatus: DeliveryNoteStatusEnum.NOT_DELIVERED,
       dateOfDeliveryNote: moment(
         this.deliveryNoteForm.get(FormControlNames.DATE_OF_DELIVERY_NOTE)?.value
       ).format("YYYY-MM-DD"),
@@ -237,29 +227,56 @@ export class AddDeliveryNoteComponent
           ? this.deliveryNoteForm.get(FormControlNames.ID_CLIENT)?.value
           : null,
     };
-    if (this.data) {
-      deliveryNote.id = this.data.id;
-      this.deliveryNoteService.update(deliveryNote).subscribe((resp) => {
-        SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
-        this.articleStore.dispatch(new GetArticleAction());
-        this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
-          true
-        );
-      });
-    } else {
-      this.deliveryNoteService.save(deliveryNote).subscribe(
-        (resp) => {
-          SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
-          this.articleStore.dispatch(new GetArticleAction());
-          this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
-            true
-          );
-        },
-        () => {
-          SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
+    openDialog(
+      ArticleConfirmDialogComponent,
+      setDialogConfig({
+        width: "90%",
+        data: this.listOfSelectedArticles,
+        disableClose: true,
+      }),
+      this.dialog
+    )
+      .afterClosed()
+      .subscribe((resp) => {
+        console.log(resp.listOfArticles);
+        if (resp.confirmed) {
+          deliveryNote.paidStatus = resp.listOfArticles.every(
+            (value: any) => value.paidStatus === "PAID"
+          )
+            ? DeliveryNotePaidStatusEnum.PAID
+            : DeliveryNotePaidStatusEnum.NOT_PAID;
+
+          deliveryNote.deliveryStatus = resp.listOfArticles.every(
+            (value: any) => value.deliveryStatus === "DELIVERED"
+          )
+            ? DeliveryNoteStatusEnum.DELIVERED
+            : DeliveryNoteStatusEnum.NOT_DELIVERED;
+          deliveryNote.listOfArticles = resp.listOfArticles;
+          if (this.data) {
+            deliveryNote.id = this.data.id;
+            this.deliveryNoteService.update(deliveryNote).subscribe((resp) => {
+              SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
+              this.articleStore.dispatch(new GetArticleAction());
+              this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
+                true
+              );
+            });
+          } else {
+            this.deliveryNoteService.save(deliveryNote).subscribe(
+              (resp) => {
+                SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
+                this.articleStore.dispatch(new GetArticleAction());
+                this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
+                  true
+                );
+              },
+              () => {
+                SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
+              }
+            );
+          }
         }
-      );
-    }
+      });
   }
 
   searchForArticle() {
