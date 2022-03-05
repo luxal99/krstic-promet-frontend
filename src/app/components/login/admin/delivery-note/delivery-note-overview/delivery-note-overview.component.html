@@ -15,15 +15,13 @@
     <h4>Dostavljenjo</h4>
     <div
       [class]="
-        deliveryNote.deliveryStatus.toString() === 'PAID'
+        deliveryNote.deliveryStatus === 'DELIVERED'
           ? 'paid-col'
           : 'not-paid-col'
       "
     >
       <mat-icon>
-        {{
-          deliveryNote.deliveryStatus.toString() === "PAID" ? "check" : "close"
-        }}
+        {{ deliveryNote.deliveryStatus === "DELIVERED" ? "check" : "close" }}
       </mat-icon>
     </div>
   </div>
@@ -47,7 +45,7 @@
   ></generic-material-table>
   <div class="text-right">
     <div class="price-div">
-      <h2>Ukupno: {{deliveryNote.gross}}</h2>
+      <h2>Ukupno: {{ deliveryNote.gross }}</h2>
     </div>
   </div>
 </div>

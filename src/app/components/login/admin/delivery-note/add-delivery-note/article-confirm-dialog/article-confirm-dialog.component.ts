@@ -9,11 +9,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import {
-  ARTICLE_BEFORE_PURCHASE_TABLE,
-  ARTICLE_TABLE,
-} from "../../../../../../constant/table-config/table-config";
-import { DeliveryNoteArticle } from "../../../../../../models/delivery-note-article";
+import { ARTICLE_BEFORE_PURCHASE_TABLE } from "../../../../../../constant/table-config/table-config";
 import { DeliveryNotePaidStatusEnum } from "../../../../../../enum/DeliveryNotePaidStatusEnum";
 import { DeliveryNoteStatusEnum } from "../../../../../../enum/DeliveryNoteStatusEnum";
 import { MatInput } from "@angular/material/input";
@@ -31,6 +27,7 @@ export class ArticleConfirmDialogComponent
   @ViewChild("deliveredAmountColumn") deliveredAmountColumn!: TemplateRef<any>;
 
   @ViewChild("payedAmountInput") payedAmountInput!: MatInput;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ArticleConfirmDialogData,
     private cdRef: ChangeDetectorRef,
@@ -40,6 +37,7 @@ export class ArticleConfirmDialogComponent
   articleTableConfig = ARTICLE_BEFORE_PURCHASE_TABLE;
 
   ngOnInit(): void {}
+
   ngAfterViewInit(): void {
     this.articleTableConfig = [
       ...this.articleTableConfig,
@@ -58,10 +56,25 @@ export class ArticleConfirmDialogComponent
         displayedName: "Dostavljena količina",
       },
     ];
+    if (this.data.paidStatus === "PAID") {
+      this.data.listOfArticles.forEach((item) => {
+        item.payedAmount = item.amount;
+        item.paidStatus = DeliveryNotePaidStatusEnum.PAID;
+      });
+    }
+
+    if (this.data.deliveredStatus === "DELIVERED") {
+      this.data.listOfArticles.forEach((item) => {
+        item.deliveredAmount = item.amount;
+        item.deliveryStatus = DeliveryNoteStatusEnum.DELIVERED;
+      });
+    }
   }
+
   ngAfterViewChecked(): void {
     this.cdRef.detectChanges();
   }
+
   addArticlePayedAmount(idArticle: number, payedAmount: any) {
     payedAmount = Number.parseInt(payedAmount);
     this.data.listOfArticles.forEach((item) => {
