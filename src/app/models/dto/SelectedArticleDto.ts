@@ -1,5 +1,7 @@
 export interface SelectedArticleDto {
   id?: number;
+
+  idDeliveryNoteArticle?: number;
   name: string;
   sellingPrice: number;
   total: number;

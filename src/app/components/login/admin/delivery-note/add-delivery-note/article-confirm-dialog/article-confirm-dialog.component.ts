@@ -17,6 +17,7 @@ import { DeliveryNoteArticle } from "../../../../../../models/delivery-note-arti
 import { DeliveryNotePaidStatusEnum } from "../../../../../../enum/DeliveryNotePaidStatusEnum";
 import { DeliveryNoteStatusEnum } from "../../../../../../enum/DeliveryNoteStatusEnum";
 import { MatInput } from "@angular/material/input";
+import { ArticleConfirmDialogData } from "../../../../../../models/dto/ArticleConfirmDialogData";
 
 @Component({
   selector: "app-article-confirm-dialog",
@@ -31,7 +32,7 @@ export class ArticleConfirmDialogComponent
 
   @ViewChild("payedAmountInput") payedAmountInput!: MatInput;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public listOfArticles: DeliveryNoteArticle[],
+    @Inject(MAT_DIALOG_DATA) public data: ArticleConfirmDialogData,
     private cdRef: ChangeDetectorRef,
     private dialogRef: MatDialogRef<ArticleConfirmDialogComponent>
   ) {}
@@ -63,7 +64,7 @@ export class ArticleConfirmDialogComponent
   }
   addArticlePayedAmount(idArticle: number, payedAmount: any) {
     payedAmount = Number.parseInt(payedAmount);
-    this.listOfArticles.forEach((item) => {
+    this.data.listOfArticles.forEach((item) => {
       // @ts-ignore
       if (item.id === idArticle) {
         item.payedAmount = payedAmount;
@@ -78,7 +79,7 @@ export class ArticleConfirmDialogComponent
 
   addArticleDeliveredAmount(idArticle: number, deliveredAmount: any) {
     deliveredAmount = Number.parseInt(deliveredAmount);
-    this.listOfArticles.forEach((item) => {
+    this.data.listOfArticles.forEach((item) => {
       // @ts-ignore
       if (item.id === idArticle) {
         item.deliveredAmount = deliveredAmount;
@@ -93,13 +94,13 @@ export class ArticleConfirmDialogComponent
 
   payAll(checked: boolean) {
     if (!checked) {
-      this.listOfArticles.forEach((item) => {
+      this.data.listOfArticles.forEach((item) => {
         item.payedAmount = item.amount;
         item.paidStatus = DeliveryNotePaidStatusEnum.PAID;
       });
       this.payedAmountInput.disabled = true;
     } else {
-      this.listOfArticles.forEach((item) => {
+      this.data.listOfArticles.forEach((item) => {
         item.payedAmount = 0;
       });
       this.payedAmountInput.disabled = false;
@@ -108,13 +109,13 @@ export class ArticleConfirmDialogComponent
 
   deliverAll(checked: boolean) {
     if (!checked) {
-      this.listOfArticles.forEach((item) => {
+      this.data.listOfArticles.forEach((item) => {
         item.deliveredAmount = item.amount;
         item.deliveryStatus = DeliveryNoteStatusEnum.DELIVERED;
       });
       this.payedAmountInput.disabled = true;
     } else {
-      this.listOfArticles.forEach((item) => {
+      this.data.listOfArticles.forEach((item) => {
         item.deliveredAmount = 0;
         item.deliveryStatus = DeliveryNoteStatusEnum.NOT_DELIVERED;
       });
@@ -129,7 +130,7 @@ export class ArticleConfirmDialogComponent
   confirm() {
     this.dialogRef.close({
       confirmed: true,
-      listOfArticles: this.listOfArticles,
+      listOfArticles: this.data.listOfArticles,
     });
   }
 }

@@ -1,17 +1,19 @@
 <div class="text-right">
   <button mat-dialog-close mat-icon-button (click)="decline()">
-    <mat-icon>
-      close
-    </mat-icon>
+    <mat-icon> close </mat-icon>
   </button>
 </div>
 <h1>Potvrda artikla</h1>
 <div>
   <div class="mt-3 mb-3">
-    <mat-checkbox #payAllCheckbox (click)="payAll(payAllCheckbox.checked)"
+    <mat-checkbox
+      [checked]="data.paidStatus === 'PAID'"
+      #payAllCheckbox
+      (click)="payAll(payAllCheckbox.checked)"
       >Isplati sve</mat-checkbox
     >
     <mat-checkbox
+      [checked]="data.deliveredStatus === 'DELIVERED'"
       style="margin-left: 1em"
       #deliverAllCheckbox
       (click)="deliverAll(deliverAllCheckbox.checked)"
@@ -20,7 +22,7 @@
   </div>
   <generic-material-table
     [displayedColumns]="articleTableConfig"
-    [dataSource]="listOfArticles"
+    [dataSource]="data.listOfArticles"
   >
     <ng-template #payedAmountColumn let-element>
       <div class="inline">
@@ -28,7 +30,9 @@
           <mat-label>Plaćena količina</mat-label>
           <input
             [disabled]="payAllCheckbox.checked"
-            [value]="payAllCheckbox.checked ? element.amount : element.payedAmount"
+            [value]="
+              payAllCheckbox.checked ? element.amount : element.payedAmount
+            "
             #payedAmountInput
             type="number"
             matInput
@@ -37,11 +41,10 @@
         <button
           [disabled]="
             payedAmountInput.value > element.amount ||
-            payedAmountInput.value === '0'|| payAllCheckbox.checked
+            payedAmountInput.value === '0' ||
+            payAllCheckbox.checked
           "
-          (click)="
-            addArticlePayedAmount(element.id, payedAmountInput.value)
-          "
+          (click)="addArticlePayedAmount(element.id, payedAmountInput.value)"
           mat-button
           color="primary"
         >
@@ -55,21 +58,23 @@
           <mat-label>Isporučena količina</mat-label>
           <input
             [disabled]="deliverAllCheckbox.checked"
-            [value]="deliverAllCheckbox.checked ? element.amount : element.deliveredAmount"
+            [value]="
+              deliverAllCheckbox.checked
+                ? element.amount
+                : element.deliveredAmount
+            "
             #deliveredAmountInput
             matInput
           />
         </mat-form-field>
         <button
-                [disabled]="
+          [disabled]="
             deliveredAmountInput.value > element.amount ||
-            deliveredAmountInput.value === '0'|| deliverAllCheckbox.checked
+            deliveredAmountInput.value === '0' ||
+            deliverAllCheckbox.checked
           "
           (click)="
-            addArticleDeliveredAmount(
-              element.id,
-              deliveredAmountInput.value
-            )
+            addArticleDeliveredAmount(element.id, deliveredAmountInput.value)
           "
           mat-button
           color="primary"

@@ -35,6 +35,7 @@ import { DeliveryNote } from "../../../../../models/delivery-note";
 import { openDialog } from "../../../../../util/modal/OpeningModal";
 import { ArticleConfirmDialogComponent } from "./article-confirm-dialog/article-confirm-dialog.component";
 import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
+import { ArticleConfirmDialogData } from "../../../../../models/dto/ArticleConfirmDialogData";
 
 @Component({
   selector: "app-add-delivery-note",
@@ -140,7 +141,7 @@ export class AddDeliveryNoteComponent
         code: item.idArticle.code,
         payedAmount: item.payedAmount,
         deliveredAmount: item.deliveredAmount,
-
+        idDeliveryNoteArticle: item.id,
         // @ts-ignore
         total: item.amount * item.sellingPrice,
       }));
@@ -231,7 +232,15 @@ export class AddDeliveryNoteComponent
       ArticleConfirmDialogComponent,
       setDialogConfig({
         width: "90%",
-        data: this.listOfSelectedArticles,
+        data: {
+          listOfArticles: this.listOfSelectedArticles,
+          paidStatus:
+            this.data && this.data.paidStatus === "PAID" ? "PAID" : "NOT_PAID",
+          deliveredStatus:
+            this.data && this.data.deliveryStatus === "DELIVERED"
+              ? "DELIVERED"
+              : "NOT_DELIVERED",
+        } as ArticleConfirmDialogData,
         disableClose: true,
       }),
       this.dialog
