@@ -264,7 +264,6 @@ export class AddDeliveryNoteComponent
             deliveryNote.id = this.data.id;
             this.deliveryNoteService.update(deliveryNote).subscribe(
               (resp) => {
-                this.articleStore.dispatch(new GetArticleAction());
                 openToastNotification(
                   {
                     notificationType: "SUCCESS",
@@ -272,6 +271,10 @@ export class AddDeliveryNoteComponent
                   },
                   this.dialog
                 );
+                this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
+                  true
+                );
+                this.articleStore.dispatch(new GetArticleAction());
               },
               () => {
                 openToastNotification(
@@ -281,13 +284,7 @@ export class AddDeliveryNoteComponent
                       "Dogodila se greška  prilikom ažuriranja otpremnice",
                   },
                   this.dialog
-                )
-                  .afterClosed()
-                  .subscribe(() => {
-                    this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
-                      true
-                    );
-                  });
+                );
               }
             );
           } else {
@@ -303,6 +300,7 @@ export class AddDeliveryNoteComponent
                 this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
                   true
                 );
+                this.articleStore.dispatch(new GetArticleAction());
               },
               () => {
                 openToastNotification(
@@ -315,8 +313,6 @@ export class AddDeliveryNoteComponent
               }
             );
           }
-
-          this.articleStore.dispatch(new GetArticleAction());
         }
       });
   }

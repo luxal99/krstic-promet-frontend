@@ -120,6 +120,9 @@ export class ArticleListViewComponent
   }
 
   getQuery() {
+    this.listOfArticle$.subscribe((resp) => {
+      console.log(resp);
+    });
     if (this.behaviorService) {
       const id = this.behaviorService.get();
       if (

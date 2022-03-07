@@ -16,9 +16,9 @@ export class ArticleEffect {
       ofType(ArticleActionTypes.GET_ARTICLE),
       mergeMap(() =>
         this.articleService.getAll().pipe(
-          map((articleCategories) => ({
+          map((article) => ({
             type: ArticleActionTypes.GET_ARTICLE_SUCCESSFULLY,
-            payload: articleCategories,
+            payload: article,
           }))
         )
       )

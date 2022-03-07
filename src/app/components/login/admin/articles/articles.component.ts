@@ -1,36 +1,21 @@
 import {
-  AfterViewChecked,
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
   OnInit,
-  TemplateRef,
   ViewChild,
   ViewContainerRef,
 } from "@angular/core";
-import { FormBuilderConfig } from "../../../../util/form-components/models/FormBuilderConfig";
 import { Store } from "@ngrx/store";
 import { ArticleState } from "../../../../store/reducers/article.reducer";
-import { articleStoreConfig } from "../../../../store/config/StoreConfig";
-import { Observable } from "rxjs";
-import { ARTICLE_TABLE } from "../../../../constant/table-config/table-config";
-import { FormControlNames } from "../../../../constant/constant";
-import { Validators } from "@angular/forms";
 import { WarehouseState } from "../../../../store/reducers/warehouse.reducer";
-import { ArticleSubCategoryState } from "../../../../store/reducers/article-sub-category.reducer";
 import { loadComponent } from "../../../../util/components-util/lazy-load-component";
 import { ArticleGridWarehouseViewComponent } from "./article-grid-warehouse-view/article-grid-warehouse-view.component";
 import { ArticleListViewComponent } from "./article-list-view/article-list-view.component";
-import { openDialog } from "../../../../util/modal/OpeningModal";
-import { FormBuilderComponent } from "../../../../util/form-components/form-builder/form-builder.component";
-import { setDialogConfig } from "../../../../util/modal/DialogConfig";
 import { MatDialog } from "@angular/material/dialog";
 import { WarehouseBehaviorService } from "../../../../service/util/warehouse-behavior.service";
 import { ArticleCategoryGridViewComponent } from "./article-category-grid-view/article-category-grid-view.component";
-import { Template } from "@angular/compiler/src/render3/r3_ast";
-import { ChangeDetection } from "@angular/cli/lib/config/workspace-schema";
 
 @Component({
   selector: "app-articles",
