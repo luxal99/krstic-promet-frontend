@@ -41,7 +41,7 @@
         <button
           [disabled]="
             payedAmountInput.value > element.amount ||
-            payedAmountInput.value === '0' ||
+            payedAmountInput.value < '0' ||
             payAllCheckbox.checked
           "
           (click)="addArticlePayedAmount(element.id, payedAmountInput.value)"
@@ -70,7 +70,7 @@
         <button
           [disabled]="
             deliveredAmountInput.value > element.amount ||
-            deliveredAmountInput.value === '0' ||
+            deliveredAmountInput.value < '0' ||
             deliverAllCheckbox.checked
           "
           (click)="

@@ -27,7 +27,9 @@
   </div>
 
   <div class="text-right">
-    <h4><b>Datum otpremnice</b>: {{ deliveryNote.dateOfDeliveryNote }}</h4>
+    <h4>
+      <b>Datum otpremnice</b>: {{ deliveryNote.dateOfDeliveryNote | date }}
+    </h4>
   </div>
   <div *ngIf="deliveryNote.idClient">
     <h2>
@@ -42,7 +44,35 @@
   <generic-material-table
     [dataSource]="deliveryNote.listOfArticles"
     [displayedColumns]="articlesTableColumns"
-  ></generic-material-table>
+  >
+    <ng-template #deliveredAmountColumn let-element>
+      <ng-container [ngSwitch]="element.deliveryStatus">
+        <div class="inline" style="justify-content: left">
+          <p style="margin-right: 0.5em">{{ element.deliveredAmount }}</p>
+          <mat-icon *ngSwitchCase="'DELIVERED'" color="primary">done</mat-icon>
+          <mat-icon *ngSwitchCase="'NOT_DELIVERED'" color="warn"
+            >error</mat-icon
+          >
+        </div>
+      </ng-container>
+    </ng-template>
+    <ng-template #payedAmountColumn let-element>
+      <ng-container [ngSwitch]="element.paidStatus">
+        <div class="inline" style="justify-content: left">
+          <p style="margin-right: 0.5em">{{ element.payedAmount }}</p>
+          <mat-icon *ngSwitchCase="'PAID'" color="primary">done</mat-icon>
+          <mat-icon *ngSwitchCase="'NOT_PAID'" color="warn">error</mat-icon>
+        </div>
+      </ng-container>
+    </ng-template>
+    <ng-template #updateAmountColumn let-element>
+      <ng-container>
+        <div class="text-right">
+          <button mat-button color="primary" (click)="openArticleConfirmDialog(element)">Ažuriraj</button>
+        </div>
+      </ng-container>
+    </ng-template>
+  </generic-material-table>
   <div class="text-right">
     <div class="price-div">
       <h2>Ukupno: {{ deliveryNote.gross }}</h2>

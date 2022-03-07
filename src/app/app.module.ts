@@ -55,6 +55,7 @@ import { DeliveryNoteOvervireComponent } from "./components/login/admin/delivery
 import { DeliveryNoteOverviewComponent } from "./components/login/admin/delivery-note/delivery-note-overview/delivery-note-overview.component";
 import { GenericMaterialTableModule } from "generic-material-table";
 import { ArticleConfirmDialogComponent } from './components/login/admin/delivery-note/add-delivery-note/article-confirm-dialog/article-confirm-dialog.component';
+import { ToastNotificationComponent } from './util/toast-notification/toast-notification/toast-notification.component';
 
 // @ts-ignore
 @NgModule({
@@ -87,6 +88,7 @@ import { ArticleConfirmDialogComponent } from './components/login/admin/delivery
     DeliveryNoteOvervireComponent,
     DeliveryNoteOverviewComponent,
     ArticleConfirmDialogComponent,
+    ToastNotificationComponent,
   ],
   imports: [
     BrowserModule,

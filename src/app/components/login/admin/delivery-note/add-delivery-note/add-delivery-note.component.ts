@@ -36,6 +36,8 @@ import { openDialog } from "../../../../../util/modal/OpeningModal";
 import { ArticleConfirmDialogComponent } from "./article-confirm-dialog/article-confirm-dialog.component";
 import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 import { ArticleConfirmDialogData } from "../../../../../models/dto/ArticleConfirmDialogData";
+import { ToastNotificationComponent } from "../../../../../util/toast-notification/toast-notification/toast-notification.component";
+import { openToastNotification } from "../../../../../util/toast-notification/openToastNotification";
 
 @Component({
   selector: "app-add-delivery-note",
@@ -247,7 +249,7 @@ export class AddDeliveryNoteComponent
     )
       .afterClosed()
       .subscribe((resp) => {
-        console.log(resp.listOfArticles);
+        console.log(resp);
         if (resp.confirmed) {
           deliveryNote.paidStatus = resp.listOfArticles.every(
             (value: any) => value.paidStatus === "PAID"
@@ -263,25 +265,51 @@ export class AddDeliveryNoteComponent
           deliveryNote.listOfArticles = resp.listOfArticles;
           if (this.data) {
             deliveryNote.id = this.data.id;
-            this.deliveryNoteService.update(deliveryNote).subscribe((resp) => {
-              SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
-              this.articleStore.dispatch(new GetArticleAction());
-              this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
-                true
-              );
-            });
-          } else {
-            this.deliveryNoteService.save(deliveryNote).subscribe(
+            this.deliveryNoteService.update(deliveryNote).subscribe(
               (resp) => {
-                SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
                 this.articleStore.dispatch(new GetArticleAction());
-                this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
-                  true
+                openToastNotification(
+                  {
+                    notificationType: "SUCCESS",
+                    message: "Uspešno ažuriranje otpremnice",
+                  },
+                  this.dialog
                 );
               },
               () => {
-                SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
+                openToastNotification(
+                  {
+                    notificationType: "ERROR",
+                    message:
+                      "Dogodila se greška  prilikom ažuriranja otpremnice",
+                  },
+                  this.dialog
+                );
               }
+            );
+          } else {
+            this.deliveryNoteService.save(deliveryNote).subscribe(
+              (resp) => {
+                openToastNotification(
+                  {
+                    notificationType: "SUCCESS",
+                    message: "Uspešno dodavanje otpremnice",
+                  },
+                  this.dialog
+                );
+              },
+              () => {
+                openToastNotification(
+                  {
+                    notificationType: "ERROR",
+                    message: "Dogodila se greška prilikom dodavanja",
+                  },
+                  this.dialog
+                );
+              }
+            );
+            this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
+              true
             );
           }
         }

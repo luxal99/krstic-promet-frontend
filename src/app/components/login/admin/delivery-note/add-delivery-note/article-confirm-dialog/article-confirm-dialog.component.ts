@@ -8,12 +8,19 @@ import {
   TemplateRef,
   ViewChild,
 } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from "@angular/material/dialog";
 import { ARTICLE_BEFORE_PURCHASE_TABLE } from "../../../../../../constant/table-config/table-config";
 import { DeliveryNotePaidStatusEnum } from "../../../../../../enum/DeliveryNotePaidStatusEnum";
 import { DeliveryNoteStatusEnum } from "../../../../../../enum/DeliveryNoteStatusEnum";
 import { MatInput } from "@angular/material/input";
 import { ArticleConfirmDialogData } from "../../../../../../models/dto/ArticleConfirmDialogData";
+import { openDialog } from "../../../../../../util/modal/OpeningModal";
+import { ToastNotificationComponent } from "../../../../../../util/toast-notification/toast-notification/toast-notification.component";
+import { openToastNotification } from "../../../../../../util/toast-notification/openToastNotification";
 
 @Component({
   selector: "app-article-confirm-dialog",
@@ -31,7 +38,8 @@ export class ArticleConfirmDialogComponent
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ArticleConfirmDialogData,
     private cdRef: ChangeDetectorRef,
-    private dialogRef: MatDialogRef<ArticleConfirmDialogComponent>
+    private dialogRef: MatDialogRef<ArticleConfirmDialogComponent>,
+    private dialog: MatDialog
   ) {}
 
   articleTableConfig = ARTICLE_BEFORE_PURCHASE_TABLE;
@@ -88,6 +96,13 @@ export class ArticleConfirmDialogComponent
         }
       }
     });
+    openToastNotification(
+      {
+        notificationType: "SUCCESS",
+        message: "Uspešno dodavanje plaćene količine",
+      },
+      this.dialog
+    );
   }
 
   addArticleDeliveredAmount(idArticle: number, deliveredAmount: any) {
@@ -103,6 +118,13 @@ export class ArticleConfirmDialogComponent
         }
       }
     });
+    openToastNotification(
+      {
+        notificationType: "SUCCESS",
+        message: "Uspešno dodavanje dostavljene količine",
+      },
+      this.dialog
+    );
   }
 
   payAll(checked: boolean) {

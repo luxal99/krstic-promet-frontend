@@ -1,0 +1,8 @@
+<div class="inline">
+    <ng-container [ngSwitch]="data.notificationType">
+        <mat-icon *ngSwitchCase="'SUCCESS'" color="primary">check</mat-icon>
+        <mat-icon *ngSwitchCase="'WARNING'" color="accent">warning</mat-icon>
+        <mat-icon *ngSwitchCase="'ERROR'" color="warn">error</mat-icon>
+    </ng-container>
+    <p style="margin-left: 1em">{{data.message}}</p>
+</div>

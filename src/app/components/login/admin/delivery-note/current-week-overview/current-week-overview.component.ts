@@ -16,7 +16,7 @@ export class CurrentWeekOverviewComponent implements OnInit {
 
   tableConfig = DELIVERY_NOTE_TABLE;
 
-  constructor(private deliveryNoteService: DeliveryNoteService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }
