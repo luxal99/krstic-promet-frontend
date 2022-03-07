@@ -18,7 +18,6 @@ import { FormControlNames } from "../../../../../constant/constant";
 import { SelectedArticleDto } from "../../../../../models/dto/SelectedArticleDto";
 import { DeliveryNoteService } from "../../../../../service/delivery-note.service";
 import * as moment from "moment";
-import { SnackBarUtil } from "../../../../../util/snackbar/snackbar-util";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Client } from "../../../../../models/client";
 import { GetArticleAction } from "../../../../../store/actions/article.actions";
@@ -36,7 +35,6 @@ import { openDialog } from "../../../../../util/modal/OpeningModal";
 import { ArticleConfirmDialogComponent } from "./article-confirm-dialog/article-confirm-dialog.component";
 import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 import { ArticleConfirmDialogData } from "../../../../../models/dto/ArticleConfirmDialogData";
-import { ToastNotificationComponent } from "../../../../../util/toast-notification/toast-notification/toast-notification.component";
 import { openToastNotification } from "../../../../../util/toast-notification/openToastNotification";
 
 @Component({
@@ -249,7 +247,6 @@ export class AddDeliveryNoteComponent
     )
       .afterClosed()
       .subscribe((resp) => {
-        console.log(resp);
         if (resp.confirmed) {
           deliveryNote.paidStatus = resp.listOfArticles.every(
             (value: any) => value.paidStatus === "PAID"
@@ -284,7 +281,13 @@ export class AddDeliveryNoteComponent
                       "Dogodila se greška  prilikom ažuriranja otpremnice",
                   },
                   this.dialog
-                );
+                )
+                  .afterClosed()
+                  .subscribe(() => {
+                    this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
+                      true
+                    );
+                  });
               }
             );
           } else {
@@ -297,6 +300,9 @@ export class AddDeliveryNoteComponent
                   },
                   this.dialog
                 );
+                this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
+                  true
+                );
               },
               () => {
                 openToastNotification(
@@ -308,10 +314,9 @@ export class AddDeliveryNoteComponent
                 );
               }
             );
-            this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
-              true
-            );
           }
+
+          this.articleStore.dispatch(new GetArticleAction());
         }
       });
   }

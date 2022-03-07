@@ -151,7 +151,5 @@ export class GenericDeliveryNoteOverviewComponent
     );
   }
 
-  ngOnDestroy(): void {
-    this.updateDeliveryNoteBS.updateDeliveryNotes.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

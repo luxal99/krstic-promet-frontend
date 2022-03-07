@@ -7,7 +7,7 @@ export function openToastNotification(
   data: ToastNotificationModel,
   dialog: MatDialog
 ) {
-  openDialog(
+  return openDialog(
     ToastNotificationComponent,
     {
       position: { top: "1em", right: "1em" },

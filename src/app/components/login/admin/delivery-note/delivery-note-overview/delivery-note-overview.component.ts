@@ -101,13 +101,29 @@ export class DeliveryNoteOverviewComponent
   ngOnInit(): void {}
 
   openArticleConfirmDialog(element: any) {
+    const listOfArticles = this.deliveryNote.listOfArticles.map((item) => ({
+      // @ts-ignore
+      id: item.idArticle.id,
+      // @ts-ignore
+      name: item.idArticle.name,
+      sellingPrice: item.sellingPrice,
+      amount: item.amount,
+      amountInWarehouse: item.idArticle?.amount,
+      // @ts-ignore
+      code: item.idArticle.code,
+      payedAmount: item.payedAmount,
+      deliveredAmount: item.deliveredAmount,
+      idDeliveryNoteArticle: item.id,
+      // @ts-ignore
+      total: item.amount * item.sellingPrice,
+    }));
     openDialog(
       ArticleConfirmDialogComponent,
       {
         width: "90%",
         disableClose: true,
         data: {
-          listOfArticles: this.deliveryNote.listOfArticles,
+          listOfArticles,
           paidStatus: this.deliveryNote.paidStatus,
           deliveredStatus: this.deliveryNote.deliveryStatus,
         } as ArticleConfirmDialogData,

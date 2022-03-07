@@ -44,7 +44,9 @@ export class ArticleConfirmDialogComponent
 
   articleTableConfig = ARTICLE_BEFORE_PURCHASE_TABLE;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 
   ngAfterViewInit(): void {
     this.articleTableConfig = [
