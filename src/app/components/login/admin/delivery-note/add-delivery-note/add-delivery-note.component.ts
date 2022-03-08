@@ -36,6 +36,7 @@ import { ArticleConfirmDialogComponent } from "./article-confirm-dialog/article-
 import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 import { ArticleConfirmDialogData } from "../../../../../models/dto/ArticleConfirmDialogData";
 import { openToastNotification } from "../../../../../util/toast-notification/openToastNotification";
+import { DeliveryNoteArticleService } from "../../../../../service/delivery-note-article.service";
 
 @Component({
   selector: "app-add-delivery-note",
@@ -100,6 +101,7 @@ export class AddDeliveryNoteComponent
     private updateDeliveryNoteBS: BehaviorService,
     private cdRef: ChangeDetectorRef,
     private spinnerService: SpinnerService,
+    private deliveryNoteArticleService: DeliveryNoteArticleService,
     private dialog: MatDialog
   ) {}
 
@@ -212,6 +214,24 @@ export class AddDeliveryNoteComponent
     this.listOfSelectedArticles.splice(article, 1);
     //@ts-ignore
     this.total -= articleById?.total;
+
+    const deliveryNoteById = this.data.listOfArticles.find(
+      //@ts-ignore
+      (item) => item.idArticle.id === article.id
+    );
+    if (this.data && deliveryNoteById) {
+      this.deliveryNoteArticleService
+        .delete(deliveryNoteById.id)
+        .subscribe(() => {
+          openToastNotification(
+            {
+              notificationType: "SUCCESS",
+              message: "Uspešno uklonjen artikl",
+            },
+            this.dialog
+          );
+        });
+    }
   }
 
   save(): void {

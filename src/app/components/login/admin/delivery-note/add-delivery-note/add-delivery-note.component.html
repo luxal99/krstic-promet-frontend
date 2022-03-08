@@ -57,7 +57,11 @@
       <div class="inline">
         <mat-form-field appearance="outline">
           <mat-label>Količina</mat-label>
-          <input #amountInput matInput />
+          <input
+            #amountInput
+            matInput
+            [value]="data ? element.deliveredAmount : 0"
+          />
         </mat-form-field>
         <button
           (click)="addArticle(element, amountInput.value)"
@@ -77,7 +81,6 @@
         </button>
       </div>
     </ng-template>
-
   </generic-material-table>
   <div class="text-right w-25 mt-3">
     <app-form-input
@@ -141,6 +144,7 @@
         >
           <mat-icon>remove</mat-icon>
         </button>
+
       </div>
       <div class="col">
         <button

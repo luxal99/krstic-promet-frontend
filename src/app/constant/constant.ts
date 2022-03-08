@@ -9,6 +9,7 @@ export type Routes =
   | "/conversion/"
   | "/client/"
   | "/delivery-note/"
+  | "/delivery-note-article/"
   | "/warehouse/";
 
 export class FormControlNames {
