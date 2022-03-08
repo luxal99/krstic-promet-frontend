@@ -16,8 +16,11 @@ export class TranslatePipe implements PipeTransform {
       case "DELIVERED":
         value = "Isporučeno";
         break;
-      case "NOT_DELIVERED":
-        value = "Neisporučeno";
+      case "PER_PIECE":
+        value = "Po komadu";
+        break;
+      case "PER_UNIT":
+        value = "Po jedinici";
         break;
     }
 

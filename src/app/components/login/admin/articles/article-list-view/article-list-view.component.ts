@@ -243,6 +243,13 @@ export class ArticleListViewComponent
         label: "Konverzija",
         bindValue: "name",
       },
+      {
+        name: FormControlNames.PRICE_TYPE,
+        type: "select",
+        label: "Tip cene",
+        bindValue: "",
+        options: ["PER_UNIT", "PER_PIECE"],
+      },
     ],
     headerText: "Dodaj artikl",
     store: this.articleStore,

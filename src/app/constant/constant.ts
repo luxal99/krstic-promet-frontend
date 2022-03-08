@@ -40,6 +40,7 @@ export class FormControlNames {
   static START_DATE = "startDate";
   static SEARCH = "search";
   static DELIVERY_STATUS = "deliveryStatus";
+  static PRICE_TYPE = "priceType";
 }
 
 export const TOKEN_NAME = "Authorization";

@@ -151,7 +151,7 @@ export class AddDeliveryNoteComponent
     }
   }
 
-  addArticle(article: SelectedArticleDto | any, amountInputValue?: any): void {
+  addArticle(article: Article | any, amountInputValue?: any): void {
     let isArticleExistingInArray: SelectedArticleDto | undefined =
       this.listOfSelectedArticles.find((item) => article.id === item.id);
     const index = this.listOfSelectedArticles.findIndex(
@@ -186,7 +186,17 @@ export class AddDeliveryNoteComponent
       });
     }
 
-    this.total += article.sellingPrice * amountValue;
+    switch (article.priceType) {
+      case "PER_PIECE":
+        this.total += article.sellingPrice * amountValue;
+        break;
+      case "PER_UNIT":
+        this.total +=
+          article.sellingPrice *
+          article.idConversion.conversionToValue *
+          amountValue;
+        break;
+    }
   }
 
   decreaseArticle(article: SelectedArticleDto | any): void {
@@ -205,7 +215,15 @@ export class AddDeliveryNoteComponent
       this.listOfSelectedArticles[index].total -=
         this.listOfSelectedArticles[index].sellingPrice;
     }
-    this.total -= article.sellingPrice;
+    switch (article.priceType) {
+      case "PER_PIECE":
+        this.total -= article.sellingPrice;
+        break;
+      case "PER_UNIT":
+        this.total +=
+          article.sellingPrice * article.idConversion.conversionToValue;
+        break;
+    }
   }
 
   removeArticle(article: SelectedArticleDto | any): void {

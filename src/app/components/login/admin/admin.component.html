@@ -1,11 +1,17 @@
 <mat-drawer-container fullscreen>
   <mat-drawer opened mode="side" #drawer>
     <div class="menu">
-      <a (click)="loadDashboardComponent()">
-        <h5 (click)="changeColor($event)" id="overview-btn">
-          <mat-icon>home</mat-icon>
-        </h5>
-      </a>
+      <div id="overview-btn" (click)="loadDashboardComponent()">
+        <a   (click)="changeColor($event)">
+          <div class="active menu-item">
+            <mat-icon>home</mat-icon>
+            <h3 >Početna
+            </h3>
+          </div>
+        </a>
+
+      </div>
+
       <app-component-activator
         icon="settings"
         title="Šifarnik"

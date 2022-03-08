@@ -14,4 +14,7 @@ export interface Article {
   idArticleSubCategory: ArticleSubCategory;
   idWarehouse: Warehouse;
   idConversion: Conversion;
+  priceType: priceType;
 }
+
+export type priceType = "PER_UNIT" | "PER_PIECE";
