@@ -18,9 +18,8 @@ import { DeliveryNotePaidStatusEnum } from "../../../../../../enum/DeliveryNoteP
 import { DeliveryNoteStatusEnum } from "../../../../../../enum/DeliveryNoteStatusEnum";
 import { MatInput } from "@angular/material/input";
 import { ArticleConfirmDialogData } from "../../../../../../models/dto/ArticleConfirmDialogData";
-import { openDialog } from "../../../../../../util/modal/OpeningModal";
-import { ToastNotificationComponent } from "../../../../../../util/toast-notification/toast-notification/toast-notification.component";
 import { openToastNotification } from "../../../../../../util/toast-notification/openToastNotification";
+import { MatCheckbox, MatCheckboxChange } from "@angular/material/checkbox";
 
 @Component({
   selector: "app-article-confirm-dialog",
@@ -44,9 +43,7 @@ export class ArticleConfirmDialogComponent
 
   articleTableConfig = ARTICLE_BEFORE_PURCHASE_TABLE;
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.articleTableConfig = [
@@ -129,19 +126,21 @@ export class ArticleConfirmDialogComponent
     );
   }
 
-  payAll(checked: boolean) {
-    if (!checked) {
-      this.data.listOfArticles.forEach((item) => {
-        item.payedAmount = item.amount;
-        item.paidStatus = DeliveryNotePaidStatusEnum.PAID;
-      });
-      this.payedAmountInput.disabled = true;
-    } else {
-      this.data.listOfArticles.forEach((item) => {
-        item.payedAmount = 0;
-      });
-      this.payedAmountInput.disabled = false;
-    }
+  payAll(checked: MatCheckbox) {
+    checked.change.subscribe((resp) => {
+      if (resp.checked) {
+        this.data.listOfArticles.forEach((item) => {
+          item.payedAmount = item.amount;
+          item.paidStatus = DeliveryNotePaidStatusEnum.PAID;
+        });
+      } else {
+        this.data.listOfArticles.forEach((item) => {
+          item.payedAmount = 0;
+          item.paidStatus = DeliveryNotePaidStatusEnum.NOT_PAID;
+        });
+        this.payedAmountInput.disabled = false;
+      }
+    });
   }
 
   deliverAll(checked: boolean) {

@@ -148,22 +148,6 @@ export class DeliveryNoteOverviewComponent
       .afterClosed()
       .subscribe((resp) => {
         if (resp.confirmed) {
-          resp.listOfArticles = resp.listOfArticles.map((item: any) => ({
-            // @ts-ignore
-            id: item.idArticle.id,
-            // @ts-ignore
-            name: item.idArticle.name,
-            sellingPrice: item.sellingPrice,
-            amount: item.amount,
-            amountInWarehouse: item.idArticle?.amount,
-            // @ts-ignore
-            code: item.idArticle.code,
-            payedAmount: item.payedAmount,
-            deliveredAmount: item.deliveredAmount,
-            idDeliveryNoteArticle: item.id,
-            // @ts-ignore
-            total: item.amount * item.sellingPrice,
-          }));
           this.deliveryNoteService
             .update({
               id: this.deliveryNote.id,
@@ -172,18 +156,16 @@ export class DeliveryNoteOverviewComponent
               listOfArticles: resp.listOfArticles,
               createdDate: this.deliveryNote.createdDate,
               idClient: this.deliveryNote.idClient,
-              deliveryStatus: (this.deliveryNote.deliveryStatus =
-                this.deliveryNote.listOfArticles.every(
-                  (value: any) => value.deliveryStatus === "DELIVERED"
-                )
-                  ? DeliveryNoteStatusEnum.DELIVERED
-                  : DeliveryNoteStatusEnum.NOT_DELIVERED),
-              paidStatus: (this.deliveryNote.paidStatus =
-                this.deliveryNote.listOfArticles.every(
-                  (value: any) => value.paidStatus === "PAID"
-                )
-                  ? DeliveryNotePaidStatusEnum.PAID
-                  : DeliveryNotePaidStatusEnum.NOT_PAID),
+              deliveryStatus: resp.listOfArticles.every(
+                (item: any) => item.deliveryStatus === "DELIVERED"
+              )
+                ? DeliveryNoteStatusEnum.DELIVERED
+                : DeliveryNoteStatusEnum.NOT_DELIVERED,
+              paidStatus: resp.listOfArticles.every(
+                (item: any) => item.paidStatus === "PAID"
+              )
+                ? DeliveryNotePaidStatusEnum.PAID
+                : DeliveryNotePaidStatusEnum.NOT_PAID,
             })
             .subscribe(
               (resp) => {
@@ -194,7 +176,16 @@ export class DeliveryNoteOverviewComponent
                     message: "Uspešno ažuriranje otpremnice",
                   },
                   this.dialog
-                );
+                )
+                  .afterClosed()
+                  .subscribe(() => {
+                    this.deliveryNoteService
+                      //@ts-ignore
+                      .findById(this.deliveryNote.id)
+                      .subscribe((resp) => {
+                        this.deliveryNote = resp;
+                      });
+                  });
               },
               () => {
                 openToastNotification(

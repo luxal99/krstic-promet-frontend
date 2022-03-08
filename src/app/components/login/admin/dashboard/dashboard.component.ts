@@ -83,6 +83,11 @@ export class DashboardComponent
         width: "50%",
       }),
       this.dialog
-    );
+    )
+      .afterClosed()
+      .subscribe((resp) => {
+        this.getUnDeliveredDeliveryNotes();
+        this.getUnPaidDeliveryNotes();
+      });
   }
 }

@@ -147,7 +147,11 @@ export class GenericDeliveryNoteOverviewComponent
         width: "70%",
       }),
       this.dialog
-    );
+    )
+      .afterClosed()
+      .subscribe(() => {
+        this.getDeliveryNotes();
+      });
   }
 
   openEditDeliveryNote(deliveryNote: DeliveryNote): void {
@@ -162,7 +166,11 @@ export class GenericDeliveryNoteOverviewComponent
         data: deliveryNote,
       }),
       this.dialog
-    );
+    )
+      .afterClosed()
+      .subscribe(() => {
+        this.getDeliveryNotes();
+      });
   }
 
   ngOnDestroy(): void {}

@@ -20,6 +20,6 @@ export class ToastNotificationComponent implements OnInit {
   closeNotification() {
     setTimeout(() => {
       this.dialogRef.close();
-    }, 2000);
+    }, 1000);
   }
 }

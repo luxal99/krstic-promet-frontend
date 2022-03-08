@@ -30,7 +30,6 @@ export class CustomPeriodOverviewComponent implements OnInit {
   ngOnInit(): void {}
 
   filterDate() {
-    console.log(this.dateForm.getRawValue());
     this.startDate = moment(
       this.dateForm.get(FormControlNames.START_DATE)?.value
     ).format(DATE_VALUE_FORMAT);

@@ -64,7 +64,6 @@ export class FormBuilderComponent
 
   save(): any {
     this.spinnerService.show(this.spinner);
-    console.log(this.configData.storeConfig);
     if (!this.configData.formValues) {
       // @ts-ignore
       this.configData.store?.dispatch(
@@ -80,18 +79,6 @@ export class FormBuilderComponent
         new this.configData.storeConfig.updateAction(obj)
       );
     }
-
-    // } else {
-    //     const obj = this.form.getRawValue();
-    //     obj.id = this.configData.formValues.id;
-    //     this.configData.service.update(obj).subscribe(() => {
-    //         this.spinnerService.hide(this.spinner);
-    //         SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
-    //     }, () => {
-    //         this.spinnerService.hide(this.spinner);
-    //         SnackBarUtil.openSnackBar(this.snackBar, "Dogodila se greška");
-    //     });
-    // }
   }
 
   ngOnChanges(): void {
