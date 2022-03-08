@@ -342,7 +342,7 @@ export class AddDeliveryNoteComponent
       .get(FormControlNames.SEARCH)
       ?.valueChanges.pipe(
         filter((inputValue) => {
-          if (inputValue.length > 2) {
+          if (inputValue.length > 1) {
             this.spinnerService.show(this.spinner);
             return inputValue;
           } else {

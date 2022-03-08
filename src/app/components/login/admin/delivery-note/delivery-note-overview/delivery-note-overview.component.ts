@@ -35,6 +35,7 @@ export class DeliveryNoteOverviewComponent
   deliveredColumnTemplateRef!: TemplateRef<any>;
   @ViewChild("payedAmountColumn") payedColumnTemplateRef!: TemplateRef<any>;
   @ViewChild("updateAmountColumn") updateAmountTemplateRef!: TemplateRef<any>;
+  @ViewChild("totalColumn") totalTemplateRef!: TemplateRef<any>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public deliveryNote: DeliveryNote,
@@ -50,12 +51,20 @@ export class DeliveryNoteOverviewComponent
     this.articlesTableColumns = [
       ...this.articlesTableColumns,
       {
+        name: "total",
+        value: "",
+        columnType: "CUSTOM",
+        displayedName: "Ukupno",
+        templateRef: this.totalTemplateRef,
+      },
+      {
         name: "deliveredAmount",
         value: "",
         templateRef: this.deliveredColumnTemplateRef,
         columnType: "CUSTOM",
         displayedName: "Dostavljena količina",
       },
+
       {
         name: "payedAmount",
         value: "",
@@ -95,6 +104,12 @@ export class DeliveryNoteOverviewComponent
       columnType: "GENERIC",
       value: "amount",
       displayedName: "Količina",
+    },
+    {
+      name: "sellingPrice",
+      columnType: "GENERIC",
+      value: "sellingPrice",
+      displayedName: "Plaćena cena",
     },
   ];
 

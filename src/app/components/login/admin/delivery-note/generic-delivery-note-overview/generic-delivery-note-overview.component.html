@@ -3,23 +3,28 @@
   [displayedColumns]="tableConfig"
 >
   <ng-template #options let-element>
+  <div class="text-right">
     <button
-      mat-icon-button
-      color="primary"
-      (click)="openDeliveryNoteOverview(element)"
+            mat-button
+            color="primary"
+            (click)="openDeliveryNoteOverview(element)"
     >
       <mat-icon>visibility</mat-icon>
+      Pregled
     </button>
-    <button mat-icon-button color="accent" (click)="openEditDeliveryNote(element)">
+    <button mat-button color="accent" (click)="openEditDeliveryNote(element)">
       <mat-icon>edit</mat-icon>
+      Izmeni
     </button>
     <button
-      mat-icon-button
-      color="warn"
-      (click)="deleteDeliveryNote(element.id)"
+            mat-button
+            color="warn"
+            (click)="deleteDeliveryNote(element.id)"
     >
       <mat-icon>delete</mat-icon>
+      Obriši
     </button>
+  </div>
   </ng-template>
   <ng-template #paidStatusColumn let-element>
     <div [class]="element.paidStatus === 'PAID' ? 'paid-col' : 'not-paid-col'">

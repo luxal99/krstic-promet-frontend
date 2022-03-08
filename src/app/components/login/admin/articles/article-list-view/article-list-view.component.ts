@@ -120,9 +120,7 @@ export class ArticleListViewComponent
   }
 
   getQuery() {
-    this.listOfArticle$.subscribe((resp) => {
-      console.log(resp);
-    });
+    this.listOfArticle$.subscribe((resp) => {});
     if (this.behaviorService) {
       const id = this.behaviorService.get();
       if (
@@ -264,7 +262,7 @@ export class ArticleListViewComponent
       .get(FormControlNames.SEARCH)
       ?.valueChanges.pipe(
         filter((inputValue) => {
-          if (inputValue.length > 2) {
+          if (inputValue.length > 1) {
             this.spinnerService.show(this.spinner);
             return inputValue;
           } else {

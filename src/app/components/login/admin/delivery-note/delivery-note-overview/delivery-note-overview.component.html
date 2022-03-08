@@ -68,8 +68,19 @@
     <ng-template #updateAmountColumn let-element>
       <ng-container>
         <div class="text-right">
-          <button mat-button color="primary" (click)="openArticleConfirmDialog(element)">Ažuriraj</button>
+          <button
+            mat-button
+            color="primary"
+            (click)="openArticleConfirmDialog(element)"
+          >
+            Ažuriraj
+          </button>
         </div>
+      </ng-container>
+    </ng-template>
+    <ng-template #totalColumn let-element>
+      <ng-container>
+        <p>{{ element.amount * element.sellingPrice }}</p>
       </ng-container>
     </ng-template>
   </generic-material-table>

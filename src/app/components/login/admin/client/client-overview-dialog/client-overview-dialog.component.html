@@ -1,0 +1,12 @@
+<h1>Pregled klijenta</h1>
+<h2>{{data.firstName+' '+data.lastName}}</h2>
+<h4>Kontakt telefon:<b>{{data.telephone}}</b></h4>
+<mat-spinner #spinner diameter="25"></mat-spinner>
+<div class="row">
+    <div class="col-sm-6"  *ngFor="let deliveryNote of listOfDeliveryNotes">
+        <div class="client-delivery-note-card" (click)="openDeliveryNoteOverviewDialog(deliveryNote)">
+            <p><b>{{deliveryNote.dateOfDeliveryNote|date}}</b></p>
+            <p class="text-right">{{deliveryNote.gross}}</p>
+        </div>
+    </div>
+</div>

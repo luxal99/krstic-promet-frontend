@@ -92,12 +92,6 @@ export const CLIENT_TABLE: Column[] = [
     value: "telephone",
     columnType: "GENERIC",
   },
-  {
-    name: "option",
-    displayedName: "",
-    value: "",
-    columnType: "CUSTOM",
-  },
 ];
 export const ARTICLE_TABLE: Column[] = [
   {

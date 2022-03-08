@@ -24,6 +24,10 @@ import { AddDeliveryNoteComponent } from "../add-delivery-note/add-delivery-note
 import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 import { BehaviorService } from "../../../../../service/util/behavior.service";
 import { DeliveryNoteOverviewComponent } from "../delivery-note-overview/delivery-note-overview.component";
+import { Store } from "@ngrx/store";
+import { ArticleState } from "../../../../../store/reducers/article.reducer";
+import { GetArticleAction } from "../../../../../store/actions/article.actions";
+import { openToastNotification } from "../../../../../util/toast-notification/openToastNotification";
 
 @Component({
   selector: "app-generic-delivery-note-overview",
@@ -51,7 +55,10 @@ export class GenericDeliveryNoteOverviewComponent
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private updateDeliveryNoteBS: BehaviorService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private articleStore: Store<{
+      articles: ArticleState;
+    }>
   ) {}
 
   ngAfterContentChecked(): void {}
@@ -120,7 +127,14 @@ export class GenericDeliveryNoteOverviewComponent
     openConfirmDialog(this.dialog, () => {
       this.deliveryNoteService.delete(id).subscribe(() => {
         this.getDeliveryNotes();
-        SnackBarUtil.openSnackBar(this.snackBar, "Uspešno obrisana otpremnica");
+        this.articleStore.dispatch(new GetArticleAction());
+        openToastNotification(
+          {
+            notificationType: "SUCCESS",
+            message: "Uspešno ste obrisali otpremnicu",
+          },
+          this.dialog
+        );
       });
     });
   }
@@ -130,7 +144,7 @@ export class GenericDeliveryNoteOverviewComponent
       DeliveryNoteOverviewComponent,
       setDialogConfig({
         data: deliveryNote,
-        width: "50%",
+        width: "70%",
       }),
       this.dialog
     );
