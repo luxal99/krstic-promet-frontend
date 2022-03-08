@@ -5,15 +5,15 @@
     </button>
   </div>
   <generic-material-table
-          [dataSource]="listOfClients$ | async"
-          [displayedColumns]="clientTableConfig"
+    [dataSource]="listOfClients$ | async"
+    [displayedColumns]="clientTableConfig"
   >
     <ng-template #optionButtonsColumn let-element>
       <div class="text-right">
         <button
-                mat-button
-                color="primary"
-                (click)="openClientOverview(element)"
+          mat-button
+          color="primary"
+          (click)="openClientOverview(element)"
         >
           <mat-icon>visibility</mat-icon>
           Pregled
@@ -22,16 +22,11 @@
           <mat-icon>edit</mat-icon>
           Izmeni
         </button>
-        <button
-                mat-button
-                color="warn"
-                (click)="deleteClient(element.id)"
-        >
+        <button mat-button color="warn" (click)="deleteClient(element.id)">
           <mat-icon>delete</mat-icon>
           Obriši
         </button>
       </div>
     </ng-template>
   </generic-material-table>
-
 </div>

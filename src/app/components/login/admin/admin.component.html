@@ -2,14 +2,12 @@
   <mat-drawer opened mode="side" #drawer>
     <div class="menu">
       <div id="overview-btn" (click)="loadDashboardComponent()">
-        <a   (click)="changeColor($event)">
+        <a (click)="changeColor($event)">
           <div class="active menu-item">
             <mat-icon>home</mat-icon>
-            <h3 >Početna
-            </h3>
+            <h3>Početna</h3>
           </div>
         </a>
-
       </div>
 
       <app-component-activator
@@ -23,13 +21,12 @@
         (load)="loadArticlesComponent()"
       ></app-component-activator>
       <app-component-activator
-              icon="account_circle"
-              title="Klijenti"
-              (load)="loadClient()"
+        icon="account_circle"
+        title="Klijenti"
+        (load)="loadClient()"
       ></app-component-activator>
       <app-component-activator
         icon="business_center"
-
         title="Otpremnice"
         (load)="loadDeliveryNote()"
       ></app-component-activator>

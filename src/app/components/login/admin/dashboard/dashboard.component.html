@@ -7,7 +7,13 @@
         [displayedColumns]="deliveryNoteTableConfig"
       >
         <ng-template #overviewButton let-element>
-          <button mat-button color="primary" (click)="openDeliveryNoteOverview(element)">Pregled</button>
+          <button
+            mat-button
+            color="primary"
+            (click)="openDeliveryNoteOverview(element)"
+          >
+            Pregled
+          </button>
         </ng-template>
       </generic-material-table>
     </div>

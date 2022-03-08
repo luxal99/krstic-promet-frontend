@@ -1,25 +1,32 @@
-<mat-form-field appearance="standard" class=" w-100 mt-2">
-    <mat-label>Datum</mat-label>
-    <mat-date-range-input [formGroup]="dateForm" [rangePicker]="picker">
-        <input matStartDate formControlName="startDate" placeholder="Početni datum">
-        <input matEndDate formControlName="endDate" placeholder="Krajnji datum">
-        <button mat-button>Filtriraj</button>
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker>
-        <mat-date-range-picker-actions>
-            <button
-                    color="primary"
-                    mat-button
-                    style="width: 100%;"
-                    class="fw-bold"
-                    (click)="filterDate()"
-                    matDateRangePickerApply
-            >
-                Filtriraj
-            </button>
-        </mat-date-range-picker-actions>
-    </mat-date-range-picker>
+<mat-form-field appearance="standard" class="w-100 mt-2">
+  <mat-label>Datum</mat-label>
+  <mat-date-range-input [formGroup]="dateForm" [rangePicker]="picker">
+    <input
+      matStartDate
+      formControlName="startDate"
+      placeholder="Početni datum"
+    />
+    <input matEndDate formControlName="endDate" placeholder="Krajnji datum" />
+    <button mat-button>Filtriraj</button>
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker>
+    <mat-date-range-picker-actions>
+      <button
+        color="primary"
+        mat-button
+        style="width: 100%"
+        class="fw-bold"
+        (click)="filterDate()"
+        matDateRangePickerApply
+      >
+        Filtriraj
+      </button>
+    </mat-date-range-picker-actions>
+  </mat-date-range-picker>
 </mat-form-field>
-<app-generic-delivery-note-overview [startDate]="startDate" [endDate]="endDate"
-                                    [listOfDeliveryNotes]="listOfDeliveryNotes"></app-generic-delivery-note-overview>
+<app-generic-delivery-note-overview
+  [startDate]="startDate"
+  [endDate]="endDate"
+  [listOfDeliveryNotes]="listOfDeliveryNotes"
+></app-generic-delivery-note-overview>

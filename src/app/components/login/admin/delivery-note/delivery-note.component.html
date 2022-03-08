@@ -1,22 +1,22 @@
 <div class="component">
-    <div class="text-right">
-        <button
-                mat-button
-                class="primary-btn"
-                (click)="openAddDeliveryNoteDialog()"
-        >
-            Dodaj
-        </button>
-    </div>
-    <mat-tab-group>
-        <mat-tab label="Trenutna nedelja">
-            <app-current-week-overview></app-current-week-overview>
-        </mat-tab>
-        <mat-tab label="Trenutni mesec">
-            <app-current-month-overview></app-current-month-overview>
-        </mat-tab>
-        <mat-tab label="Proizvoljno">
-            <app-custom-period-overview></app-custom-period-overview>
-        </mat-tab>
-    </mat-tab-group>
+  <div class="text-right">
+    <button
+      mat-button
+      class="primary-btn"
+      (click)="openAddDeliveryNoteDialog()"
+    >
+      Dodaj
+    </button>
+  </div>
+  <mat-tab-group>
+    <mat-tab label="Trenutna nedelja">
+      <app-current-week-overview></app-current-week-overview>
+    </mat-tab>
+    <mat-tab label="Trenutni mesec">
+      <app-current-month-overview></app-current-month-overview>
+    </mat-tab>
+    <mat-tab label="Proizvoljno">
+      <app-custom-period-overview></app-custom-period-overview>
+    </mat-tab>
+  </mat-tab-group>
 </div>

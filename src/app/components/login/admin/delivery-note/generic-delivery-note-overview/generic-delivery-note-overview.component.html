@@ -3,33 +3,29 @@
   [displayedColumns]="tableConfig"
 >
   <ng-template #options let-element>
-  <div class="text-right">
-    <button
-            mat-button
-            color="primary"
-            (click)="openDeliveryNoteOverview(element)"
-    >
-      <mat-icon>visibility</mat-icon>
-      Pregled
-    </button>
-    <button mat-button color="accent" (click)="openEditDeliveryNote(element)">
-      <mat-icon>edit</mat-icon>
-      Izmeni
-    </button>
-    <button
-            mat-button
-            color="warn"
-            (click)="deleteDeliveryNote(element.id)"
-    >
-      <mat-icon>delete</mat-icon>
-      Obriši
-    </button>
-  </div>
+    <div class="text-right">
+      <button
+        mat-button
+        color="primary"
+        (click)="openDeliveryNoteOverview(element)"
+      >
+        <mat-icon>visibility</mat-icon>
+        Pregled
+      </button>
+      <button mat-button color="accent" (click)="openEditDeliveryNote(element)">
+        <mat-icon>edit</mat-icon>
+        Izmeni
+      </button>
+      <button mat-button color="warn" (click)="deleteDeliveryNote(element.id)">
+        <mat-icon>delete</mat-icon>
+        Obriši
+      </button>
+    </div>
   </ng-template>
   <ng-template #paidStatusColumn let-element>
     <div [class]="element.paidStatus === 'PAID' ? 'paid-col' : 'not-paid-col'">
       <mat-icon>
-          {{element.paidStatus === 'PAID'?'check':'close'}}
+        {{ element.paidStatus === "PAID" ? "check" : "close" }}
       </mat-icon>
     </div>
   </ng-template>

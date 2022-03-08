@@ -57,11 +57,7 @@
       <div class="inline">
         <mat-form-field appearance="outline">
           <mat-label>Količina</mat-label>
-          <input
-            #amountInput
-            matInput
-            type="number"
-          />
+          <input #amountInput matInput type="number" />
         </mat-form-field>
         <button
           (click)="addArticle(element, amountInput.value)"
@@ -146,7 +142,6 @@
         >
           <mat-icon>remove</mat-icon>
         </button>
-
       </div>
       <div class="col">
         <button

@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DeliveryNoteOvervireComponent } from './delivery-note-overvire.component';
+import { DeliveryNoteOvervireComponent } from "./delivery-note-overvire.component";
 
-describe('DeliveryNoteOvervireComponent', () => {
+describe("DeliveryNoteOvervireComponent", () => {
   let component: DeliveryNoteOvervireComponent;
   let fixture: ComponentFixture<DeliveryNoteOvervireComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeliveryNoteOvervireComponent ]
-    })
-    .compileComponents();
+      declarations: [DeliveryNoteOvervireComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('DeliveryNoteOvervireComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
