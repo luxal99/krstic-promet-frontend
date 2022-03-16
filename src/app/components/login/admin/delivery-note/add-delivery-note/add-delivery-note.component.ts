@@ -49,6 +49,7 @@ export class AddDeliveryNoteComponent
   @ViewChild("spinner") spinner!: MatSpinner;
   @ViewChild("amountColumn") amountColumn!: TemplateRef<any>;
   public total = 0;
+  public isMobile = window.screen.width <= 700;
   listOfSelectedArticles: SelectedArticleDto[] = [];
 
   listOfArticles: Article[] = [];

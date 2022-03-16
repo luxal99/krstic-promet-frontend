@@ -10,7 +10,7 @@
       "/delivery-note",
       "/warehouse"
     ],
-    "target": "http://localhost:8080/",
+    "target": "http://localhost:8091/",
     "secure": false
   }
 ]
