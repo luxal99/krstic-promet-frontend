@@ -4,29 +4,31 @@
       Dodaj
     </button>
   </div>
-  <generic-material-table
-    [dataSource]="listOfClients$ | async"
-    [displayedColumns]="clientTableConfig"
-  >
-    <ng-template #optionButtonsColumn let-element>
-      <div class="text-right">
-        <button
-          mat-button
-          color="primary"
-          (click)="openClientOverview(element)"
-        >
-          <mat-icon>visibility</mat-icon>
-          Pregled
-        </button>
-        <button mat-button color="accent" (click)="openAddDialog(element)">
-          <mat-icon>edit</mat-icon>
-          Izmeni
-        </button>
-        <button mat-button color="warn" (click)="deleteClient(element.id)">
-          <mat-icon>delete</mat-icon>
-          Obriši
-        </button>
-      </div>
-    </ng-template>
-  </generic-material-table>
+  <div class="overflow-scroll">
+    <generic-material-table
+            [dataSource]="listOfClients$ | async"
+            [displayedColumns]="clientTableConfig"
+    >
+      <ng-template #optionButtonsColumn let-element>
+        <div class="text-right">
+          <button
+                  mat-button
+                  color="primary"
+                  (click)="openClientOverview(element)"
+          >
+            <mat-icon>visibility</mat-icon>
+            Pregled
+          </button>
+          <button mat-button color="accent" (click)="openAddDialog(element)">
+            <mat-icon>edit</mat-icon>
+            Izmeni
+          </button>
+          <button mat-button color="warn" (click)="deleteClient(element.id)">
+            <mat-icon>delete</mat-icon>
+            Obriši
+          </button>
+        </div>
+      </ng-template>
+    </generic-material-table>
+  </div>
 </div>

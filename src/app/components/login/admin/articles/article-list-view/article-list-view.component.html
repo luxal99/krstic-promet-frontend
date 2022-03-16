@@ -14,9 +14,10 @@
       </button>
     </div>
   </div>
+<div class="overflow-scroll">
   <generic-material-table
-    [dataSource]="listOfArticle$ | async"
-    [displayedColumns]="articleTableConfig"
+          [dataSource]="listOfArticle$ | async"
+          [displayedColumns]="articleTableConfig"
   >
     <ng-template #options let-element>
       <div class="text-right">
@@ -29,4 +30,5 @@
       </div>
     </ng-template>
   </generic-material-table>
+</div>
 </div>

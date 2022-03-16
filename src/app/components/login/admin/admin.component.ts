@@ -20,6 +20,7 @@ import { DeliveryNoteComponent } from "./delivery-note/delivery-note.component";
 import { GetConversionAction } from "../../../store/actions/conversion.actions";
 import { ClientComponent } from "./client/client.component";
 import { GetClientAction } from "../../../store/actions/client.actions";
+import { ResponsiveService } from "../../../service/util/responsive.service";
 
 @Component({
   selector: "app-admin",
@@ -35,7 +36,8 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private resolver: ComponentFactoryResolver,
-    private store: Store<any>
+    private store: Store<any>,
+    public responsiveService: ResponsiveService
   ) {}
 
   ngOnInit(): void {

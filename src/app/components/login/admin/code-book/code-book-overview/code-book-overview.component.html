@@ -10,9 +10,10 @@
     </div>
   </div>
   <mat-spinner #spinner diameter="25"></mat-spinner>
+<div class="overflow-scroll">
   <generic-material-table
-    [dataSource]="dataSource"
-    [displayedColumns]="displayedColumns"
+          [dataSource]="dataSource"
+          [displayedColumns]="displayedColumns"
   >
     <ng-template #optionBtnsTemplateRef let-element>
       <div class="text-right">
@@ -27,4 +28,5 @@
       </div>
     </ng-template>
   </generic-material-table>
+</div>
 </div>
