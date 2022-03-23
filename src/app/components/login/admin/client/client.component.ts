@@ -23,6 +23,7 @@ import { openConfirmDialog } from "../../../../util/confirm-dialog/config/confir
 import { ConfirmDialogComponent } from "../../../../util/confirm-dialog/confirm-dialog.component";
 import { DeleteClientAction } from "../../../../store/actions/client.actions";
 import { ClientOverviewDialogComponent } from "./client-overview-dialog/client-overview-dialog.component";
+import { ResponsiveService } from "../../../../service/util/responsive.service";
 
 @Component({
   selector: "app-client",
@@ -76,7 +77,8 @@ export class ClientComponent
       client: ClientState;
     }>,
     private dialog: MatDialog,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    public responsiveService: ResponsiveService
   ) {}
 
   ngAfterViewInit(): void {

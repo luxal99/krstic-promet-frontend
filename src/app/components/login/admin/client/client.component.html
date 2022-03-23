@@ -4,7 +4,7 @@
       Dodaj
     </button>
   </div>
-  <div class="overflow-scroll">
+  <div [class.overflow-scroll]="responsiveService.isMobile.value">
     <generic-material-table
             [dataSource]="listOfClients$ | async"
             [displayedColumns]="clientTableConfig"

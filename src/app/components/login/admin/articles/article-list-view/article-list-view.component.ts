@@ -35,6 +35,7 @@ import { FieldConfig } from "../../../../../util/form-components/models/FieldCon
 import { ArticleService } from "../../../../../service/article.service";
 import { SpinnerService } from "../../../../../util/spinner/spinner.service";
 import { MatSpinner } from "@angular/material/progress-spinner";
+import { ResponsiveService } from "../../../../../service/util/responsive.service";
 
 @Component({
   selector: "app-article-list-view",
@@ -91,7 +92,8 @@ export class ArticleListViewComponent
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
     private articleService: ArticleService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    public responsiveService: ResponsiveService
   ) {}
 
   ngOnInit(): void {

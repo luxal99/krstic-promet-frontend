@@ -5,7 +5,7 @@ import { BehaviorSubject } from "rxjs";
   providedIn: "root",
 })
 export class ResponsiveService {
-  private isMobile = new BehaviorSubject(window.screen.width <= 700);
+  isMobile = new BehaviorSubject(window.screen.width <= 700);
 
   constructor() {}
 

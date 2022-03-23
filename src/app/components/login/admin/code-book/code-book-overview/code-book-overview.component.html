@@ -10,23 +10,23 @@
     </div>
   </div>
   <mat-spinner #spinner diameter="25"></mat-spinner>
-<div class="overflow-scroll">
-  <generic-material-table
-          [dataSource]="dataSource"
-          [displayedColumns]="displayedColumns"
-  >
-    <ng-template #optionBtnsTemplateRef let-element>
-      <div class="text-right">
-        <button mat-button color="accent" (click)="openEditDialog(element)">
-          <mat-icon>edit</mat-icon>
-          Izmeni
-        </button>
-        <button mat-button color="warn" (click)="delete(element.id)">
-          <mat-icon>delete</mat-icon>
-          Obirši
-        </button>
-      </div>
-    </ng-template>
-  </generic-material-table>
-</div>
+  <div [class.overflow-scroll]="responsiveService.isMobile.value">
+    <generic-material-table
+      [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns"
+    >
+      <ng-template #optionBtnsTemplateRef let-element>
+        <div class="text-right">
+          <button mat-button color="accent" (click)="openEditDialog(element)">
+            <mat-icon>edit</mat-icon>
+            Izmeni
+          </button>
+          <button mat-button color="warn" (click)="delete(element.id)">
+            <mat-icon>delete</mat-icon>
+            Obirši
+          </button>
+        </div>
+      </ng-template>
+    </generic-material-table>
+  </div>
 </div>

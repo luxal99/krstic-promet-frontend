@@ -20,6 +20,7 @@ import { FormBuilderConfig } from "../../../../../util/form-components/models/Fo
 import { MatSpinner } from "@angular/material/progress-spinner";
 import { openConfirmDialog } from "../../../../../util/confirm-dialog/config/confirm-dialog-config";
 import { Column } from "generic-material-table/lib/models/Column";
+import { ResponsiveService } from "../../../../../service/util/responsive.service";
 
 @Component({
   selector: "app-code-book-overview",
@@ -42,7 +43,8 @@ export class CodeBookOverviewComponent
     private dialog: MatDialog,
     private spinnerService: SpinnerService,
     private snackBar: MatSnackBar,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    public responsiveService: ResponsiveService
   ) {}
 
   ngOnInit(): void {
