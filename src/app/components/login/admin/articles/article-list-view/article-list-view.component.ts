@@ -152,6 +152,7 @@ export class ArticleListViewComponent
       FormBuilderComponent,
       setDialogConfig({
         width: "30%",
+        height: "80vh",
         data: this.articleDialogConfig,
       }),
       this.dialog

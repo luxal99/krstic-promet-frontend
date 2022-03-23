@@ -6,7 +6,15 @@
   height: 100vh
 
   .row
-    padding-top: 15em
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    justify-content: center
+    margin: auto
+    width: 1000px
+    height: 500px
   .login-form
     padding: 10em 5em 5em 5em
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px
@@ -23,8 +31,11 @@
       margin: 2em auto
       display: none
 @media screen and (max-width: 1024px)
+
   .login
     .row
+      width: auto
+      height: auto
       .login-form
         position: absolute
         bottom: 0
