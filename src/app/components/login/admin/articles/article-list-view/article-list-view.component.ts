@@ -9,14 +9,15 @@ import {
   ViewChild,
 } from "@angular/core";
 import { ARTICLE_TABLE } from "../../../../../constant/table-config/table-config";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Store } from "@ngrx/store";
 import { ArticleState } from "../../../../../store/reducers/article.reducer";
 import {
   debounceTime,
   distinctUntilChanged,
-  filter,
   map,
+  switchMap,
+  tap,
 } from "rxjs/operators";
 import { FormBuilderConfig } from "../../../../../util/form-components/models/FormBuilderConfig";
 import { FormControlNames } from "../../../../../constant/constant";
@@ -271,20 +272,15 @@ export class ArticleListViewComponent
     this.searchForm
       .get(FormControlNames.SEARCH)
       ?.valueChanges.pipe(
-        filter((inputValue) => {
-          if (inputValue.length > 1) {
-            this.spinnerService.show(this.spinner);
-            return inputValue;
-          } else {
-            this.spinnerService.hide(this.spinner);
-          }
+        switchMap((value) => {
+          this.spinnerService.show(this.spinner);
+          return this.articleService.searchForRealEstate(value);
         }),
-        debounceTime(500),
-        distinctUntilChanged()
+        distinctUntilChanged(),
+        debounceTime(500)
       )
-      .subscribe((searchText) => {
-        this.listOfArticle$ =
-          this.articleService.searchForRealEstate(searchText);
+      .subscribe((resp) => {
+        this.listOfArticle$ = of(resp);
         this.spinnerService.hide(this.spinner);
       });
   }
