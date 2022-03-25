@@ -15,6 +15,7 @@ import { ArticleState } from "../../../../../store/reducers/article.reducer";
 import {
   debounceTime,
   distinctUntilChanged,
+  filter,
   map,
   switchMap,
   tap,
@@ -269,19 +270,46 @@ export class ArticleListViewComponent
   }
 
   searchForArticle() {
+    // this.searchForm
+    //   .get(FormControlNames.SEARCH)
+    //   ?.valueChanges.pipe(
+    //     switchMap((value) => {
+    //       this.spinnerService.show(this.spinner);
+    //       return this.articleService.searchForRealEstate(value);
+    //     }),
+    //     distinctUntilChanged(),
+    //     debounceTime(500)
+    //   )
+    //   .subscribe((resp) => {
+    //     console.log(resp);
+    //     this.listOfArticle$ = of(resp);
+    //     this.spinnerService.hide(this.spinner);
+    //   });
+
     this.searchForm
       .get(FormControlNames.SEARCH)
       ?.valueChanges.pipe(
-        switchMap((value) => {
-          this.spinnerService.show(this.spinner);
-          return this.articleService.searchForRealEstate(value);
+        filter((inputValue) => {
+          if (inputValue.length > 1) {
+            this.spinnerService.show(this.spinner);
+            return inputValue;
+          } else {
+            this.spinnerService.hide(this.spinner);
+            return inputValue;
+          }
         }),
-        distinctUntilChanged(),
-        debounceTime(500)
+        debounceTime(500),
+        distinctUntilChanged()
       )
       .subscribe((resp) => {
-        this.listOfArticle$ = of(resp);
-        this.spinnerService.hide(this.spinner);
+        if (resp.length > 1) {
+          this.listOfArticle$ = this.articleService.searchForRealEstate(resp);
+          this.spinnerService.hide(this.spinner);
+        } else {
+          this.listOfArticle$ = this.articleStore.select(
+            (state) => state.articles.list
+          );
+        }
       });
   }
 }
