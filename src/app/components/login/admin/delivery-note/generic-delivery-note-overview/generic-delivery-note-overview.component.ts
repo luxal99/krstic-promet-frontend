@@ -18,7 +18,6 @@ import { DeliveryNoteService } from "../../../../../service/delivery-note.servic
 import { MatDialog } from "@angular/material/dialog";
 import { openConfirmDialog } from "../../../../../util/confirm-dialog/config/confirm-dialog-config";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { SnackBarUtil } from "../../../../../util/snackbar/snackbar-util";
 import { openDialog } from "../../../../../util/modal/OpeningModal";
 import { AddDeliveryNoteComponent } from "../add-delivery-note/add-delivery-note.component";
 import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
@@ -28,6 +27,10 @@ import { Store } from "@ngrx/store";
 import { ArticleState } from "../../../../../store/reducers/article.reducer";
 import { GetArticleAction } from "../../../../../store/actions/article.actions";
 import { openToastNotification } from "../../../../../util/toast-notification/openToastNotification";
+import { PaginationData } from "../../../../../models/dto/PaginationData";
+import { PageEvent } from "@angular/material/paginator/paginator";
+import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
+import { map, take } from "rxjs/operators";
 
 @Component({
   selector: "app-generic-delivery-note-overview",
@@ -49,6 +52,9 @@ export class GenericDeliveryNoteOverviewComponent
   @Input() startDate = "";
   @Input() endDate = "";
   tableConfig = DELIVERY_NOTE_TABLE;
+
+  pagination: PaginationData = { dataCount: 0, total: 0 };
+  dateFilter: ReplaySubject<SimpleChanges> = new ReplaySubject(10);
 
   constructor(
     private deliveryNoteService: DeliveryNoteService,
@@ -88,9 +94,28 @@ export class GenericDeliveryNoteOverviewComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.startDate.firstChange && !changes.endDate.firstChange) {
-      this.getDeliveryNotes();
-    }
+    this.dateFilter.next(changes);
+    this.dateFilter
+      .pipe(
+        map((value) => {
+          if (
+            (value.startDate && !value.startDate.firstChange) ||
+            (value.endDate && !value.endDate.firstChange)
+          ) {
+            return value;
+          } else {
+            return null;
+          }
+        }),
+        take(1)
+      )
+      .subscribe((resp) => {
+        if (resp) {
+          this.startDate = resp.startDate.currentValue;
+          this.endDate = resp.endDate.currentValue;
+          this.getDeliveryNotes();
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -106,18 +131,23 @@ export class GenericDeliveryNoteOverviewComponent
     });
   }
 
-  getDeliveryNotes(): void {
+  getDeliveryNotes(pagination?: PageEvent): void {
     this.deliveryNoteService
       .getDeliveryNoteByQuery(
         encodeURI(
           JSON.stringify({
-            pagination: { page: 0, rows: 10 },
+            pagination: pagination
+              ? { page: pagination.pageIndex, rows: pagination.pageSize }
+              : { page: 0, rows: 10 },
             startDate: this.startDate,
             endDate: this.endDate,
           })
         )
       )
       .subscribe((resp) => {
+        this.pagination.dataCount = Number.parseInt(
+          <string>resp.headers.get("TOTAL")
+        );
         //@ts-ignore
         this.listOfDeliveryNotes = resp.body;
       });
