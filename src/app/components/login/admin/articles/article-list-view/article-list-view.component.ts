@@ -270,22 +270,6 @@ export class ArticleListViewComponent
   }
 
   searchForArticle() {
-    // this.searchForm
-    //   .get(FormControlNames.SEARCH)
-    //   ?.valueChanges.pipe(
-    //     switchMap((value) => {
-    //       this.spinnerService.show(this.spinner);
-    //       return this.articleService.searchForRealEstate(value);
-    //     }),
-    //     distinctUntilChanged(),
-    //     debounceTime(500)
-    //   )
-    //   .subscribe((resp) => {
-    //     console.log(resp);
-    //     this.listOfArticle$ = of(resp);
-    //     this.spinnerService.hide(this.spinner);
-    //   });
-
     this.searchForm
       .get(FormControlNames.SEARCH)
       ?.valueChanges.pipe(
