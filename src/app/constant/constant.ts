@@ -41,6 +41,7 @@ export class FormControlNames {
   static SEARCH = "search";
   static DELIVERY_STATUS = "deliveryStatus";
   static PRICE_TYPE = "priceType";
+  static CONFIRM_PASSWORD = "confirmPassword";
 }
 
 export const TOKEN_NAME = "Authorization";

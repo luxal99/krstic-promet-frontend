@@ -10,6 +10,9 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormControlNames, Pages, TOKEN_NAME } from "src/app/constant/constant";
 import { UserService } from "../../service/user.service";
+import { openDialog } from "../../util/modal/OpeningModal";
+import { RegistrationDialogComponent } from "./registration-dialog/registration-dialog.component";
+import { setDialogConfig } from "../../util/modal/DialogConfig";
 
 @Component({
   selector: "app-login",
@@ -20,10 +23,7 @@ export class LoginComponent implements OnInit {
   @ViewChild("spinner") spinner!: MatSpinner;
 
   loginForm = new FormGroup({
-    username: new FormControl("", [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
+    username: new FormControl("", [Validators.required]),
     password: new FormControl("", [
       Validators.required,
       Validators.minLength(5),
@@ -69,5 +69,9 @@ export class LoginComponent implements OnInit {
         this.spinnerService.hide(this.spinner);
       }
     );
+  }
+
+  openRegistrationButton() {
+    openDialog(RegistrationDialogComponent, setDialogConfig({}), this.dialog);
   }
 }

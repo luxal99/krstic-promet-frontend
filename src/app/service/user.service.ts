@@ -18,4 +18,7 @@ export class UserService {
       responseType: "json",
     });
   }
+  registerUser(user: User): Observable<User> {
+    return this.http.post<User>(this.ROUTE, user, { responseType: "json" });
+  }
 }

@@ -1,0 +1,21 @@
+<app-form-input
+  [group]="registrationForm"
+  [config]="usernameInputConfig"
+></app-form-input>
+<app-form-input
+  [group]="registrationForm"
+  [config]="passwordInputConfig"
+></app-form-input>
+<app-form-input
+  [group]="registrationForm"
+  [config]="confirmPasswordInputConfig"
+  (input)="passwordMatching()"
+></app-form-input>
+<button
+  mat-button
+  class="primary-btn w-100"
+  (click)="registerUser()"
+  [disabled]="!registrationForm.valid || !isPasswordMatched"
+>
+  Sačuvaj
+</button>
