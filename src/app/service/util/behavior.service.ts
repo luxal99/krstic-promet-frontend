@@ -1,29 +1,33 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { BehaviorFilterModel } from "./model/BehaviorFilterModel";
 
 @Injectable({
   providedIn: "root",
 })
 export class BehaviorService {
-  private behaviorSubject = new BehaviorSubject(0);
+  private behaviorSubject = new BehaviorSubject<BehaviorFilterModel>({
+    id: 0,
+    filterType: null,
+  });
   private _updateDeliveryNotes = new BehaviorSubject(false);
 
   constructor() {}
 
-  add(id: number) {
-    this.behaviorSubject.next(id);
+  add(model: BehaviorFilterModel) {
+    this.behaviorSubject.next(model);
   }
 
   get updateDeliveryNotes(): BehaviorSubject<boolean> {
     return this._updateDeliveryNotes;
   }
 
-  get(): number {
+  get(): BehaviorFilterModel {
     return this.behaviorSubject.value;
   }
 
   reset() {
-    this.behaviorSubject.next(0);
+    this.behaviorSubject.next({ id: 0, filterType: null });
   }
 
   setValueForUpdateDeliveryNoteBehaviorSubject(value: boolean): void {

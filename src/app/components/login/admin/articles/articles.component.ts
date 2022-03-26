@@ -14,8 +14,8 @@ import { loadComponent } from "../../../../util/components-util/lazy-load-compon
 import { ArticleGridWarehouseViewComponent } from "./article-grid-warehouse-view/article-grid-warehouse-view.component";
 import { ArticleListViewComponent } from "./article-list-view/article-list-view.component";
 import { MatDialog } from "@angular/material/dialog";
-import { WarehouseBehaviorService } from "../../../../service/util/warehouse-behavior.service";
 import { ArticleCategoryGridViewComponent } from "./article-category-grid-view/article-category-grid-view.component";
+import { BehaviorService } from "../../../../service/util/behavior.service";
 
 @Component({
   selector: "app-articles",
@@ -31,8 +31,8 @@ export class ArticlesComponent implements OnInit {
     private warehouseStore: Store<{ warehouse: WarehouseState }>,
     private resolver: ComponentFactoryResolver,
     private dialog: MatDialog,
-    private warehouseBehaviorService: WarehouseBehaviorService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private behaviorService: BehaviorService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   loadArticleListView(): void {
-    this.warehouseBehaviorService.reset();
+    this.behaviorService.reset();
     const articleListViewComponentComponentRef: ComponentRef<ArticleListViewComponent> =
       loadComponent(ArticleListViewComponent, this.entry, this.resolver);
   }

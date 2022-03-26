@@ -160,12 +160,6 @@ export const ARTICLE_BEFORE_PURCHASE_TABLE: Column[] = [
 ];
 export const DELIVERY_NOTE_TABLE: Column[] = [
   {
-    name: "date",
-    displayedName: "Datum otpremnice",
-    value: "dateOfDeliveryNote",
-    columnType: "GENERIC",
-  },
-  {
     name: "gross",
     displayedName: "Ukupno",
     value: "gross",

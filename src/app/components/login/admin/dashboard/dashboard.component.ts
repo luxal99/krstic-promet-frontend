@@ -26,6 +26,8 @@ export class DashboardComponent
   implements OnInit, AfterViewInit, AfterViewChecked
 {
   @ViewChild("overviewButton") overviewButtonTemplate!: TemplateRef<any>;
+
+  @ViewChild("dateColumn") dateTemplateRef!: TemplateRef<any>;
   listOfUnPaidDeliveryNotes: DeliveryNote[] = [];
   listOfUnDeliveredDeliveryNotes: DeliveryNote[] = [];
 
@@ -43,6 +45,13 @@ export class DashboardComponent
 
   ngAfterViewInit(): void {
     this.deliveryNoteTableConfig = [
+      {
+        name: "date",
+        displayedName: "Datum otpremnice",
+        value: "",
+        columnType: "CUSTOM",
+        templateRef: this.dateTemplateRef,
+      },
       ...this.deliveryNoteTableConfig,
       {
         name: "overviewBtn",

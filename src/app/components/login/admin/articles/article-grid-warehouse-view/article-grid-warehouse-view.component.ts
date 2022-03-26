@@ -9,9 +9,9 @@ import {
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { WarehouseState } from "../../../../../store/reducers/warehouse.reducer";
-import { WarehouseBehaviorService } from "../../../../../service/util/warehouse-behavior.service";
 import { loadComponent } from "../../../../../util/components-util/lazy-load-component";
 import { ArticleListViewComponent } from "../article-list-view/article-list-view.component";
+import { BehaviorService } from "../../../../../service/util/behavior.service";
 
 @Component({
   selector: "app-article-grid-warehouse-view",
@@ -27,20 +27,17 @@ export class ArticleGridWarehouseViewComponent implements OnInit {
   constructor(
     private warehouseStore: Store<{ warehouse: WarehouseState }>,
     private resolver: ComponentFactoryResolver,
-    private warehouseBehaviorService: WarehouseBehaviorService
+    private behaviorService: BehaviorService
   ) {}
 
   ngOnInit(): void {}
 
   selectWarehouse(id: number) {
-    this.warehouseBehaviorService.add(id);
+    this.behaviorService.add({ id, filterType: "WAREHOUSE" });
     this.loadArticleWarehouseView();
   }
 
   loadArticleWarehouseView(): void {
-    const articleListViewComponentComponentRef: ComponentRef<ArticleListViewComponent> =
-      loadComponent(ArticleListViewComponent, this.entry, this.resolver);
-    articleListViewComponentComponentRef.instance.behaviorService =
-      this.warehouseBehaviorService;
+    loadComponent(ArticleListViewComponent, this.entry, this.resolver);
   }
 }

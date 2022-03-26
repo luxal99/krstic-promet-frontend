@@ -3,13 +3,12 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  Input,
   OnInit,
   TemplateRef,
   ViewChild,
 } from "@angular/core";
 import { ARTICLE_TABLE } from "../../../../../constant/table-config/table-config";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
 import { ArticleState } from "../../../../../store/reducers/article.reducer";
 import {
@@ -17,8 +16,6 @@ import {
   distinctUntilChanged,
   filter,
   map,
-  switchMap,
-  tap,
 } from "rxjs/operators";
 import { FormBuilderConfig } from "../../../../../util/form-components/models/FormBuilderConfig";
 import { FormControlNames } from "../../../../../constant/constant";
@@ -38,6 +35,7 @@ import { ArticleService } from "../../../../../service/article.service";
 import { SpinnerService } from "../../../../../util/spinner/spinner.service";
 import { MatSpinner } from "@angular/material/progress-spinner";
 import { ResponsiveService } from "../../../../../service/util/responsive.service";
+import { BehaviorFilterModel } from "../../../../../service/util/model/BehaviorFilterModel";
 
 @Component({
   selector: "app-article-list-view",
@@ -53,7 +51,6 @@ export class ArticleListViewComponent
   @ViewChild("spinner")
   spinner!: MatSpinner;
 
-  @Input() behaviorService!: BehaviorService;
   listOfArticle$: Observable<any> = this.articleStore.select(
     (state) => state.articles.list
   );
@@ -95,11 +92,11 @@ export class ArticleListViewComponent
     private cdRef: ChangeDetectorRef,
     private articleService: ArticleService,
     private spinnerService: SpinnerService,
-    public responsiveService: ResponsiveService
+    public responsiveService: ResponsiveService,
+    private behaviorService: BehaviorService
   ) {}
 
   ngOnInit(): void {
-    this.getQuery();
     this.initArticleSubCategorySelect();
     this.initWarehouseSelect();
     this.initConversionSelect();
@@ -116,6 +113,7 @@ export class ArticleListViewComponent
         displayedName: "",
       },
     ];
+    this.getQuery();
     this.searchForArticle();
   }
 
@@ -124,26 +122,27 @@ export class ArticleListViewComponent
   }
 
   getQuery() {
-    this.listOfArticle$.subscribe((resp) => {});
-    if (this.behaviorService) {
-      const id = this.behaviorService.get();
-      if (
-        this.behaviorService.constructor.name === "WarehouseBehaviorService"
-      ) {
-        this.listOfArticle$ = this.listOfArticle$.pipe(
-          map((value) =>
-            value.filter((item: any) => item.idWarehouse.id === id)
-          )
-        );
-      } else if (
-        this.behaviorService.constructor.name ===
-        "ArticleSubCategoryBehaviorService"
-      ) {
-        this.listOfArticle$ = this.listOfArticle$.pipe(
-          map((value) =>
-            value.filter((item: any) => item.idArticleSubCategory.id === id)
-          )
-        );
+    if (this.behaviorService.get().filterType) {
+      const filterModel: BehaviorFilterModel = this.behaviorService.get();
+      switch (filterModel.filterType) {
+        case "WAREHOUSE":
+          this.listOfArticle$ = this.listOfArticle$.pipe(
+            map((value) =>
+              value.filter(
+                (item: any) => item.idWarehouse.id === filterModel.id
+              )
+            )
+          );
+          break;
+        case "ARTICLE_SUB_CATEGORY":
+          this.listOfArticle$ = this.listOfArticle$.pipe(
+            map((value) =>
+              value.filter(
+                (item: any) => item.idArticleSubCategory.id === filterModel.id
+              )
+            )
+          );
+          break;
       }
     }
   }

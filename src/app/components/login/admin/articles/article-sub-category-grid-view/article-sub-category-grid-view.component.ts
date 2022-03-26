@@ -12,9 +12,9 @@ import { Store } from "@ngrx/store";
 import { WarehouseState } from "../../../../../store/reducers/warehouse.reducer";
 import { loadComponent } from "../../../../../util/components-util/lazy-load-component";
 import { ArticleListViewComponent } from "../article-list-view/article-list-view.component";
-import { ArticleSubCategoryBehaviorService } from "../../../../../service/util/article-sub-category-behavior.service";
 import { map } from "rxjs/operators";
-import { ArticleCategoryBehaviorService } from "../../../../../service/util/article-category-behavior.service";
+import { BehaviorService } from "../../../../../service/util/behavior.service";
+import { BehaviorFilterModel } from "../../../../../service/util/model/BehaviorFilterModel";
 
 @Component({
   selector: "app-article-sub-category-grid-view",
@@ -31,8 +31,7 @@ export class ArticleSubCategoryGridViewComponent implements OnInit {
   constructor(
     private articleSubCategory: Store<{ articleSubCategory: WarehouseState }>,
     private resolver: ComponentFactoryResolver,
-    private articleSubCategoryBehaviorService: ArticleSubCategoryBehaviorService,
-    private articleCategoryBehaviorService: ArticleCategoryBehaviorService
+    private behaviorService: BehaviorService
   ) {}
 
   ngOnInit(): void {
@@ -40,10 +39,10 @@ export class ArticleSubCategoryGridViewComponent implements OnInit {
   }
 
   filterArticleCategories() {
-    const id = this.articleCategoryBehaviorService.get();
+    const filterData: BehaviorFilterModel = this.behaviorService.get();
     this.listOfArticleSubCategories$ = this.listOfArticleSubCategories$.pipe(
       map((value) =>
-        value.filter((item: any) => item.idArticleCategory.id === id)
+        value.filter((item: any) => item.idArticleCategory.id === filterData.id)
       )
     );
   }
@@ -51,12 +50,10 @@ export class ArticleSubCategoryGridViewComponent implements OnInit {
   loadArticleSubCategoryView(): void {
     const articleListViewComponentComponentRef: ComponentRef<ArticleListViewComponent> =
       loadComponent(ArticleListViewComponent, this.entry, this.resolver);
-    articleListViewComponentComponentRef.instance.behaviorService =
-      this.articleSubCategoryBehaviorService;
   }
 
   selectArticleSubCategory(id: number) {
-    this.articleSubCategoryBehaviorService.add(id);
+    this.behaviorService.add({ id, filterType: "ARTICLE_SUB_CATEGORY" });
     this.loadArticleSubCategoryView();
   }
 }

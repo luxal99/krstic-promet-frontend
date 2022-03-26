@@ -47,6 +47,7 @@ export class GenericDeliveryNoteOverviewComponent
     AfterContentChecked
 {
   @ViewChild("options") optionsTemplateRef!: TemplateRef<any>;
+  @ViewChild("dateColumn") dateTemplateRef!: TemplateRef<any>;
   @ViewChild("paidStatusColumn") paidStatusColumnTemplateRef!: TemplateRef<any>;
   @Input() listOfDeliveryNotes: DeliveryNote[] = [];
   @Input() startDate = "";
@@ -75,6 +76,13 @@ export class GenericDeliveryNoteOverviewComponent
 
   ngAfterViewInit(): void {
     this.tableConfig = [
+      {
+        name: "date",
+        displayedName: "Datum otpremnice",
+        value: "",
+        columnType: "CUSTOM",
+        templateRef: this.dateTemplateRef,
+      },
       ...this.tableConfig,
       {
         name: "paidStatus",
