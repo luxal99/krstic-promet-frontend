@@ -36,6 +36,7 @@ import { SpinnerService } from "../../../../../util/spinner/spinner.service";
 import { MatSpinner } from "@angular/material/progress-spinner";
 import { ResponsiveService } from "../../../../../service/util/responsive.service";
 import { BehaviorFilterModel } from "../../../../../service/util/model/BehaviorFilterModel";
+import { ClientService } from "../../../../../service/client.service";
 
 @Component({
   selector: "app-article-list-view",

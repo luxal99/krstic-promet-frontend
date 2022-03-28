@@ -37,6 +37,8 @@ import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 import { ArticleConfirmDialogData } from "../../../../../models/dto/ArticleConfirmDialogData";
 import { openToastNotification } from "../../../../../util/toast-notification/openToastNotification";
 import { DeliveryNoteArticleService } from "../../../../../service/delivery-note-article.service";
+import { Observable, of } from "rxjs";
+import { ClientService } from "../../../../../service/client.service";
 
 @Component({
   selector: "app-add-delivery-note",
@@ -56,8 +58,7 @@ export class AddDeliveryNoteComponent
 
   articleTableDisplayedColumns = ARTICLE_TABLE;
 
-  public listOfClients$ = this.clientStore.select((state) => state.client.list);
-
+  public listOfClients$!: Observable<Client[]>;
   deliveryNoteForm = new FormGroup({
     idClient: new FormControl(""),
     gross: new FormControl("", Validators.required),
@@ -90,9 +91,7 @@ export class AddDeliveryNoteComponent
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DeliveryNote,
-    private clientStore: Store<{
-      client: ClientState;
-    }>,
+
     private articleStore: Store<{
       articles: ArticleState;
     }>,
@@ -103,11 +102,13 @@ export class AddDeliveryNoteComponent
     private cdRef: ChangeDetectorRef,
     private spinnerService: SpinnerService,
     private deliveryNoteArticleService: DeliveryNoteArticleService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private clientService: ClientService
   ) {}
 
   ngAfterViewInit(): void {
     this.searchForArticle();
+    this.searchClient();
     this.articleTableDisplayedColumns = [
       ...this.articleTableDisplayedColumns,
       {
@@ -152,6 +153,33 @@ export class AddDeliveryNoteComponent
     }
   }
 
+  searchClient() {
+    this.deliveryNoteForm
+      .get(FormControlNames.ID_CLIENT)
+      ?.valueChanges.pipe(
+        filter((inputValue) => {
+          if (inputValue.length > 3) {
+            this.spinnerService.show(this.spinner);
+            return inputValue;
+          } else {
+            this.spinnerService.hide(this.spinner);
+          }
+        }),
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+      .subscribe((resp) => {
+        if (resp) {
+          this.listOfClients$ = this.clientService.searchClient(
+            resp.toLocaleLowerCase()
+          );
+          this.spinnerService.hide(this.spinner);
+        } else {
+          this.listOfClients$ = of([]);
+          this.spinnerService.hide(this.spinner);
+        }
+      });
+  }
   addArticle(article: Article | any, amountInputValue?: any): void {
     let isArticleExistingInArray: SelectedArticleDto | undefined =
       this.listOfSelectedArticles.find((item) => article.id === item.id);

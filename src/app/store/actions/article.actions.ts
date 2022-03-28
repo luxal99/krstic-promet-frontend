@@ -1,5 +1,6 @@
 import { Action } from "@ngrx/store";
 import { Article } from "../../models/article";
+import { PaginationDto } from "../../models/dto/PaginationDto";
 
 export enum ArticleActionTypes {
   ADD_ARTICLE = "[ARTICLE] Add Item",

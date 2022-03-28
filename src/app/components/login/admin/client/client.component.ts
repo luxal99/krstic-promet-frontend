@@ -13,17 +13,25 @@ import { ClientState } from "../../../../store/reducers/client.reducer";
 import { CLIENT_TABLE } from "../../../../constant/table-config/table-config";
 import { FormBuilderConfig } from "../../../../util/form-components/models/FormBuilderConfig";
 import { FormControlNames } from "../../../../constant/constant";
-import { Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { clientStoreConfig } from "../../../../store/config/StoreConfig";
 import { openDialog } from "../../../../util/modal/OpeningModal";
 import { FormBuilderComponent } from "../../../../util/form-components/form-builder/form-builder.component";
 import { setDialogConfig } from "../../../../util/modal/DialogConfig";
 import { MatDialog } from "@angular/material/dialog";
 import { openConfirmDialog } from "../../../../util/confirm-dialog/config/confirm-dialog-config";
-import { ConfirmDialogComponent } from "../../../../util/confirm-dialog/confirm-dialog.component";
 import { DeleteClientAction } from "../../../../store/actions/client.actions";
 import { ClientOverviewDialogComponent } from "./client-overview-dialog/client-overview-dialog.component";
 import { ResponsiveService } from "../../../../service/util/responsive.service";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  switchMap,
+} from "rxjs/operators";
+import { SpinnerService } from "../../../../util/spinner/spinner.service";
+import { ClientService } from "../../../../service/client.service";
+import { MatSpinner } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-client",
@@ -34,10 +42,14 @@ export class ClientComponent
   implements OnInit, AfterViewInit, AfterViewChecked
 {
   @ViewChild("optionButtonsColumn") optionButtonsTemplateRef!: TemplateRef<any>;
+  @ViewChild("spinner") spinner!: MatSpinner;
   listOfClients$: Observable<any> = this.clientStore.select(
     (state) => state.client.list
   );
 
+  searchForm = new FormGroup({
+    search: new FormControl(),
+  });
   clientTableConfig = CLIENT_TABLE;
 
   clientDialogConfig: FormBuilderConfig = {
@@ -78,7 +90,9 @@ export class ClientComponent
     }>,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    public responsiveService: ResponsiveService
+    public responsiveService: ResponsiveService,
+    private spinnerService: SpinnerService,
+    private clientService: ClientService
   ) {}
 
   ngAfterViewInit(): void {
@@ -92,6 +106,7 @@ export class ClientComponent
         templateRef: this.optionButtonsTemplateRef,
       },
     ];
+    this.searchClient();
   }
 
   ngAfterViewChecked(): void {
@@ -133,5 +148,31 @@ export class ClientComponent
     openConfirmDialog(this.dialog, () => {
       this.clientStore.dispatch(new DeleteClientAction(id));
     });
+  }
+
+  searchClient() {
+    this.searchForm
+      .get(FormControlNames.SEARCH)
+      ?.valueChanges.pipe(
+        map((value) => {
+          this.spinnerService.show(this.spinner);
+          return value;
+        }),
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+      .subscribe((resp) => {
+        if (resp) {
+          this.listOfClients$ = this.clientService.searchClient(
+            resp.toLocaleLowerCase()
+          );
+          this.spinnerService.hide(this.spinner);
+        } else {
+          this.listOfClients$ = this.clientStore.select(
+            (state) => state.client.list
+          );
+          this.spinnerService.hide(this.spinner);
+        }
+      });
   }
 }

@@ -12,7 +12,20 @@ export class ClientService extends GenericService<Client> {
   constructor(http: HttpClient) {
     super(http, "/client/");
   }
+
   findDeliveryNotesByClientId(id: number): Observable<DeliveryNote[]> {
     return this.http.get<DeliveryNote[]>(this.route + "delivery-notes/" + id);
+  }
+
+  getAll(q: string): Observable<Client[]> {
+    return this.http.get<Client[]>(this.route, {
+      params: { q },
+    });
+  }
+
+  searchClient(searchText: string): Observable<Client[]> {
+    return this.http.get<Client[]>(this.route + "search", {
+      params: { search: searchText },
+    });
   }
 }

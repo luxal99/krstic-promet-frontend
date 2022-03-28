@@ -24,10 +24,9 @@ export class GenericService<T> {
     });
   }
 
-  getAll(params?: any): Observable<T[]> {
+  getAll(q?: any): Observable<T[]> {
     return this.http.get<T[]>(`${this.route}`, {
       responseType: "json",
-      params,
     });
   }
 

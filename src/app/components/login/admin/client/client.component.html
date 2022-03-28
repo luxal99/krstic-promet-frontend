@@ -1,34 +1,51 @@
 <div class="component">
-  <div class="text-right">
-    <button class="primary-btn" mat-button (click)="openAddDialog()">
-      Dodaj
-    </button>
-  </div>
-  <div [class.overflow-scroll]="responsiveService.isMobile.value">
-    <generic-material-table
-            [dataSource]="listOfClients$ | async"
-            [displayedColumns]="clientTableConfig"
-    >
-      <ng-template #optionButtonsColumn let-element>
-        <div class="text-right">
-          <button
-                  mat-button
-                  color="primary"
-                  (click)="openClientOverview(element)"
-          >
-            <mat-icon>visibility</mat-icon>
-            Pregled
-          </button>
-          <button mat-button color="accent" (click)="openAddDialog(element)">
-            <mat-icon>edit</mat-icon>
-            Izmeni
-          </button>
-          <button mat-button color="warn" (click)="deleteClient(element.id)">
-            <mat-icon>delete</mat-icon>
-            Obriši
-          </button>
+    <div class="row">
+        <div class="col-sm">
+            <div [formGroup]="searchForm">
+                <mat-form-field appearance="standard">
+                    <mat-label>Pretraži</mat-label>
+                    <input matInput formControlName="search">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
         </div>
-      </ng-template>
-    </generic-material-table>
-  </div>
+        <div class="col-sm text-right">
+            <button class="primary-btn" mat-button (click)="openAddDialog()">
+                Dodaj
+            </button>
+
+        </div>
+    </div>
+    <div class="m-auto">
+        <mat-spinner #spinner diameter="25"></mat-spinner>
+    </div>
+    <div [class.overflow-scroll]="responsiveService.isMobile.value">
+        <generic-material-table
+                [dataSource]="listOfClients$ | async"
+                [displayedColumns]="clientTableConfig"
+        >
+            <ng-template #optionButtonsColumn let-element>
+                <div class="text-right">
+                    <button
+                            mat-button
+                            color="primary"
+                            (click)="openClientOverview(element)"
+                    >
+                        <mat-icon>visibility</mat-icon>
+                        Pregled
+                    </button>
+                    <button mat-button color="accent"
+                            (click)="openAddDialog(element)">
+                        <mat-icon>edit</mat-icon>
+                        Izmeni
+                    </button>
+                    <button mat-button color="warn"
+                            (click)="deleteClient(element.id)">
+                        <mat-icon>delete</mat-icon>
+                        Obriši
+                    </button>
+                </div>
+            </ng-template>
+        </generic-material-table>
+    </div>
 </div>

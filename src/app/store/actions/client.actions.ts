@@ -1,5 +1,6 @@
 import { Action } from "@ngrx/store";
 import { Client } from "../../models/client";
+import { PaginationDto } from "../../models/dto/PaginationDto";
 
 export enum ClientActionTypes {
   ADD_CLIENT = "[CLIENT] Add Item",
@@ -38,6 +39,8 @@ export class DeleteClientSuccessfullyAction implements Action {
 
 export class GetClientAction implements Action {
   type = ClientActionTypes.GET_CLIENT;
+
+  constructor(public pagination: PaginationDto) {}
 }
 
 export class GetClientActionSuccessfully implements Action {

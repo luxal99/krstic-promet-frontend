@@ -14,8 +14,8 @@ export class ClientEffect {
   loadClient = createEffect(() =>
     this.actions$.pipe(
       ofType(ClientActionTypes.GET_CLIENT),
-      mergeMap(() =>
-        this.articleService.getAll().pipe(
+      mergeMap((data) =>
+        this.articleService.getAll(encodeURI(JSON.stringify(data))).pipe(
           map((articleCategories) => ({
             type: ClientActionTypes.GET_CLIENT_SUCCESSFULLY,
             payload: articleCategories,
