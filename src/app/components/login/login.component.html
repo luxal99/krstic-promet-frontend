@@ -21,7 +21,7 @@
           [config]="passwordInputConfig"
           [group]="loginForm"
         ></app-form-input>
-        <button class="outlined-btn mt-3" style="margin-right: 1em" mat-button (click)="openRegistrationButton()">
+        <button class="outlined-btn mt-3"  mat-button (click)="openRegistrationButton()">
           Registracija
         </button>
         <button [disabled]="!loginForm.valid" class="primary-btn mt-3" mat-button (click)="auth()">
