@@ -1,39 +1,51 @@
 <generic-material-table
-        [dataSource]="listOfDeliveryNotes"
-        [displayedColumns]="tableConfig"
+  [dataSource]="listOfDeliveryNotes"
+  [displayedColumns]="tableConfig"
 >
-    <ng-template #dateColumn let-element>
-        <h3 class="mt-3">{{element.dateOfDeliveryNote | date}}</h3>
-    </ng-template>
-    <ng-template #options let-element>
-        <div class="text-right">
-            <button
-                    mat-button
-                    color="primary"
-                    (click)="openDeliveryNoteOverview(element)"
-            >
-                <mat-icon>visibility</mat-icon>
-                Pregled
-            </button>
-            <button mat-button color="accent"
-                    (click)="openEditDeliveryNote(element)">
-                <mat-icon>edit</mat-icon>
-                Izmeni
-            </button>
-            <button mat-button color="warn"
-                    (click)="deleteDeliveryNote(element.id)">
-                <mat-icon>delete</mat-icon>
-                Obriši
-            </button>
-        </div>
-    </ng-template>
-    <ng-template #paidStatusColumn let-element>
-        <div [class]="element.paidStatus === 'PAID' ? 'paid-col' : 'not-paid-col'">
-            <mat-icon>
-                {{ element.paidStatus === "PAID" ? "check" : "close" }}
-            </mat-icon>
-        </div>
-    </ng-template>
+  <ng-template #dateColumn let-element>
+    <h3 class="mt-3">{{ element.dateOfDeliveryNote | date }}</h3>
+  </ng-template>
+  <ng-template #options let-element>
+    <div class="text-right">
+      <button
+        mat-button
+        color="primary"
+        (click)="openDeliveryNoteOverview(element)"
+      >
+        <mat-icon>visibility</mat-icon>
+        Pregled
+      </button>
+      <button mat-button color="accent" (click)="openEditDeliveryNote(element)">
+        <mat-icon>edit</mat-icon>
+        Izmeni
+      </button>
+      <button mat-button color="warn" (click)="deleteDeliveryNote(element.id)">
+        <mat-icon>delete</mat-icon>
+        Obriši
+      </button>
+    </div>
+  </ng-template>
+  <ng-template #paidStatusColumn let-element>
+    <div [class]="element.paidStatus === 'PAID' ? 'paid-col' : 'not-paid-col'">
+      <mat-icon>
+        {{ element.paidStatus === "PAID" ? "check" : "close" }}
+      </mat-icon>
+    </div>
+  </ng-template>
+  <ng-template #deliveryStatusColumn let-element>
+    <div
+      [class]="
+        element.deliveryStatus === 'DELIVERED' ? 'paid-col' : 'not-paid-col'
+      "
+    >
+      <mat-icon>
+        {{ element.deliveryStatus === "DELIVERED" ? "check" : "close" }}
+      </mat-icon>
+    </div>
+  </ng-template>
 </generic-material-table>
-<mat-paginator [pageSizeOptions]="[5,10,15]" (page)="getDeliveryNotes($event)"
-[length]="pagination.dataCount"></mat-paginator>
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 15]"
+  (page)="getDeliveryNotes($event)"
+  [length]="pagination.dataCount"
+></mat-paginator>

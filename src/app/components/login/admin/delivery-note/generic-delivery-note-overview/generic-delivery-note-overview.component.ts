@@ -49,6 +49,8 @@ export class GenericDeliveryNoteOverviewComponent
   @ViewChild("options") optionsTemplateRef!: TemplateRef<any>;
   @ViewChild("dateColumn") dateTemplateRef!: TemplateRef<any>;
   @ViewChild("paidStatusColumn") paidStatusColumnTemplateRef!: TemplateRef<any>;
+  @ViewChild("deliveryStatusColumn")
+  deliveryStatusColumnTemplateRef!: TemplateRef<any>;
   @Input() listOfDeliveryNotes: DeliveryNote[] = [];
   @Input() startDate = "";
   @Input() endDate = "";
@@ -90,6 +92,13 @@ export class GenericDeliveryNoteOverviewComponent
         templateRef: this.paidStatusColumnTemplateRef,
         columnType: "CUSTOM",
         displayedName: "Status plaćanja",
+      },
+      {
+        name: "deliveryStatus",
+        value: "",
+        templateRef: this.deliveryStatusColumnTemplateRef,
+        columnType: "CUSTOM",
+        displayedName: "Status isporuke",
       },
       {
         name: "option",
