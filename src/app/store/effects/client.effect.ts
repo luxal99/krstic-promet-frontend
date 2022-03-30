@@ -15,7 +15,8 @@ export class ClientEffect {
     this.actions$.pipe(
       ofType(ClientActionTypes.GET_CLIENT),
       mergeMap((data) =>
-        this.articleService.getAll(encodeURI(JSON.stringify(data))).pipe(
+        // @ts-ignore
+        this.articleService.getAll(data.pagination).pipe(
           map((articleCategories) => ({
             type: ClientActionTypes.GET_CLIENT_SUCCESSFULLY,
             payload: articleCategories,

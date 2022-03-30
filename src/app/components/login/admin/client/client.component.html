@@ -47,5 +47,6 @@
                 </div>
             </ng-template>
         </generic-material-table>
+        <mat-paginator (page)="getClientByPage($event)" [pageSizeOptions]="[10]" [length]="11"></mat-paginator>
     </div>
 </div>

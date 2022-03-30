@@ -4,6 +4,7 @@ import { Client } from "../models/client";
 import { HttpClient } from "@angular/common/http";
 import { DeliveryNote } from "../models/delivery-note";
 import { Observable } from "rxjs";
+import { PaginationDto } from "../models/dto/PaginationDto";
 
 @Injectable({
   providedIn: "root",
@@ -17,9 +18,9 @@ export class ClientService extends GenericService<Client> {
     return this.http.get<DeliveryNote[]>(this.route + "delivery-notes/" + id);
   }
 
-  getAll(q: string): Observable<Client[]> {
+  getAll(q: PaginationDto): Observable<Client[]> {
     return this.http.get<Client[]>(this.route, {
-      params: { q },
+      params: { q: JSON.stringify({ pagination: q }) },
     });
   }
 

@@ -32,6 +32,7 @@ import {
 import { SpinnerService } from "../../../../util/spinner/spinner.service";
 import { ClientService } from "../../../../service/client.service";
 import { MatSpinner } from "@angular/material/progress-spinner";
+import { PageEvent } from "@angular/material/paginator/paginator";
 
 @Component({
   selector: "app-client",
@@ -174,5 +175,11 @@ export class ClientComponent
           this.spinnerService.hide(this.spinner);
         }
       });
+  }
+  getClientByPage(pagination: PageEvent) {
+    this.listOfClients$ = this.clientService.getAll({
+      page: pagination.pageIndex,
+      rows: pagination.pageSize,
+    });
   }
 }
