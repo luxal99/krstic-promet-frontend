@@ -17,6 +17,10 @@ import { SpinnerService } from "../../../../../util/spinner/spinner.service";
 export class ClientOverviewDialogComponent implements OnInit {
   @ViewChild("spinner") spinner!: MatSpinner;
   listOfDeliveryNotes: DeliveryNote[] = [];
+
+  totalDebt = 0;
+  totalPaid = 0;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Client,
     private dialog: MatDialog,
@@ -26,6 +30,8 @@ export class ClientOverviewDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.findDeliveryNotes();
+    this.getTotalClientDebt();
+    this.getTotalClientPaid();
   }
 
   findDeliveryNotes(): void {
@@ -35,6 +41,18 @@ export class ClientOverviewDialogComponent implements OnInit {
         this.listOfDeliveryNotes = resp;
         this.spinnerService.hide(this.spinner);
       });
+  }
+
+  getTotalClientDebt() {
+    this.clientService.getTotalDebtForClient(this.data.id).subscribe((resp) => {
+      this.totalDebt = resp.totalDebt;
+    });
+  }
+
+  getTotalClientPaid() {
+    this.clientService.getTotalPaidForClient(this.data.id).subscribe((resp) => {
+      this.totalPaid = resp.totalPaid;
+    });
   }
 
   openDeliveryNoteOverviewDialog(data: DeliveryNote) {

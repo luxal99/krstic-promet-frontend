@@ -8,3 +8,36 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px
 mat-spinner
   margin: 2em auto
+.debt
+  padding: 1em
+  border-radius: 8px
+  background-color: #f52c2c
+  h3
+    color: #fff
+    margin: 0 !important
+.paid
+  @extend .debt
+  background-color: $secondary
+  margin-top: 1em
+.row
+  .col-6
+    position: relative
+.paid-col
+  text-align: center
+  font-weight: bold
+  background-color: $secondary
+  color: white
+  border-radius: 8px
+  width: 25px
+  height: 25px
+  border-radius: 50%
+
+  position: absolute
+  right: 1rem
+  mat-icon
+    width: 25px
+    height: 25px
+
+.not-paid-col
+  @extend .paid-col
+  background-color: #f52c2c
