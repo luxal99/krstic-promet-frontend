@@ -12,6 +12,7 @@ import { PaginationDto } from "../../../../../models/dto/PaginationDto";
 import { DateQueryDto } from "../../../../../models/dto/DateQueryDto";
 import { PaginationData } from "../../../../../models/dto/PaginationData";
 import { ClientDateFilterDialogComponent } from "./client-date-filter-dialog/client-date-filter-dialog.component";
+import { PageEvent } from "@angular/material/paginator/paginator";
 
 @Component({
   selector: "app-client-overview-dialog",
@@ -22,7 +23,7 @@ export class ClientOverviewDialogComponent implements OnInit {
   @ViewChild("spinner") spinner!: MatSpinner;
   listOfDeliveryNotes: DeliveryNote[] = [];
 
-  pagination: PaginationDto = { page: 0, rows: 0 };
+  pagination: PaginationDto = { page: 0, rows: 6 };
   paginationData: PaginationData = { dataCount: 0 };
 
   totalDebt = 0;
@@ -41,7 +42,13 @@ export class ClientOverviewDialogComponent implements OnInit {
     this.getTotalClientPaid();
   }
 
-  findDeliveryNotes(dateQueryDto?: DateQueryDto): void {
+  findDeliveryNotes(pagination?: PageEvent, dateQueryDto?: DateQueryDto): void {
+    if (pagination) {
+      this.pagination = {
+        page: pagination.pageIndex,
+        rows: pagination.pageSize,
+      };
+    }
     this.clientService
       .findDeliveryNotesByClientId(this.data.id, {
         pagination: this.pagination,
