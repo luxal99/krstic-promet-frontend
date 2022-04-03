@@ -31,6 +31,7 @@ export function ClientReducer(
         ...state,
         //@ts-ignore
         list: [...state.list, action.payload],
+        pagination: { dataCount: state.pagination.dataCount + 1 },
         loading: false,
       };
 

@@ -135,15 +135,7 @@ export class ClientComponent
         data: this.clientDialogConfig,
       }),
       this.dialog
-    )
-      .afterClosed()
-      .subscribe((resp) => {
-        this.paginationData
-          .pipe(map((pagination) => ({ dataCount: pagination.dataCount + 1 })))
-          .subscribe((resp) => {
-            this.paginationData = of(resp);
-          });
-      });
+    );
   }
 
   openClientOverview(client: any) {
