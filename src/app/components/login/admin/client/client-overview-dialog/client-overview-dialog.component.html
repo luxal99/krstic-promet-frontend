@@ -16,6 +16,11 @@
   </div>
 </div>
 <mat-spinner #spinner diameter="25"></mat-spinner>
+<div class="text-right">
+  <button mat-mini-fab color="primary" class="m-4" (click)="openDateFilterDialog()">
+    <mat-icon style="color: white" >filter_alt</mat-icon>
+  </button>
+</div>
 <div class="row">
   <div class="col-sm-6" *ngFor="let deliveryNote of listOfDeliveryNotes">
     <div class="row client-delivery-note-card">
@@ -36,4 +41,5 @@
     </div>
 
   </div>
+  <mat-paginator [length]="paginationData.dataCount" ></mat-paginator>
 </div>

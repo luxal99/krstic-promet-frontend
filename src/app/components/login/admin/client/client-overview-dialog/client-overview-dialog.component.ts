@@ -8,6 +8,10 @@ import { setDialogConfig } from "../../../../../util/modal/DialogConfig";
 import { ClientService } from "../../../../../service/client.service";
 import { MatSpinner } from "@angular/material/progress-spinner";
 import { SpinnerService } from "../../../../../util/spinner/spinner.service";
+import { PaginationDto } from "../../../../../models/dto/PaginationDto";
+import { DateQueryDto } from "../../../../../models/dto/DateQueryDto";
+import { PaginationData } from "../../../../../models/dto/PaginationData";
+import { ClientDateFilterDialogComponent } from "./client-date-filter-dialog/client-date-filter-dialog.component";
 
 @Component({
   selector: "app-client-overview-dialog",
@@ -17,6 +21,9 @@ import { SpinnerService } from "../../../../../util/spinner/spinner.service";
 export class ClientOverviewDialogComponent implements OnInit {
   @ViewChild("spinner") spinner!: MatSpinner;
   listOfDeliveryNotes: DeliveryNote[] = [];
+
+  pagination: PaginationDto = { page: 0, rows: 0 };
+  paginationData: PaginationData = { dataCount: 0 };
 
   totalDebt = 0;
   totalPaid = 0;
@@ -34,11 +41,17 @@ export class ClientOverviewDialogComponent implements OnInit {
     this.getTotalClientPaid();
   }
 
-  findDeliveryNotes(): void {
+  findDeliveryNotes(dateQueryDto?: DateQueryDto): void {
     this.clientService
-      .findDeliveryNotesByClientId(this.data.id)
+      .findDeliveryNotesByClientId(this.data.id, {
+        pagination: this.pagination,
+        dateQueryDto: dateQueryDto,
+      })
       .subscribe((resp) => {
-        this.listOfDeliveryNotes = resp;
+        this.listOfDeliveryNotes = resp.body;
+        this.paginationData.dataCount = Number.parseInt(
+          <string>resp.headers.get("total")
+        );
         this.spinnerService.hide(this.spinner);
       });
   }
@@ -64,5 +77,19 @@ export class ClientOverviewDialogComponent implements OnInit {
       }),
       this.dialog
     );
+  }
+
+  openDateFilterDialog() {
+    openDialog(
+      ClientDateFilterDialogComponent,
+      setDialogConfig({}),
+      this.dialog
+    )
+      .afterClosed()
+      .subscribe((resp) => {
+        if (resp) {
+          this.findDeliveryNotes(resp);
+        }
+      });
   }
 }

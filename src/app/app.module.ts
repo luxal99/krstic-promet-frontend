@@ -58,6 +58,7 @@ import { ArticleConfirmDialogComponent } from "./components/login/admin/delivery
 import { ToastNotificationComponent } from "./util/toast-notification/toast-notification/toast-notification.component";
 import { ClientOverviewDialogComponent } from "./components/login/admin/client/client-overview-dialog/client-overview-dialog.component";
 import { RegistrationDialogComponent } from './components/login/registration-dialog/registration-dialog.component';
+import { ClientDateFilterDialogComponent } from './components/login/admin/client/client-overview-dialog/client-date-filter-dialog/client-date-filter-dialog.component';
 
 // @ts-ignore
 @NgModule({
@@ -93,6 +94,7 @@ import { RegistrationDialogComponent } from './components/login/registration-dia
     ToastNotificationComponent,
     ClientOverviewDialogComponent,
     RegistrationDialogComponent,
+    ClientDateFilterDialogComponent,
   ],
   imports: [
     BrowserModule,
