@@ -36,7 +36,7 @@ import { SpinnerService } from "../../../../../util/spinner/spinner.service";
 import { MatSpinner } from "@angular/material/progress-spinner";
 import { ResponsiveService } from "../../../../../service/util/responsive.service";
 import { BehaviorFilterModel } from "../../../../../service/util/model/BehaviorFilterModel";
-import { ClientService } from "../../../../../service/client.service";
+import { PaginationData } from "../../../../../models/dto/PaginationData";
 
 @Component({
   selector: "app-article-list-view",
@@ -51,6 +51,10 @@ export class ArticleListViewComponent
 
   @ViewChild("spinner")
   spinner!: MatSpinner;
+
+  paginationData: Observable<PaginationData> = this.articleStore.select(
+    (state) => state.articles.pagination
+  );
 
   listOfArticle$: Observable<any> = this.articleStore.select(
     (state) => state.articles.list

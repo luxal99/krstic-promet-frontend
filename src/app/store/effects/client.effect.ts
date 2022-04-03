@@ -16,10 +16,13 @@ export class ClientEffect {
       ofType(ClientActionTypes.GET_CLIENT),
       mergeMap((data) =>
         // @ts-ignore
-        this.articleService.getAll(data.pagination).pipe(
-          map((articleCategories) => ({
+        this.articleService.getAllWithPagination(data.pagination).pipe(
+          map((response) => ({
             type: ClientActionTypes.GET_CLIENT_SUCCESSFULLY,
-            payload: articleCategories,
+            payload: response.body,
+            pagination: {
+              dataCount: Number.parseInt(<string>response.headers.get("total")),
+            },
           }))
         )
       )

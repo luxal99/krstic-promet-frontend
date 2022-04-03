@@ -341,7 +341,9 @@ export class AddDeliveryNoteComponent
                 this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
                   true
                 );
-                this.articleStore.dispatch(new GetArticleAction());
+                this.articleStore.dispatch(
+                  new GetArticleAction({ rows: 10, page: 0 })
+                );
               },
               () => {
                 openToastNotification(
@@ -367,7 +369,9 @@ export class AddDeliveryNoteComponent
                 this.updateDeliveryNoteBS.setValueForUpdateDeliveryNoteBehaviorSubject(
                   true
                 );
-                this.articleStore.dispatch(new GetArticleAction());
+                this.articleStore.dispatch(
+                  new GetArticleAction({ rows: 10, page: 0 })
+                );
               },
               () => {
                 openToastNotification(

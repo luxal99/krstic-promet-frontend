@@ -56,7 +56,7 @@ export class GenericDeliveryNoteOverviewComponent
   @Input() endDate = "";
   tableConfig = DELIVERY_NOTE_TABLE;
 
-  pagination: PaginationData = { dataCount: 0, total: 0 };
+  pagination: PaginationData = { dataCount: 0 };
   dateFilter: ReplaySubject<SimpleChanges> = new ReplaySubject(10);
 
   constructor(
@@ -174,7 +174,7 @@ export class GenericDeliveryNoteOverviewComponent
     openConfirmDialog(this.dialog, () => {
       this.deliveryNoteService.delete(id).subscribe(() => {
         this.getDeliveryNotes();
-        this.articleStore.dispatch(new GetArticleAction());
+        this.articleStore.dispatch(new GetArticleAction({ rows: 10, page: 0 }));
         openToastNotification(
           {
             notificationType: "SUCCESS",

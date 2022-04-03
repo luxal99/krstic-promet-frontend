@@ -30,6 +30,6 @@
       </div>
     </ng-template>
   </generic-material-table>
-  <mat-paginator></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10]" [length]="(paginationData|async)?.dataCount"></mat-paginator>
 </div>
 </div>

@@ -39,6 +39,8 @@ export class DeleteArticleSuccessfullyAction implements Action {
 
 export class GetArticleAction implements Action {
   type = ArticleActionTypes.GET_ARTICLE;
+
+  constructor(public pagination: PaginationDto) {}
 }
 
 export class GetArticleActionSuccessfully implements Action {

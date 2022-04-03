@@ -1,8 +1,10 @@
 import { ArticleAction, ArticleActionTypes } from "../actions/article.actions";
 import { Article } from "../../models/article";
+import { PaginationData } from "../../models/dto/PaginationData";
 
 export interface ArticleState {
   list: Article[];
+  pagination: PaginationData;
   loading: boolean;
   error: any;
 }
@@ -11,6 +13,7 @@ const initialState: ArticleState = {
   list: [],
   loading: false,
   error: undefined,
+  pagination: { dataCount: 0 },
 };
 
 export function ArticleReducer(
@@ -28,6 +31,7 @@ export function ArticleReducer(
         ...state,
         //@ts-ignore
         list: [...state.list, action.payload],
+        pagination: { dataCount: state.pagination.dataCount + 1 },
         loading: false,
       };
 
@@ -54,6 +58,8 @@ export function ArticleReducer(
         ...state,
         //@ts-ignore
         list: action.payload,
+        //@ts-ignore
+        pagination: action.pagination,
         loading: false,
       };
 

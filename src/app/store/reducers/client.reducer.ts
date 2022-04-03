@@ -1,16 +1,19 @@
 import { ClientAction, ClientActionTypes } from "../actions/client.actions";
 import { Client } from "../../models/client";
+import { PaginationData } from "../../models/dto/PaginationData";
 
 export interface ClientState {
   list: Client[];
   loading: boolean;
   error: any;
+  pagination: PaginationData;
 }
 
 const initialState: ClientState = {
   list: [],
   loading: false,
   error: undefined,
+  pagination: { dataCount: 0 },
 };
 
 export function ClientReducer(
@@ -50,11 +53,15 @@ export function ClientReducer(
       };
 
     case ClientActionTypes.GET_CLIENT_SUCCESSFULLY:
+      //@ts-ignore
+      console.log(action.pagination);
       return {
         ...state,
         //@ts-ignore
         list: action.payload,
         loading: false,
+        //@ts-ignore
+        pagination: action.pagination,
       };
 
     case ClientActionTypes.UPDATE_CLIENT:

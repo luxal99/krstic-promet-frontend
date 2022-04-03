@@ -1,24 +1,29 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { map, mergeMap } from "rxjs/operators";
+import { map, mergeMap, tap } from "rxjs/operators";
 import { ArticleService } from "../../service/article.service";
 import { ArticleActionTypes } from "../actions/article.actions";
+import { ArticlePaginationService } from "../../service/util/article-pagination.service";
 
 @Injectable()
 export class ArticleEffect {
   constructor(
     private actions$: Actions,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private articlePaginationService: ArticlePaginationService
   ) {}
 
   loadArticle = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActionTypes.GET_ARTICLE),
-      mergeMap(() =>
-        this.articleService.getAll().pipe(
+      mergeMap((data: any) =>
+        this.articleService.getAllArticles(data.pagination).pipe(
           map((article) => ({
             type: ArticleActionTypes.GET_ARTICLE_SUCCESSFULLY,
-            payload: article,
+            payload: article.body,
+            pagination: {
+              dataCount: Number.parseInt(<string>article.headers.get("total")),
+            },
           }))
         )
       )

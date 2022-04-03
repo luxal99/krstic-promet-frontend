@@ -7,7 +7,7 @@ import {
   TemplateRef,
   ViewChild,
 } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Store } from "@ngrx/store";
 import { ClientState } from "../../../../store/reducers/client.reducer";
 import { CLIENT_TABLE } from "../../../../constant/table-config/table-config";
@@ -20,19 +20,23 @@ import { FormBuilderComponent } from "../../../../util/form-components/form-buil
 import { setDialogConfig } from "../../../../util/modal/DialogConfig";
 import { MatDialog } from "@angular/material/dialog";
 import { openConfirmDialog } from "../../../../util/confirm-dialog/config/confirm-dialog-config";
-import { DeleteClientAction } from "../../../../store/actions/client.actions";
+import {
+  DeleteClientAction,
+  GetClientAction,
+} from "../../../../store/actions/client.actions";
 import { ClientOverviewDialogComponent } from "./client-overview-dialog/client-overview-dialog.component";
 import { ResponsiveService } from "../../../../service/util/responsive.service";
 import {
   debounceTime,
   distinctUntilChanged,
   map,
-  switchMap,
+  mergeMap,
 } from "rxjs/operators";
 import { SpinnerService } from "../../../../util/spinner/spinner.service";
 import { ClientService } from "../../../../service/client.service";
 import { MatSpinner } from "@angular/material/progress-spinner";
 import { PageEvent } from "@angular/material/paginator/paginator";
+import { PaginationData } from "../../../../models/dto/PaginationData";
 
 @Component({
   selector: "app-client",
@@ -46,6 +50,10 @@ export class ClientComponent
   @ViewChild("spinner") spinner!: MatSpinner;
   listOfClients$: Observable<any> = this.clientStore.select(
     (state) => state.client.list
+  );
+
+  paginationData: Observable<PaginationData> = this.clientStore.select(
+    (state) => state.client.pagination
   );
 
   searchForm = new FormGroup({
@@ -129,7 +137,13 @@ export class ClientComponent
       this.dialog
     )
       .afterClosed()
-      .subscribe(() => {});
+      .subscribe((resp) => {
+        this.paginationData
+          .pipe(map((pagination) => ({ dataCount: pagination.dataCount + 1 })))
+          .subscribe((resp) => {
+            this.paginationData = of(resp);
+          });
+      });
   }
 
   openClientOverview(client: any) {
@@ -176,10 +190,13 @@ export class ClientComponent
         }
       });
   }
+
   getClientByPage(pagination: PageEvent) {
-    this.listOfClients$ = this.clientService.getAll({
-      page: pagination.pageIndex,
-      rows: pagination.pageSize,
-    });
+    this.clientStore.dispatch(
+      new GetClientAction({
+        page: pagination.pageIndex,
+        rows: pagination.pageSize,
+      })
+    );
   }
 }

@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { GenericService } from "./generic.service";
 import { Article } from "../models/article";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { PaginationDto } from "../models/dto/PaginationDto";
 
 @Injectable({
   providedIn: "root",
@@ -10,6 +11,14 @@ import { Observable } from "rxjs";
 export class ArticleService extends GenericService<Article> {
   constructor(http: HttpClient) {
     super(http, "/article/");
+  }
+
+  getAllArticles(pagination: PaginationDto): Observable<HttpResponse<any>> {
+    return this.http.get<HttpResponse<any>>(this.route, {
+      params: { q: JSON.stringify({ pagination }) },
+      responseType: "json",
+      observe: "response",
+    });
   }
 
   searchForRealEstate(searchText: string): Observable<Article[]> {

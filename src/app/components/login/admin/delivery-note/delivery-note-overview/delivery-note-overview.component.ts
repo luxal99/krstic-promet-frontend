@@ -169,7 +169,9 @@ export class DeliveryNoteOverviewComponent
             })
             .subscribe(
               (resp) => {
-                this.articleStore.dispatch(new GetArticleAction());
+                this.articleStore.dispatch(
+                  new GetArticleAction({ rows: 10, page: 0 })
+                );
                 openToastNotification(
                   {
                     notificationType: "SUCCESS",

@@ -9,7 +9,7 @@ import {
 } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { MatSpinner } from "@angular/material/progress-spinner";
 import { FormBuilderConfig } from "../models/FormBuilderConfig";
 import { SpinnerService } from "../../spinner/spinner.service";
@@ -48,7 +48,8 @@ export class FormBuilderComponent
     private fb: FormBuilder,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private snackBar: MatSnackBar,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private dialogRef: MatDialogRef<FormBuilderComponent>
   ) {}
 
   ngAfterViewChecked(): void {
@@ -71,6 +72,7 @@ export class FormBuilderComponent
       );
       SnackBarUtil.openSnackBar(this.snackBar, "Uspešno");
       this.spinnerService.hide(this.spinner);
+      this.dialogRef.close(true);
     } else {
       const obj = this.form.getRawValue();
       obj.id = this.configData.formValues.id;

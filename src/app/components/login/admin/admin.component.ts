@@ -47,7 +47,7 @@ export class AdminComponent implements OnInit {
     this.store.dispatch(new GetArticleCategoryAction());
     this.store.dispatch(new GetArticleSubCategoryAction());
     this.store.dispatch(new GetWarehouseAction());
-    this.store.dispatch(new GetArticleAction());
+    this.store.dispatch(new GetArticleAction({ rows: 10, page: 0 }));
     this.store.dispatch(new GetConversionAction());
     this.store.dispatch(new GetClientAction({ rows: 10, page: 0 }));
   }
