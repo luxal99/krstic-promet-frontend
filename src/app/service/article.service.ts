@@ -26,4 +26,25 @@ export class ArticleService extends GenericService<Article> {
       params: { search: encodeURI(searchText) },
     });
   }
+
+  getArticlesByWarehouse(
+    idWarehouse: number,
+    pagination: PaginationDto
+  ): Observable<Article[]> {
+    return this.http.get<Article[]>(this.route + "warehouse/" + idWarehouse, {
+      params: { q: JSON.stringify({ pagination }) },
+    });
+  }
+
+  getArticlesByArticleSubCategory(
+    idArticleSubCategory: number,
+    pagination: PaginationDto
+  ): Observable<Article[]> {
+    return this.http.get<Article[]>(
+      this.route + "warehouse/" + idArticleSubCategory,
+      {
+        params: { q: JSON.stringify({ pagination }) },
+      }
+    );
+  }
 }

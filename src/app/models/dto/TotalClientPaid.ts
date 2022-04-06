@@ -1,3 +1,3 @@
 export interface TotalClientPaid {
-	totalPaid:number;
+  totalPaid: number;
 }

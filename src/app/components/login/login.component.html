@@ -21,7 +21,12 @@
           [config]="passwordInputConfig"
           [group]="loginForm"
         ></app-form-input>
-        <button [disabled]="!loginForm.valid" class="primary-btn mt-3" mat-button (click)="auth()">
+        <button
+          [disabled]="!loginForm.valid"
+          class="primary-btn mt-3"
+          mat-button
+          (click)="auth()"
+        >
           Login
         </button>
         <mat-spinner #spinner diameter="25"></mat-spinner>

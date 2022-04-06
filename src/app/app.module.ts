@@ -57,8 +57,8 @@ import { GenericMaterialTableModule } from "generic-material-table";
 import { ArticleConfirmDialogComponent } from "./components/login/admin/delivery-note/add-delivery-note/article-confirm-dialog/article-confirm-dialog.component";
 import { ToastNotificationComponent } from "./util/toast-notification/toast-notification/toast-notification.component";
 import { ClientOverviewDialogComponent } from "./components/login/admin/client/client-overview-dialog/client-overview-dialog.component";
-import { RegistrationDialogComponent } from './components/login/registration-dialog/registration-dialog.component';
-import { ClientDateFilterDialogComponent } from './components/login/admin/client/client-overview-dialog/client-date-filter-dialog/client-date-filter-dialog.component';
+import { RegistrationDialogComponent } from "./components/login/registration-dialog/registration-dialog.component";
+import { ClientDateFilterDialogComponent } from "./components/login/admin/client/client-overview-dialog/client-date-filter-dialog/client-date-filter-dialog.component";
 
 // @ts-ignore
 @NgModule({

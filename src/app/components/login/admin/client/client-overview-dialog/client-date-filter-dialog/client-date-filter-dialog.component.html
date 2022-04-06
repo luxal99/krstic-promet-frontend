@@ -1,30 +1,32 @@
 <div [formGroup]="dateForm">
-    <mat-form-field appearance="standard" class="w-100 mt-2">
-        <mat-label>Datum</mat-label>
-        <mat-date-range-input [formGroup]="dateForm" [rangePicker]="picker">
-            <input
-                    matStartDate
-                    formControlName="startDate"
-                    placeholder="Početni datum"
-            />
-            <input matEndDate formControlName="endDate" placeholder="Krajnji datum" />
-            <button mat-button (click)="filter()" class="primary-btn">Filtriraj</button>
-        </mat-date-range-input>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker>
-            <mat-date-range-picker-actions>
-                <button
-                        color="primary"
-                        mat-button
-                        style="width: 100%"
-                        class="fw-bold"
-                        (click)="filter()"
-                        matDateRangePickerApply
-                >
-                    Filtriraj
-                </button>
-            </mat-date-range-picker-actions>
-        </mat-date-range-picker>
-    </mat-form-field>
+  <mat-form-field appearance="standard" class="w-100 mt-2">
+    <mat-label>Datum</mat-label>
+    <mat-date-range-input [formGroup]="dateForm" [rangePicker]="picker">
+      <input
+        matStartDate
+        formControlName="startDate"
+        placeholder="Početni datum"
+      />
+      <input matEndDate formControlName="endDate" placeholder="Krajnji datum" />
+      <button mat-button (click)="filter()" class="primary-btn">
+        Filtriraj
+      </button>
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker>
+      <mat-date-range-picker-actions>
+        <button
+          color="primary"
+          mat-button
+          style="width: 100%"
+          class="fw-bold"
+          (click)="filter()"
+          matDateRangePickerApply
+        >
+          Filtriraj
+        </button>
+      </mat-date-range-picker-actions>
+    </mat-date-range-picker>
+  </mat-form-field>
 </div>
 <button class="primary-btn" mat-button (click)="filter()">Filtriraj</button>
