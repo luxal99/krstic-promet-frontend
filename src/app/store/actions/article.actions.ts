@@ -49,28 +49,29 @@ export class GetArticleAction implements Action {
 
 export class GetArticleActionSuccessfully implements Action {
   type = ArticleActionTypes.GET_ARTICLE_SUCCESSFULLY;
-
-  constructor(public pagination: PaginationDto) {}
 }
 
 export class GetArticleByWarehouse implements Action {
   type = ArticleActionTypes.GET_ARTICLE_BY_WAREHOUSE;
+
+  constructor(public idWarehouse: number, public pagination: PaginationDto) {}
 }
 
 export class GetArticleByWarehouseSuccessfully implements Action {
   type = ArticleActionTypes.GET_ARTICLE_BY_WAREHOUSE_SUCCESSFULLY;
-
-  constructor(public pagination: PaginationDto) {}
 }
 
 export class GetArticleByArticleSubCategory implements Action {
   type = ArticleActionTypes.GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY;
+
+  constructor(
+    public idArticleSubCategory: number,
+    public pagination: PaginationDto
+  ) {}
 }
 
 export class GetArticleByArticleSubCategorySuccessfully implements Action {
   type = ArticleActionTypes.GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY_SUCCESSFULLY;
-
-  constructor(public pagination: PaginationDto) {}
 }
 
 export class UpdateArticleAction implements Action {

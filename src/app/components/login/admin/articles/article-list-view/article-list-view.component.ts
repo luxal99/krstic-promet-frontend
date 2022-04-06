@@ -37,6 +37,13 @@ import { MatSpinner } from "@angular/material/progress-spinner";
 import { ResponsiveService } from "../../../../../service/util/responsive.service";
 import { BehaviorFilterModel } from "../../../../../service/util/model/BehaviorFilterModel";
 import { PaginationData } from "../../../../../models/dto/PaginationData";
+import { PageEvent } from "@angular/material/paginator/paginator";
+import {
+  GetArticleAction,
+  GetArticleByArticleSubCategory,
+  GetArticleByWarehouse,
+} from "../../../../../store/actions/article.actions";
+import { GetArticleSubCategoryAction } from "../../../../../store/actions/article-sub-category.actions";
 
 @Component({
   selector: "app-article-list-view",
@@ -126,29 +133,35 @@ export class ArticleListViewComponent
     this.cdRef.detectChanges();
   }
 
-  getQuery() {
+  getQuery(pagination?: PageEvent) {
     if (this.behaviorService.get().filterType) {
       const filterModel: BehaviorFilterModel = this.behaviorService.get();
       switch (filterModel.filterType) {
         case "WAREHOUSE":
-          this.listOfArticle$ = this.listOfArticle$.pipe(
-            map((value) =>
-              value.filter(
-                (item: any) => item.idWarehouse.id === filterModel.id
-              )
-            )
+          this.articleStore.dispatch(
+            new GetArticleByWarehouse(filterModel.id, {
+              page: pagination ? pagination.pageIndex : 0,
+              rows: pagination ? pagination.pageSize : 10,
+            })
           );
           break;
         case "ARTICLE_SUB_CATEGORY":
-          this.listOfArticle$ = this.listOfArticle$.pipe(
-            map((value) =>
-              value.filter(
-                (item: any) => item.idArticleSubCategory.id === filterModel.id
-              )
-            )
+          this.articleStore.dispatch(
+            new GetArticleByArticleSubCategory(filterModel.id, {
+              page: pagination ? pagination.pageIndex : 0,
+              rows: pagination ? pagination.pageSize : 10,
+            })
           );
           break;
       }
+    }
+    if (pagination && !this.behaviorService.get().filterType) {
+      this.articleStore.dispatch(
+        new GetArticleAction({
+          page: pagination ? pagination.pageIndex : 0,
+          rows: pagination ? pagination.pageSize : 10,
+        })
+      );
     }
   }
 

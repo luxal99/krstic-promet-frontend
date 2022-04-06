@@ -16,6 +16,7 @@ import { ArticleListViewComponent } from "./article-list-view/article-list-view.
 import { MatDialog } from "@angular/material/dialog";
 import { ArticleCategoryGridViewComponent } from "./article-category-grid-view/article-category-grid-view.component";
 import { BehaviorService } from "../../../../service/util/behavior.service";
+import { GetArticleAction } from "../../../../store/actions/article.actions";
 
 @Component({
   selector: "app-articles",
@@ -37,12 +38,14 @@ export class ArticlesComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.loadArticleListView();
+      const articleListViewComponentComponentRef: ComponentRef<ArticleListViewComponent> =
+        loadComponent(ArticleListViewComponent, this.entry, this.resolver);
     }, 100);
   }
 
   loadArticleListView(): void {
     this.behaviorService.reset();
+    this.articleStore.dispatch(new GetArticleAction({ page: 0, rows: 10 }));
     const articleListViewComponentComponentRef: ComponentRef<ArticleListViewComponent> =
       loadComponent(ArticleListViewComponent, this.entry, this.resolver);
   }

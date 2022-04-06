@@ -63,6 +63,38 @@ export function ArticleReducer(
         loading: false,
       };
 
+    case ArticleActionTypes.GET_ARTICLE_BY_WAREHOUSE:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case ArticleActionTypes.GET_ARTICLE_BY_WAREHOUSE_SUCCESSFULLY:
+      return {
+        ...state,
+        //@ts-ignore
+        list: action.payload,
+        //@ts-ignore
+        pagination: action.pagination,
+        loading: false,
+      };
+
+    case ArticleActionTypes.GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case ArticleActionTypes.GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY_SUCCESSFULLY:
+      return {
+        ...state,
+        //@ts-ignore
+        list: action.payload,
+        //@ts-ignore
+        pagination: action.pagination,
+        loading: false,
+      };
+
     case ArticleActionTypes.UPDATE_ARTICLE:
       return {
         ...state,
