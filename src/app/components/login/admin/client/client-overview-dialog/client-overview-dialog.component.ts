@@ -95,7 +95,7 @@ export class ClientOverviewDialogComponent implements OnInit {
       .afterClosed()
       .subscribe((resp) => {
         if (resp) {
-          this.findDeliveryNotes(resp);
+          this.findDeliveryNotes(undefined, resp);
         }
       });
   }

@@ -23,7 +23,8 @@
     </button>
 </div>
 <div class="row">
-    <div class="col-sm-6" *ngFor="let deliveryNote of listOfDeliveryNotes">
+    <div class="col-sm-6" (click)="openDeliveryNoteOverviewDialog(deliveryNote)"
+         *ngFor="let deliveryNote of listOfDeliveryNotes">
         <div class="row client-delivery-note-card">
             <div class="col-6">
                 <p>
