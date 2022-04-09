@@ -31,7 +31,7 @@
           <input
             [disabled]="payAllCheckbox.checked"
             [value]="
-              payAllCheckbox.checked ? element.amount : element.payedAmount
+             ( payAllCheckbox.checked ? element.amount : element.payedAmount) | formatNumber
             "
             #payedAmountInput
             type="number"
@@ -59,9 +59,9 @@
           <input
             [disabled]="deliverAllCheckbox.checked"
             [value]="
-              deliverAllCheckbox.checked
+              (deliverAllCheckbox.checked
                 ? element.amount
-                : element.deliveredAmount
+                : element.deliveredAmount) | formatNumber
             "
             #deliveredAmountInput
             matInput

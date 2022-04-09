@@ -192,9 +192,16 @@ export class AddDeliveryNoteComponent
     }
     const amountValue = Number.parseInt(amountInputValue);
     if (isArticleExistingInArray) {
-      this.listOfSelectedArticles[index].amount += amountValue;
+      this.listOfSelectedArticles[index].amount +=
+        article.priceType === "PER_UNIT"
+          ? amountValue * article.idConversion.conversionToValue
+          : amountValue;
       this.listOfSelectedArticles[index].total +=
-        amountValue * article.sellingPrice;
+        article.priceType === "PER_UNIT"
+          ? amountValue *
+            article.idConversion.conversionToValue *
+            article.sellingPrice
+          : amountValue * article.sellingPrice;
     } else {
       this.listOfSelectedArticles.push({
         id: article.id,

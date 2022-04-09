@@ -84,7 +84,7 @@
   </div>
   <div class="text-right mt-3" [class.w-25]="!isMobile">
     <app-form-input
-      [model]="total"
+      [model]="total | formatNumber"
       label="Ukupno"
       [group]="deliveryNoteForm"
       [config]="grossInputConfig"

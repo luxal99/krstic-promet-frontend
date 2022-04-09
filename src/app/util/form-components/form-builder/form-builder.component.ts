@@ -80,6 +80,7 @@ export class FormBuilderComponent
       this.configData.store?.dispatch(
         new this.configData.storeConfig.updateAction(obj)
       );
+      this.spinnerService.hide(this.spinner);
     }
   }
 

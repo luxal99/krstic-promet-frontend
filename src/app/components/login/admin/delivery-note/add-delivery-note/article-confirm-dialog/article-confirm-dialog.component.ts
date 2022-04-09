@@ -83,7 +83,7 @@ export class ArticleConfirmDialogComponent
   }
 
   addArticlePayedAmount(idArticle: number, payedAmount: any) {
-    payedAmount = Number.parseInt(payedAmount);
+    payedAmount = Number.parseFloat(payedAmount);
     this.data.listOfArticles.forEach((item) => {
       // @ts-ignore
       if (item.id === idArticle) {
@@ -105,7 +105,7 @@ export class ArticleConfirmDialogComponent
   }
 
   addArticleDeliveredAmount(idArticle: number, deliveredAmount: any) {
-    deliveredAmount = Number.parseInt(deliveredAmount);
+    deliveredAmount = Number.parseFloat(deliveredAmount);
     this.data.listOfArticles.forEach((item) => {
       // @ts-ignore
       if (item.id === idArticle) {

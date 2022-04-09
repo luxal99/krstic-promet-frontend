@@ -54,8 +54,6 @@ export function ClientReducer(
       };
 
     case ClientActionTypes.GET_CLIENT_SUCCESSFULLY:
-      //@ts-ignore
-      console.log(action.pagination);
       return {
         ...state,
         //@ts-ignore

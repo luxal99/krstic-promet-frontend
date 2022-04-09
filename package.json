@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --watch --proxy-config proxy.config.json",
-    "build": "ng build",
-    "deploy": "ng build && cd dist && rsync -avz -e 'ssh' ./krstic-promet-frontend/* root@161.35.71.233:/var/www/krstic.luxal.dev",
+    "build": "sed -i 's/8080/8091/' ./proxy.config.json && ng build ",
+    "deploy": " cd dist && rsync -avz -e 'ssh' ./krstic-promet-frontend/* root@161.35.71.233:/var/www/krstic.luxal.dev",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
