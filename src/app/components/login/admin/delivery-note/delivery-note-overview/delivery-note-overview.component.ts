@@ -21,6 +21,7 @@ import { openToastNotification } from "../../../../../util/toast-notification/op
 import { Store } from "@ngrx/store";
 import { ArticleState } from "../../../../../store/reducers/article.reducer";
 import { DeliveryNoteStatusEnum } from "../../../../../enum/DeliveryNoteStatusEnum";
+import CriteriaBuilder from "../../../../../util/generic-query-search/criteria-builder";
 
 @Component({
   selector: "app-delivery-note-overview",
@@ -170,7 +171,7 @@ export class DeliveryNoteOverviewComponent
             .subscribe(
               (resp) => {
                 this.articleStore.dispatch(
-                  new GetArticleAction({ rows: 10, page: 0 })
+                  new GetArticleAction(new CriteriaBuilder().buildUri())
                 );
                 openToastNotification(
                   {

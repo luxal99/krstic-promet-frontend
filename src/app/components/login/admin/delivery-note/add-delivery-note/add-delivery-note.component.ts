@@ -39,6 +39,7 @@ import { openToastNotification } from "../../../../../util/toast-notification/op
 import { DeliveryNoteArticleService } from "../../../../../service/delivery-note-article.service";
 import { Observable, of } from "rxjs";
 import { ClientService } from "../../../../../service/client.service";
+import CriteriaBuilder from "../../../../../util/generic-query-search/criteria-builder";
 
 @Component({
   selector: "app-add-delivery-note",
@@ -349,7 +350,7 @@ export class AddDeliveryNoteComponent
                   true
                 );
                 this.articleStore.dispatch(
-                  new GetArticleAction({ rows: 10, page: 0 })
+                  new GetArticleAction(new CriteriaBuilder().buildUri())
                 );
               },
               () => {
@@ -377,7 +378,7 @@ export class AddDeliveryNoteComponent
                   true
                 );
                 this.articleStore.dispatch(
-                  new GetArticleAction({ rows: 10, page: 0 })
+                  new GetArticleAction(new CriteriaBuilder().buildUri())
                 );
               },
               () => {
@@ -412,9 +413,11 @@ export class AddDeliveryNoteComponent
       )
       .subscribe((searchText) => {
         this.articleService
-          .searchForRealEstate(searchText)
+          .getAllArticles(
+            new CriteriaBuilder().setSearchText(searchText).buildUri()
+          )
           .subscribe((resp) => {
-            this.listOfArticles = resp;
+            this.listOfArticles = resp.body;
             this.spinnerService.hide(this.spinner);
           });
       });

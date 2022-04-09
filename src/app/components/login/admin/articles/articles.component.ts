@@ -17,6 +17,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ArticleCategoryGridViewComponent } from "./article-category-grid-view/article-category-grid-view.component";
 import { BehaviorService } from "../../../../service/util/behavior.service";
 import { GetArticleAction } from "../../../../store/actions/article.actions";
+import CriteriaBuilder from "../../../../util/generic-query-search/criteria-builder";
 
 @Component({
   selector: "app-articles",
@@ -45,7 +46,9 @@ export class ArticlesComponent implements OnInit {
 
   loadArticleListView(): void {
     this.behaviorService.reset();
-    this.articleStore.dispatch(new GetArticleAction({ page: 0, rows: 10 }));
+    this.articleStore.dispatch(
+      new GetArticleAction(new CriteriaBuilder().buildUri())
+    );
     const articleListViewComponentComponentRef: ComponentRef<ArticleListViewComponent> =
       loadComponent(ArticleListViewComponent, this.entry, this.resolver);
   }

@@ -107,6 +107,12 @@ export const ARTICLE_TABLE: Column[] = [
     columnType: "GENERIC",
   },
   {
+    name: "warehouse",
+    displayedName: "Magacin",
+    value: "idWarehouse.name",
+    columnType: "GENERIC",
+  },
+  {
     name: "purchasePrice",
     displayedName: "Nabavna cena",
     value: "purchasePrice",

@@ -31,6 +31,7 @@ import { PaginationData } from "../../../../../models/dto/PaginationData";
 import { PageEvent } from "@angular/material/paginator/paginator";
 import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
 import { map, take } from "rxjs/operators";
+import CriteriaBuilder from "../../../../../util/generic-query-search/criteria-builder";
 
 @Component({
   selector: "app-generic-delivery-note-overview",
@@ -174,7 +175,9 @@ export class GenericDeliveryNoteOverviewComponent
     openConfirmDialog(this.dialog, () => {
       this.deliveryNoteService.delete(id).subscribe(() => {
         this.getDeliveryNotes();
-        this.articleStore.dispatch(new GetArticleAction({ rows: 10, page: 0 }));
+        this.articleStore.dispatch(
+          new GetArticleAction(new CriteriaBuilder().buildUri())
+        );
         openToastNotification(
           {
             notificationType: "SUCCESS",

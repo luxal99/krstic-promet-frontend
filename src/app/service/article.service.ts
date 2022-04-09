@@ -4,6 +4,7 @@ import { Article } from "../models/article";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { PaginationDto } from "../models/dto/PaginationDto";
+import { ArticleQueryDto } from "../models/dto/ArticleQueryDto";
 
 @Injectable({
   providedIn: "root",
@@ -13,43 +14,11 @@ export class ArticleService extends GenericService<Article> {
     super(http, "/article/");
   }
 
-  getAllArticles(pagination: PaginationDto): Observable<HttpResponse<any>> {
+  getAllArticles(q: string): Observable<HttpResponse<any>> {
     return this.http.get<HttpResponse<any>>(this.route, {
-      params: { q: JSON.stringify({ pagination }) },
+      params: { q },
       responseType: "json",
       observe: "response",
     });
-  }
-
-  searchForRealEstate(searchText: string): Observable<Article[]> {
-    return this.http.get<Article[]>(this.route + "search", {
-      params: { search: encodeURI(searchText) },
-    });
-  }
-
-  getArticlesByWarehouse(
-    idWarehouse: number,
-    pagination: PaginationDto
-  ): Observable<HttpResponse<any>> {
-    return this.http.get<HttpResponse<any>>(
-      this.route + "warehouse/" + idWarehouse,
-      {
-        params: { q: JSON.stringify({ pagination }) },
-        observe: "response",
-      }
-    );
-  }
-
-  getArticlesByArticleSubCategory(
-    idArticleSubCategory: number,
-    pagination: PaginationDto
-  ): Observable<HttpResponse<any>> {
-    return this.http.get<HttpResponse<any>>(
-      this.route + "article-sub-category/" + idArticleSubCategory,
-      {
-        params: { q: JSON.stringify({ pagination }) },
-        observe: "response",
-      }
-    );
   }
 }

@@ -9,10 +9,6 @@ export enum ArticleActionTypes {
   DELETE_ARTICLE_SUCCESSFULLY = "[ARTICLE] Delete Item Successfully",
   GET_ARTICLE = "[ARTICLE] Get Items",
   GET_ARTICLE_SUCCESSFULLY = "[ARTICLE] Get Items Successfully",
-  GET_ARTICLE_BY_WAREHOUSE = "[ARTICLE] Get Items By Warehouse",
-  GET_ARTICLE_BY_WAREHOUSE_SUCCESSFULLY = "[ARTICLE] Get Items By Warehouse Successfully",
-  GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY = "[ARTICLE] Get Items By Article Sub Category",
-  GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY_SUCCESSFULLY = "[ARTICLE] Get Items By Article Sub Category Successfully",
   UPDATE_ARTICLE = "[ARTICLE] Update Item",
   UPDATE_ARTICLE_SUCCESSFULLY = "[ARTICLE] Update Item Successfully",
 }
@@ -44,34 +40,11 @@ export class DeleteArticleSuccessfullyAction implements Action {
 export class GetArticleAction implements Action {
   type = ArticleActionTypes.GET_ARTICLE;
 
-  constructor(public pagination: PaginationDto) {}
+  constructor(public query: string) {}
 }
 
 export class GetArticleActionSuccessfully implements Action {
   type = ArticleActionTypes.GET_ARTICLE_SUCCESSFULLY;
-}
-
-export class GetArticleByWarehouse implements Action {
-  type = ArticleActionTypes.GET_ARTICLE_BY_WAREHOUSE;
-
-  constructor(public idWarehouse: number, public pagination: PaginationDto) {}
-}
-
-export class GetArticleByWarehouseSuccessfully implements Action {
-  type = ArticleActionTypes.GET_ARTICLE_BY_WAREHOUSE_SUCCESSFULLY;
-}
-
-export class GetArticleByArticleSubCategory implements Action {
-  type = ArticleActionTypes.GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY;
-
-  constructor(
-    public idArticleSubCategory: number,
-    public pagination: PaginationDto
-  ) {}
-}
-
-export class GetArticleByArticleSubCategorySuccessfully implements Action {
-  type = ArticleActionTypes.GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY_SUCCESSFULLY;
 }
 
 export class UpdateArticleAction implements Action {
@@ -90,10 +63,6 @@ export type ArticleAction =
   | AddArticleAction
   | GetArticleAction
   | GetArticleActionSuccessfully
-  | GetArticleByWarehouse
-  | GetArticleByWarehouseSuccessfully
-  | GetArticleByArticleSubCategory
-  | GetArticleByArticleSubCategorySuccessfully
   | AddArticleSuccessfullyAction
   | DeleteArticleAction
   | DeleteArticleSuccessfullyAction

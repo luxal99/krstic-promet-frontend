@@ -9,15 +9,14 @@ import { ArticlePaginationService } from "../../service/util/article-pagination.
 export class ArticleEffect {
   constructor(
     private actions$: Actions,
-    private articleService: ArticleService,
-    private articlePaginationService: ArticlePaginationService
+    private articleService: ArticleService
   ) {}
 
   loadArticle = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActionTypes.GET_ARTICLE),
       mergeMap((data: any) =>
-        this.articleService.getAllArticles(data.pagination).pipe(
+        this.articleService.getAllArticles(data.query).pipe(
           map((article) => ({
             type: ArticleActionTypes.GET_ARTICLE_SUCCESSFULLY,
             payload: article.body,
@@ -26,51 +25,6 @@ export class ArticleEffect {
             },
           }))
         )
-      )
-    )
-  );
-
-  loadArticlesByWarehouse = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ArticleActionTypes.GET_ARTICLE_BY_WAREHOUSE),
-      mergeMap((data: any) =>
-        this.articleService
-          .getArticlesByWarehouse(data.idWarehouse, data.pagination)
-          .pipe(
-            map((article) => ({
-              type: ArticleActionTypes.GET_ARTICLE_BY_WAREHOUSE_SUCCESSFULLY,
-              payload: article.body,
-              pagination: {
-                dataCount: Number.parseInt(
-                  <string>article.headers.get("total")
-                ),
-              },
-            }))
-          )
-      )
-    )
-  );
-
-  loadArticlesByArticleSubCategory = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ArticleActionTypes.GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY),
-      mergeMap((data: any) =>
-        this.articleService
-          .getArticlesByArticleSubCategory(
-            data.idArticleSubCategory,
-            data.pagination
-          )
-          .pipe(
-            map((article) => ({
-              type: ArticleActionTypes.GET_ARTICLE_BY_ARTICLE_SUB_CATEGORY_SUCCESSFULLY,
-              payload: article.body,
-              pagination: {
-                dataCount: Number.parseInt(
-                  <string>article.headers.get("total")
-                ),
-              },
-            }))
-          )
       )
     )
   );

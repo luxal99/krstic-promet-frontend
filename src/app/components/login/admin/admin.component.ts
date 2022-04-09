@@ -21,6 +21,7 @@ import { GetConversionAction } from "../../../store/actions/conversion.actions";
 import { ClientComponent } from "./client/client.component";
 import { GetClientAction } from "../../../store/actions/client.actions";
 import { ResponsiveService } from "../../../service/util/responsive.service";
+import CriteriaBuilder from "../../../util/generic-query-search/criteria-builder";
 
 @Component({
   selector: "app-admin",
@@ -47,7 +48,7 @@ export class AdminComponent implements OnInit {
     this.store.dispatch(new GetArticleCategoryAction());
     this.store.dispatch(new GetArticleSubCategoryAction());
     this.store.dispatch(new GetWarehouseAction());
-    this.store.dispatch(new GetArticleAction({ rows: 10, page: 0 }));
+    this.store.dispatch(new GetArticleAction(new CriteriaBuilder().buildUri()));
     this.store.dispatch(new GetConversionAction());
     this.store.dispatch(new GetClientAction({ rows: 10, page: 0 }));
   }

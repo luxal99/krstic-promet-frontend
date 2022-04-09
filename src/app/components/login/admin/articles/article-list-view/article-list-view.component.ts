@@ -37,13 +37,9 @@ import { MatSpinner } from "@angular/material/progress-spinner";
 import { ResponsiveService } from "../../../../../service/util/responsive.service";
 import { BehaviorFilterModel } from "../../../../../service/util/model/BehaviorFilterModel";
 import { PaginationData } from "../../../../../models/dto/PaginationData";
-import { PageEvent } from "@angular/material/paginator/paginator";
-import {
-  GetArticleAction,
-  GetArticleByArticleSubCategory,
-  GetArticleByWarehouse,
-} from "../../../../../store/actions/article.actions";
-import { GetArticleSubCategoryAction } from "../../../../../store/actions/article-sub-category.actions";
+import { MatPaginator, PageEvent } from "@angular/material/paginator/paginator";
+import { GetArticleAction } from "../../../../../store/actions/article.actions";
+import CriteriaBuilder from "../../../../../util/generic-query-search/criteria-builder";
 
 @Component({
   selector: "app-article-list-view",
@@ -56,8 +52,13 @@ export class ArticleListViewComponent
   @ViewChild("options")
   options!: TemplateRef<any>;
 
+  @ViewChild("paginationRef")
+  paginationRef!: MatPaginator;
+
   @ViewChild("spinner")
   spinner!: MatSpinner;
+
+  queryBuilder = new CriteriaBuilder();
 
   paginationData: Observable<PaginationData> = this.articleStore.select(
     (state) => state.articles.pagination
@@ -138,29 +139,31 @@ export class ArticleListViewComponent
       const filterModel: BehaviorFilterModel = this.behaviorService.get();
       switch (filterModel.filterType) {
         case "WAREHOUSE":
-          this.articleStore.dispatch(
-            new GetArticleByWarehouse(filterModel.id, {
-              page: pagination ? pagination.pageIndex : 0,
-              rows: pagination ? pagination.pageSize : 10,
-            })
-          );
+          this.queryBuilder.addFilter({
+            operation: "=",
+            value: filterModel.id.toString(),
+            path: "idWarehouse.id",
+          });
           break;
         case "ARTICLE_SUB_CATEGORY":
-          this.articleStore.dispatch(
-            new GetArticleByArticleSubCategory(filterModel.id, {
-              page: pagination ? pagination.pageIndex : 0,
-              rows: pagination ? pagination.pageSize : 10,
-            })
-          );
+          this.queryBuilder.addFilter({
+            operation: "=",
+            value: filterModel.id.toString(),
+            path: "idArticleSubCategory.id",
+          });
           break;
       }
-    }
-    if (pagination && !this.behaviorService.get().filterType) {
       this.articleStore.dispatch(
-        new GetArticleAction({
-          page: pagination ? pagination.pageIndex : 0,
-          rows: pagination ? pagination.pageSize : 10,
-        })
+        new GetArticleAction(this.queryBuilder.buildUri())
+      );
+    }
+    if (pagination) {
+      this.queryBuilder.setPagination({
+        page: pagination.pageIndex,
+        rows: pagination.pageSize,
+      });
+      this.articleStore.dispatch(
+        new GetArticleAction(this.queryBuilder.buildUri())
       );
     }
   }
@@ -304,13 +307,16 @@ export class ArticleListViewComponent
       )
       .subscribe((resp) => {
         if (resp.length > 1) {
-          this.listOfArticle$ = this.articleService.searchForRealEstate(resp);
+          this.queryBuilder.setSearchText(resp);
+          this.queryBuilder.resetPagination();
           this.spinnerService.hide(this.spinner);
         } else {
-          this.listOfArticle$ = this.articleStore.select(
-            (state) => state.articles.list
-          );
+          this.queryBuilder.resetSearch();
         }
+        this.paginationRef.firstPage();
+        this.articleStore.dispatch(
+          new GetArticleAction(this.queryBuilder.buildUri())
+        );
       });
   }
 }

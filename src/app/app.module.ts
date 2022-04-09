@@ -59,6 +59,7 @@ import { ToastNotificationComponent } from "./util/toast-notification/toast-noti
 import { ClientOverviewDialogComponent } from "./components/login/admin/client/client-overview-dialog/client-overview-dialog.component";
 import { RegistrationDialogComponent } from "./components/login/registration-dialog/registration-dialog.component";
 import { ClientDateFilterDialogComponent } from "./components/login/admin/client/client-overview-dialog/client-date-filter-dialog/client-date-filter-dialog.component";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 // @ts-ignore
 @NgModule({
@@ -127,6 +128,7 @@ import { ClientDateFilterDialogComponent } from "./components/login/admin/client
       ConversionEffect,
       ClientEffect,
     ]),
+    NgxSpinnerModule,
     ReactiveFormsModule,
     MatChipsModule,
     FormsModule,
